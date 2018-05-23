@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="../../js/jquery/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+	<ul class="selectUserList"></ul>
+</body>
+</html>
+
+<script type="text/javascript">
+	$(function(){
+		for(var i = 0;i<10;i++){
+			addUser({id: i, userName: i+'a', name: i+'b',mobile: i*10});
+		}
+	})
+
+	
+	function addUser(data) {
+	
+	    var _li = $("<li></li>");//li
+	    var _em = $("<em></em>");//li-em
+	    var _a = $('<a class="closebtn" href="javascript:void(0);" onclick="closeBtnFunc(this)"></a>');//li-a
+	    var _hiden_username = $('<input type="hidden" class="_hidenUsername"/>');//li-input name:_hidenUsername
+	    var _hiden_tel = $('<input type="hidden" class="_hidenMobile"/>');//li-input name:_hiden_tel
+	    
+	    _hiden_username.val(data.userName);
+	    _hiden_tel.val(data.mobile);
+	    _em.text(data.userName + "(" + data.mobile + ")");
+	    
+	    _li.append(_em);
+	    _li.append(_a);
+	    _li.append(_hiden_username);
+	    _li.append(_hiden_tel);
+	    $(".selectUserList").append(_li);
+	}
+</script>

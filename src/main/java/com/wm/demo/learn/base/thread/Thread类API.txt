@@ -1,0 +1,29 @@
+ * 如何获取线程对象的名称呢?
+ * public final String getName():获取线程的名称。
+ * 如何设置线程对象的名称呢?
+ * public final void setName(String name):设置线程的名称
+ * 
+ * 针对不是Thread类的子类中如何获取线程对象名称呢?
+ * public static Thread currentThread():返回当前正在执行的线程对象
+ * Thread.currentThread().getName()
+
+
+-------------------------------线程的控制---------------------------------------
+		* 获取线程对象的优先级	public final int getPriority():返回线程对象的优先级
+		* 设置线程对象的优先级	public final void setPriority(int newPriority)：更改线程的优先级。 
+			* 注意：
+			* 		线程默认优先级是5。
+ 			* 		线程优先级的范围是：1-10。
+			* 		线程优先级高仅仅表示线程获取的 CPU时间片的几率高
+		
+		* 坦克大战
+		* public final void setDaemon(boolean on):将该线程标记为守护线程或用户线程。
+ 		* 当正在运行的线程都是守护线程时，Java 虚拟机退出。 该方法必须在启动线程前调用。 
+		
+		A:线程休眠	public static void sleep(long millis)
+		B:加入线程	public final void join():等待该线程终止。 
+		C:礼让线程	public static void yield():暂停当前正在执行的线程对象，并执行其他线程。 
+		D:后台线程
+		E:终止线程(掌握)	
+			* public final void stop():让线程停止，过时了，但是还可以使用。
+ 			* public void interrupt():中断线程。 把线程的状态终止，并抛出一个InterruptedException。

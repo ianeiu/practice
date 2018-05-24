@@ -36,6 +36,7 @@ public class UserController {
 		if (user == null) {
 			return "forward:/user/searchUserList";
 		}
+		logger.info("searchUserInfoById:"+user.getUserName());
 		model.addAttribute("user", user);
 		return "userDetail";
 	}

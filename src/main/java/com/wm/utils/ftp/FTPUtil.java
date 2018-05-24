@@ -17,7 +17,9 @@ import javax.servlet.http.HttpServlet;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
   
 /**
  * FTP工具类
@@ -25,7 +27,7 @@ import org.apache.log4j.Logger;
  *
  */
 public class FTPUtil extends HttpServlet{  
-    private static Logger logger = Logger.getLogger(FTPUtil.class);  
+    private static Logger logger = LoggerFactory.getLogger(FTPUtil.class);  
     
     static String ftpHost;
     static String ftpPassword;

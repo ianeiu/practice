@@ -47,4 +47,10 @@
 		<!-- 给出需要扫描Dao接口包 -->
 		<property name="basePackage" value="com.wm.ssm.user.dao" />
 	</bean>
+	
+	 <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
 </beans>

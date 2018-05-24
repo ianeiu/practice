@@ -1,0 +1,33 @@
+package com.wm.ssm.user.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.wm.ssm.user.model.SysUserBean;
+
+public interface UserDAO {
+	
+	/**
+	 * 通过ID查询用户
+	 * @param userId
+	 * @return
+	 */
+	SysUserBean queryById(String userId);
+
+	/**
+	 * 查询所有用户
+	 * @param offset 查询起始位置
+	 * @param limit 查询条数
+	 * @return
+	 */
+	List<SysUserBean> queryAll(@Param("offset") int offset, @Param("limit") int limit);
+
+	/**
+	 * 更新用户状态
+	 * @param userId
+	 * @param status
+	 * @return
+	 */
+	int updateUserStatus(String userId,boolean status);
+}

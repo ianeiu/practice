@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wm.ssm.user.dao.UserDAO">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<select id="queryById" resultType="SysUserBean" parameterType="java.lang.String">
+		<!-- 具体的sql -->
+		select * from tb_sys_user t where t.user_id = #{userId}
+	</select>
+
+	<select id="queryAll" resultType="SysUserBean">
+		select * from tb_sys_user t ORDER BY t.user_id
+		LIMIT #{offset}, #{limit}
+	</select>
+
+	<update id="updateUserStatus">
+		UPDATE tb_sys_user t
+		SET t.status = #{1}
+		WHERE  t.user_id = #{0}
+	</update>
+</mapper>

@@ -2,14 +2,17 @@ package com.wm.ssm.sys.user.service;
 
 import java.util.List;
 
-import com.wm.ssm.sys.user.model.SysUserBean;
+import com.wm.ssm.sys.user.model.TbSysUser;
+import com.wm.ssm.sys.user.vo.UserVO;
 
 public interface IUserService {
 	
-	SysUserBean getById(String userId);
+	TbSysUser getById(String userId);
 
-	List<SysUserBean> getList();
+	List<TbSysUser> getList();
 
 	int updateUserStatus(String userId);
+
+	UserVO searchUserVOById(String userId);
 
 }

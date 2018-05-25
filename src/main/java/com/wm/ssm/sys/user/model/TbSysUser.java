@@ -2,7 +2,7 @@ package com.wm.ssm.sys.user.model;
 
 import java.util.Date;
 
-public class SysUserBean {
+public class TbSysUser {
 	private String userId;
 	private String userName;
 	private String password;

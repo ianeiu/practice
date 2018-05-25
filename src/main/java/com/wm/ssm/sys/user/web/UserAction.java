@@ -15,24 +15,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wm.ssm.common.vo.Result;
-import com.wm.ssm.sys.user.model.SysUserBean;
+import com.wm.ssm.sys.user.model.TbSysUser;
 import com.wm.ssm.sys.user.service.IUserService;
+import com.wm.ssm.sys.user.vo.UserVO;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserAction {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Resource
 	private IUserService userService;
 
 
+	@RequestMapping(value = "/searchUserVOById/{userId}", method = RequestMethod.GET)
+	private String searchUserVOById(@PathVariable("userId") String userId, Model model) {
+		UserVO user = userService.searchUserVOById(userId);
+		if(user==null){
+			return "forward:/user/searchUserList";
+		}
+		logger.info("searchUserInfoById:"+user.getUserName()+"---"+user.getRole().getRoleName());
+		model.addAttribute("user", user);
+		return "userVO";
+	}
+	
 	@RequestMapping(value = "/searchUserInfoById/{userId}", method = RequestMethod.GET)
 	private String searchUserInfoById(@PathVariable("userId") String userId, Model model) {
 		if (userId == null) {
 			return "redirect:/user/searchUserList";
 		}
-		SysUserBean user = userService.getById(userId);
+		TbSysUser user = userService.getById(userId);
 		if (user == null) {
 			return "forward:/user/searchUserList";
 		}
@@ -43,7 +55,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/searchUserList", method = RequestMethod.GET)
 	private String searchUserList(Model model) {
-		List<SysUserBean> list = userService.getList();
+		List<TbSysUser> list = userService.getList();
 		model.addAttribute("list", list);
 		// list.jsp + model = ModelAndView
 		return "userList";// WEB-INF/jsp/"list".jsp
@@ -54,12 +66,12 @@ public class UserController {
 	@RequestMapping(value = "/updateUserStatus/{id}", method = RequestMethod.POST, produces = {
 			"application/json; charset=utf-8" })
 	@ResponseBody
-	private Result<SysUserBean> updateUserStatus(@PathVariable("id") String id, @RequestParam(value="userId",required = false) String userId) {
+	private Result<TbSysUser> updateUserStatus(@PathVariable("id") String id, @RequestParam(value="userId",required = false) String userId) {
 		if (id == null || "".equals(id)) {
 			return new Result<>("1001", "用户名不得为空");
 		}
 		userService.updateUserStatus(id);
-		SysUserBean user = userService.getById(id);
-		return new Result<SysUserBean>("0", "查询成功",user);
+		TbSysUser user = userService.getById(id);
+		return new Result<TbSysUser>("0", "查询成功",user);
 	}
 }

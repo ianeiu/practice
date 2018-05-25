@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.wm.ssm.sys.user.model.SysUserBean;
+import com.wm.ssm.sys.user.model.TbSysUser;
+import com.wm.ssm.sys.user.vo.UserVO;
 
 public interface UserDAO {
 	
@@ -13,7 +14,7 @@ public interface UserDAO {
 	 * @param userId
 	 * @return
 	 */
-	SysUserBean queryById(String userId);
+	TbSysUser queryById(String userId);
 
 	/**
 	 * 查询所有用户
@@ -21,7 +22,7 @@ public interface UserDAO {
 	 * @param limit 查询条数
 	 * @return
 	 */
-	List<SysUserBean> queryAll(@Param("offset") int offset, @Param("limit") int limit);
+	List<TbSysUser> queryAll(@Param("offset") int offset, @Param("limit") int limit);
 
 	/**
 	 * 更新用户状态
@@ -30,4 +31,6 @@ public interface UserDAO {
 	 * @return
 	 */
 	int updateUserStatus(String userId,boolean status);
+	
+	UserVO queryUserVOById(String userId);
 }

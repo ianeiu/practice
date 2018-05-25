@@ -4,12 +4,12 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wm.ssm.sys.user.dao.UserDAO">
 	<!-- 目的：为dao接口方法提供sql语句配置 -->
-	<select id="queryById" resultType="SysUserBean" parameterType="java.lang.String">
+	<select id="queryById" resultType="com.wm.ssm.sys.user.model.TbSysUser" parameterType="java.lang.String">
 		<!-- 具体的sql -->
 		select * from tb_sys_user t where t.user_id = #{userId}
 	</select>
 
-	<select id="queryAll" resultType="SysUserBean">
+	<select id="queryAll" resultType="com.wm.ssm.sys.user.model.TbSysUser">
 		select * from tb_sys_user t ORDER BY t.user_id
 		LIMIT #{offset}, #{limit}
 	</select>
@@ -19,4 +19,13 @@
 		SET t.status = #{1}
 		WHERE  t.user_id = #{0}
 	</update>
+	
+	
+	<select id="queryUserVOById" resultType="com.wm.ssm.sys.user.vo.UserVO">
+		SELECT u.user_id,u.user_name,u.user_sex,
+		r.id "role.id",r.role_name "role.role_name",r.role_desc "role.role_desc"
+		FROM tb_sys_user u left join tb_sys_user_role_ref urr on u.user_id = urr.user_id
+		left join tb_sys_role r on r.id = urr.role_id
+		WHERE u.user_id = #{userId}
+	</select>
 </mapper>

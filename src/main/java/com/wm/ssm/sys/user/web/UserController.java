@@ -1,4 +1,4 @@
-package com.wm.ssm.user.web;
+package com.wm.ssm.sys.user.web;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wm.ssm.common.vo.Result;
-import com.wm.ssm.user.model.SysUserBean;
-import com.wm.ssm.user.service.IUserService;
+import com.wm.ssm.sys.user.model.SysUserBean;
+import com.wm.ssm.sys.user.service.IUserService;
 
 @Controller
 @RequestMapping("/user")

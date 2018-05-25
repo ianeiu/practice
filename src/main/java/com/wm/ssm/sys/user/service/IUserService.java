@@ -1,8 +1,8 @@
-package com.wm.ssm.user.service;
+package com.wm.ssm.sys.user.service;
 
 import java.util.List;
 
-import com.wm.ssm.user.model.SysUserBean;
+import com.wm.ssm.sys.user.model.SysUserBean;
 
 public interface IUserService {
 	

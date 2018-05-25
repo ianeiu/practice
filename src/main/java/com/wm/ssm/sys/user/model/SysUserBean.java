@@ -1,4 +1,4 @@
-package com.wm.ssm.user.model;
+package com.wm.ssm.sys.user.model;
 
 import java.util.Date;
 

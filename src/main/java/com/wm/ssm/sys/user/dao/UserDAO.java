@@ -1,10 +1,10 @@
-package com.wm.ssm.user.dao;
+package com.wm.ssm.sys.user.dao;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.wm.ssm.user.model.SysUserBean;
+import com.wm.ssm.sys.user.model.SysUserBean;
 
 public interface UserDAO {
 	

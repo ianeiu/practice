@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `tb_sys_user`;
 CREATE TABLE `tb_sys_user` (
   `user_id` varchar(36) NOT NULL COMMENT '用户账号',
   `user_name` varchar(50) DEFAULT NULL COMMENT '用户姓名',
-  `passwork` varchar(26) DEFAULT NULL,
+  `passwork` varchar(100) DEFAULT NULL,
   `user_sex` tinyint(4) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `status` tinyint(2) DEFAULT NULL COMMENT '状态 0-禁用，1-正常',

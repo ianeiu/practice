@@ -1,10 +1,10 @@
-package demo;
+package com.wm.demo.trywork;
 
-public class YuFa {
+public class Demo04YuFa {
 	private String s = "abc";
 	private static int i =1 ;
 	
-	public YuFa(){
+	public Demo04YuFa(){
 		//doSomeThing();
 	}
 	
@@ -13,13 +13,13 @@ public class YuFa {
 		//s ="abc";
 	}
 	
-	public YuFa(int i,String s){
+	public Demo04YuFa(int i,String s){
 		i=1;
 		s="abc";
 	}
 	
 	public static void main(String[] args) {
-		YuFa yf = new YuFa();
-		YuFa yf2 = new YuFa(1,"abc");
+		Demo04YuFa yf = new Demo04YuFa();
+		Demo04YuFa yf2 = new Demo04YuFa(1,"abc");
 	}
 }

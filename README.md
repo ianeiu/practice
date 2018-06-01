@@ -15,6 +15,8 @@ ssm最初的整合借鉴github上的一些项目。
 * `https://github.com/liyifeng1994/ssm`
 * `https://blog.csdn.net/qq598535550/article/details/51703190`
 
+* `https://www.cnblogs.com/ainyi/p/8527984.html`
+
 mabatis逆向工程 
 =======
 * `https://github.com/wcyong/mybatisGeneratorCustom`

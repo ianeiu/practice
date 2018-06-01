@@ -138,24 +138,42 @@ public class TxtUtil {
 		String s1 = new String();// 内容更新
 
 		File f = new File(filePath);
-		if (f.exists()) {
-			System.out.println("文件存在");
-		} else {
-			System.out.println("文件不存在");
-			f.createNewFile();// 不存在则创建
+		BufferedReader input = null;
+		BufferedWriter output = null;
+		try{
+			if (f.exists()) {
+				System.out.println("文件存在");
+			} else {
+				System.out.println("文件不存在");
+				f.createNewFile();// 不存在则创建
+			}
+			input = new BufferedReader(new FileReader(f));
+	
+			while ((str = input.readLine()) != null) {
+				s1 += str + "\n";
+			}
+			System.out.println(s1);
+			s1 += content;
+	
+			output = new BufferedWriter(new FileWriter(f));
+			output.write(s1);
+		} finally {
+			if(input !=null ){
+				try {
+					input.close();
+				} catch (IOException e) {
+					
+				}
+			}
+			if (output !=null ) {
+				try {
+					output.close();
+				} catch (IOException e) {
+					
+				}
+			}
 		}
-		BufferedReader input = new BufferedReader(new FileReader(f));
-
-		while ((str = input.readLine()) != null) {
-			s1 += str + "\n";
-		}
-		System.out.println(s1);
-		input.close();
-		s1 += content;
-
-		BufferedWriter output = new BufferedWriter(new FileWriter(f));
-		output.write(s1);
-		output.close();
+		
 	}
 	
 	/**

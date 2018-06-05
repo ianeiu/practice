@@ -208,5 +208,14 @@ public class DateUtils {
 		return compareToCurrentDate(date);
 	}
 	
+	/**
+	 * 获取date 的sqlDate对象
+	 * @param date
+	 * @return
+	 */
+	public static java.sql.Date getSqlDateFromUtilDate(Date date){
+		return new java.sql.Date(date.getTime());
+	}
+	
 	
 }

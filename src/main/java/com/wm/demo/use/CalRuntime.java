@@ -1,4 +1,4 @@
-package com.wm.demo;
+package com.wm.demo.use;
 
 public class CalRuntime {
 	

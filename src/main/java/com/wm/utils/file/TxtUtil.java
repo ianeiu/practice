@@ -1,4 +1,4 @@
-package com.wm.utils.txt;
+package com.wm.utils.file;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

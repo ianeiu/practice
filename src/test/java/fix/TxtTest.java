@@ -4,7 +4,7 @@ import java.io.File;
 
 import org.junit.Test;
 
-import com.wm.utils.txt.TxtUtil;
+import com.wm.utils.file.TxtUtil;
 
 public class TxtTest {
 	

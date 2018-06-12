@@ -8,7 +8,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.wm.utils.excel.ExcelUtil;
+import com.wm.utils.file.ExcelUtil;
 
 import fix.vo.ExcelTestVO;
 

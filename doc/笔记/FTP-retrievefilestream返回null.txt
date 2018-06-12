@@ -1,0 +1,89 @@
+下载FTP文件 retrievefilestream返回null
+
+增加 fc.getReply(); 解决
+具体使用如下： 
+
+ @Override
+public void getOutsideFile() throws SocketException, IOException, IllegalAccessException, SQLException, Exception {
+	FTPClient fc = null;
+	InputStream is = null;
+    OutputStream os = null;
+		
+	try {
+		//FTP信息
+		String ftpHost = ConfigMgr.get("yxt_readfile", "ftpHost","10.10.0.118");//XQ
+		String ftpPassword = ConfigMgr.get("yxt_readfile", "ftpPassword","123456");//XQ
+		String ftpUserName = ConfigMgr.get("yxt_readfile", "ftpUserName","zsyx");//XQ
+		int ftpPort = Integer.parseInt(ConfigMgr.get("yxt_readfile", "ftpPort","21"));//XQ
+		fc = getFTPClient(ftpHost, ftpPassword, ftpUserName, ftpPort);
+		
+		String fileContentCharset = ConfigMgr.get("yxt_readfile", "fileContentCharset","UTF-8");//XQ
+		String fileNameCharset = ConfigMgr.get("yxt_readfile", "fileNameCharset","iso-8859-1");//XQ
+		String itemPath = ConfigMgr.get("yxt_readfile", "getPath","");//XQ
+
+		//创建目录
+		String dateStr = new SimpleDateFormat("yyyyMMdd").format(new Date());
+		String savePath =  DqdpAppContext.getAppRootPath()+"uploadfile/childorder_file/outside_ref/outside_file/"+dateStr;
+		File tmpFile = new File(savePath);
+	    if (!tmpFile.exists()) {
+	        tmpFile.mkdirs(); //创建目录
+	    }
+
+	    //获取文件
+		List<String> nameList = getNameList(fc,"","txt",fileContentCharset);//得到FTP文件名集合
+
+		List<TbYxtWorkDatasipportAffirmPO> apoList = filereadDAO.getAffirmListPOByStatus("0");
+		for (String fileName : nameList) {
+			String fileLocalPath = savePath + "/" + fileName;
+			
+			fileName = new String(fileName.getBytes("GBK"), fileNameCharset);
+			is = getInputStream(fc, itemPath, fileName, fileContentCharset);//得到FTP文件输入流
+			os = new FileOutputStream(fileLocalPath);
+			
+			if(is==null){
+				continue;
+			}
+
+			byte[] bs = new byte[1024]; // 1K的数据缓冲
+			int len;// 读取到的数据长度
+			// 开始读取
+			while ((len = is.read(bs)) != -1) {
+				os.write(bs, 0, len);
+			}
+			
+			//////////////////////////////////////////////////////////////////////////
+			fc.getReply();// 主动调用一次getReply()把接下来的226消费掉. 这样做是可以解决这个返回null问题
+			//////////////////////////////////////////////////////////////////////////
+			
+			for (TbYxtWorkDatasipportAffirmPO tbYxtWorkDatasipportAffirmPO : apoList) {
+				String name = tbYxtWorkDatasipportAffirmPO.getFileName();
+				if(name.equals(fileName)){
+					tbYxtWorkDatasipportAffirmPO.setStatus("1");//1-已获取文件
+					tbYxtWorkDatasipportAffirmPO.setFilePath(fileLocalPath);
+					filereadDAO.updateData(tbYxtWorkDatasipportAffirmPO, false);
+				}
+			}
+		}
+		
+	} finally {
+		 //释放资源
+		try {
+			if (is != null) {
+				is.close();
+			}
+			if (os != null) {
+				os.close();
+			}
+		} catch (IOException e) {
+			logger.error("FilereadServiceImpl-getOutsideFile-关闭流出现异常");
+		}
+		
+        try {
+        	if (fc.isConnected()) { 
+	        	fc.disconnect();
+	    	} 
+		} catch (IOException e) {
+			logger.error("FilereadServiceImpl-pushRecordTxt-断开FTP出现异常");
+		}
+	}
+}

@@ -1,0 +1,16 @@
+以下实例演示了如何查看主机指定文件的最后修改时间：
+Main.java 文件
+import java.net.URL;
+import java.net.URLConnection;
+ 
+public class Main {
+    public static void main(String[] argv) throws Exception {
+        URL u = new URL("http://127.0.0.1/java.bmp");
+        URLConnection uc = u.openConnection();
+        uc.setUseCaches(false);
+        long timestamp = uc.getLastModified();
+        System.out.println("java.bmp 文件最后修改时间 :"+timestamp);
+    }
+}
+以上代码运行输出结果为：
+java.bmp 文件最后修改时间 24 May 2014 12:14:50

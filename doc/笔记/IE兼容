@@ -2,10 +2,17 @@ JS：
 	方法/函数：减少使用JS原生方法
 		indexOf。可用jquery里的$.inArray替代indexOf。 具体使用：$.inArray(“a”, divarr)==-1
 	AJAX：
-		上传文件：IE下ajaxSubmit将file对象传递到控制层，建议使用ajaxFileUpload
+		上传文件：IE下ajaxSubmit将file对象传递到控制层，建议使用ajaxFileUpload。
+		
+		有些方法调用获取数据是直接读缓存的，这时候加个属性 cache:false 即可。
 		
 	DOM：
-		
+		复选框赋值兼容问题：
+		  for(var k =0; k<number.length; k++){
+   				//$(":checkbox[name='tCheckTwo'][value='"+number[k]+"']").attr("checked", true);
+                //解决ie8的复选框赋值兼容问题。eq的是索引
+   				$(":checkbox[name='tCheckTwo']").eq(number[k]).attr("checked", true);
+		    };
 
 
 CSS：

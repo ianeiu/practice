@@ -1,6 +1,7 @@
 package fix;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -31,4 +32,9 @@ public class TxtTest {
 		TxtUtil.contentToTxt("G:\\20171227.txt", "213214sd\r\n");
 	}
 
+	@Test
+	public void testCount() throws IOException{
+		String path = "C:\\Users\\admin\\Desktop\\temp.txt";
+		System.out.println(TxtUtil.countLines(path));
+	}
 }

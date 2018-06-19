@@ -1,15 +1,20 @@
 package com.wm.utils.file;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class TxtUtil {
 
@@ -100,6 +105,42 @@ public class TxtUtil {
 	}
 	
 	/**
+	 * 写入TXT
+	 * 
+	 * @param filePath
+	 * @param content
+	 * @throws IOException
+	 */
+	public static void writeToTxt(String filePath,List<String> list) throws IOException {
+		File file = new File(filePath);
+		if(!file.exists()){
+			file.createNewFile();
+		}
+		
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        try {
+            fw = new FileWriter(filePath);
+            bw = new BufferedWriter(fw);
+            for(Object o : list){
+                bw.write(o.toString());
+                bw.newLine();
+                bw.flush();
+            }
+        } finally {
+        	try{
+	        	if(fw!=null){
+	                fw.close();
+	        	}
+	        	if(bw!=null){
+	                bw.close();
+	        	}
+        	}catch(IOException e){}
+        }
+	}
+	
+	
+	/**
 	 * 写入Txt
 	 * 
 	 * @param content
@@ -175,6 +216,35 @@ public class TxtUtil {
 		}
 		
 	}
+	
+	/**
+	 * 统计文件行数
+	 * @param filename
+	 * @return
+	 * @throws FileNotFoundException
+	 */
+	public static long countLines(String filename) throws FileNotFoundException{
+		Scanner scanner = null;
+		try{
+			File file = new File(filename);
+			if(!file.exists()){
+				return 0L;
+			}
+			
+			long count = 0;
+			scanner= new Scanner(new FileInputStream(file));
+			while (scanner.hasNextLine()) {
+				if(!"".equals(scanner.nextLine().trim()))
+					count++;
+			}
+			return count;
+		}finally {
+			if(scanner != null){
+				scanner.close();
+			}
+		}
+	}
+	
 	
 	/**
 	 * 

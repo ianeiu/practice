@@ -1,6 +1,6 @@
 package com.wm.demo.trywork;
 
-public class Demo06IntegerInt {
+public class Demo07IntegerInt {
 	Integer a = 1000,b=1000;
 	Integer c = 100,d=100;   
 	Integer e = new Integer(10);
@@ -19,6 +19,6 @@ public class Demo06IntegerInt {
     }
 	
 	public static void main(String[] args) {
-		new Demo06IntegerInt().mRun();
+		new Demo07IntegerInt().mRun();
 	}
 }

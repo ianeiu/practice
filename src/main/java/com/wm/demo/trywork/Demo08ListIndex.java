@@ -9,7 +9,7 @@ public class Demo08ListIndex {
 		String s = "如果";
 		String s2 = "吾未眠";
 		String s3 = "如果还要明天";
-		String sforlist = "如果还要明天";
+		String sforlist = "如果还要明天如果";
 		
 		List<String> list = new ArrayList<>();
 		list.add(sforlist);
@@ -17,12 +17,12 @@ public class Demo08ListIndex {
 		list.add("XXXXXXXXXXXXXXX如果");
 		
 		System.out.println(list.toString());
-		System.out.println(list.toString().indexOf(s));
-		System.out.println(list.toString().indexOf(s2));
+		System.out.println(list.toString().indexOf(s));//1
+		System.out.println(list.toString().indexOf(s2));//-1
 		System.out.println("-------------------------");
-		System.out.println(s.indexOf(sforlist));
-		System.out.println(sforlist.indexOf(s));
-		System.out.println(sforlist.indexOf(s3));
-		System.out.println(sforlist.indexOf(s2));
+		System.out.println(s.indexOf(sforlist));//-1
+		System.out.println(sforlist.indexOf(s));//0
+		System.out.println(sforlist.indexOf(s3));//0
+		System.out.println(sforlist.indexOf(s2));//-1
 	}
 }

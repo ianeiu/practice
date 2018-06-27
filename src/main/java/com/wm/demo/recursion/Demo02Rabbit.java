@@ -1,4 +1,4 @@
-package com.wm.demo.learn.recursion;
+package com.wm.demo.recursion;
 
 /*
  * 斐波那契数列

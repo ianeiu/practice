@@ -1,4 +1,4 @@
-package com.wm.demo.learn.recursion;
+package com.wm.demo.recursion;
 
 import java.io.File;
 

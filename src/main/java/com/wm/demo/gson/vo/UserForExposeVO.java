@@ -1,4 +1,4 @@
-package com.wm.demo.learn.gson.vo;
+package com.wm.demo.gson.vo;
 
 import com.google.gson.annotations.Expose;
 

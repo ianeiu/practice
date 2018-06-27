@@ -1,4 +1,4 @@
-package com.wm.demo.learn.gson;
+package com.wm.demo.gson;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
-import com.wm.demo.learn.gson.vo.UserVO;
+import com.wm.demo.gson.vo.UserVO;
 
 public class TypeAdapterDemo {
 

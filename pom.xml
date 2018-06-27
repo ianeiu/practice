@@ -9,6 +9,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <logback.version>1.1.1</logback.version>
         <spring.version>4.1.7.RELEASE</spring.version>
+        <activiti.version>5.13</activiti.version>
     </properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -211,7 +212,7 @@
 			<version>3.0.0</version>
 		</dependency>
 
-		<!-- 单元测试 -->
+		<!-- junit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -353,10 +354,23 @@
 		</dependency>
 		
         <!-- MyBatis逆向工程 -->
-       <dependency>
-            <groupId>org.mybatis.generator</groupId>
-            <artifactId>mybatis-generator-core</artifactId>
-            <version>1.3.5</version>
-        </dependency>
+		<dependency>
+			<groupId>org.mybatis.generator</groupId>
+			<artifactId>mybatis-generator-core</artifactId>
+			<version>1.3.5</version>
+		</dependency>
+
+		<!-- activiti -->
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-engine</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-spring</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		
 	</dependencies>
 </project>

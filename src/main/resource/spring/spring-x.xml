@@ -8,5 +8,6 @@
 	http://www.springframework.org/schema/context/spring-context.xsd">
 	
     <import resource="classpath:com/wm/ssm/**/resouce/spring-*.xml"/>
-	
+    
+    <!-- <import resource="classpath:activiti-context.xml"/> -->
 </beans>

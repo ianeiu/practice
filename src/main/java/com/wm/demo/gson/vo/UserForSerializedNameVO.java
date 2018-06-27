@@ -1,32 +1,15 @@
-package com.wm.demo.learn.gson.vo;
+package com.wm.demo.gson.vo;
 
-import com.google.gson.annotations.Until;
+import com.google.gson.annotations.SerializedName;
 
-
-
-/* 
- * @Until(float v)注解 版本控制
- * 当gson的setVersion(n) n<v 才解析
- */
-public class UserForUntilVO {
+public class UserForSerializedNameVO {
 	private String id;
-	private String userName; 
-	@Until(2)
+	@SerializedName(value ="userName",alternate = {"name","user"}) 
+	private String userName;
 	private String userSex;
+	@SerializedName("pwd")
 	private String password;
 	
-	
-	public UserForUntilVO() {
-		super();
-	}
-
-	public UserForUntilVO(String id, String userName, String userSex, String password) {
-		super();
-		this.id = id;
-		this.userName = userName;
-		this.userSex = userSex;
-		this.password = password;
-	}
 	
 	public String getId() {
 		return id;

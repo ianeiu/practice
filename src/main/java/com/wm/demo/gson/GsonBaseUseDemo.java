@@ -1,4 +1,4 @@
-package com.wm.demo.learn.gson;
+package com.wm.demo.gson;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import org.junit.Test;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.wm.demo.learn.gson.vo.UserVO;
+import com.wm.demo.gson.vo.UserVO;
 
 
 public class GsonBaseUseDemo {

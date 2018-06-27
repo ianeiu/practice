@@ -1,11 +1,11 @@
-package com.wm.demo.learn.logback;
+package com.wm.demo.logback;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LockBackDemo {
+public class LogBackDemo {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(LockBackDemo.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(LogBackDemo.class);
 
     public static void main(String[] args) {
         LOGGER.trace("logback的--trace日志--输出了");

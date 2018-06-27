@@ -1,4 +1,4 @@
-package com.wm.demo.learn.gson;
+package com.wm.demo.gson;
 
 import org.junit.Test;
 

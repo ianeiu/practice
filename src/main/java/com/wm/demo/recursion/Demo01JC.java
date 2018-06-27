@@ -1,4 +1,4 @@
-package com.wm.demo.learn.recursion;
+package com.wm.demo.recursion;
 
 /*
  * 需求：请用代码实现求5的阶乘。

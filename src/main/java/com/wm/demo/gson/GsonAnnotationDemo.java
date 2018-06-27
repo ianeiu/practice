@@ -1,14 +1,14 @@
-package com.wm.demo.learn.gson;
+package com.wm.demo.gson;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.wm.demo.learn.gson.vo.UserForExposeVO;
-import com.wm.demo.learn.gson.vo.UserForSerializedNameVO;
-import com.wm.demo.learn.gson.vo.UserForSinceVO;
-import com.wm.demo.learn.gson.vo.UserForUntilVO;
+import com.wm.demo.gson.vo.UserForExposeVO;
+import com.wm.demo.gson.vo.UserForSerializedNameVO;
+import com.wm.demo.gson.vo.UserForSinceVO;
+import com.wm.demo.gson.vo.UserForUntilVO;
 
 /**
  * 

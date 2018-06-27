@@ -1,25 +1,26 @@
-package com.wm.demo.learn.gson.vo;
+package com.wm.demo.gson.vo;
 
-import com.google.gson.annotations.Since;
+import com.google.gson.annotations.Until;
+
 
 
 /* 
- * @Since(float v)注解  版本控制 
- * 结合GsonBuilder.setVersion(n)使用 当n>=v时 才会序列化解析
+ * @Until(float v)注解 版本控制
+ * 当gson的setVersion(n) n<v 才解析
  */
-public class UserForSinceVO {
+public class UserForUntilVO {
 	private String id;
 	private String userName; 
-	@Since(2)
+	@Until(2)
 	private String userSex;
 	private String password;
 	
 	
-	public UserForSinceVO() {
+	public UserForUntilVO() {
 		super();
 	}
 
-	public UserForSinceVO(String id, String userName, String userSex, String password) {
+	public UserForUntilVO(String id, String userName, String userSex, String password) {
 		super();
 		this.id = id;
 		this.userName = userName;

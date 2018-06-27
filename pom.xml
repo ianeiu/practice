@@ -9,7 +9,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <logback.version>1.1.1</logback.version>
         <spring.version>4.1.7.RELEASE</spring.version>
-        <activiti.version>5.13</activiti.version>
+        <activiti.version>5.14</activiti.version>
     </properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -259,7 +259,8 @@
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>3.3.0</version>
+			<version>3.2.8</version>
+			<!-- <version>3.3.0</version> -->
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>

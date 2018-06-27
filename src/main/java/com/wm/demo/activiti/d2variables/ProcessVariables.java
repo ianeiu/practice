@@ -19,8 +19,8 @@ public class ProcessVariables {
 	/**部署流程定义（从InputStream）*/
 	@Test
 	public void deploymentProcessDefinition_inputStream(){
-		InputStream inputStreambpmn = this.getClass().getResourceAsStream("/diagrams/processVariables.bpmn");
-		InputStream inputStreampng = this.getClass().getResourceAsStream("/diagrams/processVariables.png");
+		InputStream inputStreambpmn = this.getClass().getResourceAsStream("processVariables.bpmn");
+		InputStream inputStreampng = this.getClass().getResourceAsStream("processVariables.png");
 		Deployment deployment = processEngine.getRepositoryService()//与流程定义和部署对象相关的Service
 						.createDeployment()//创建一个部署对象
 						.name("流程定义")//添加部署的名称

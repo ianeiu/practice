@@ -21,8 +21,8 @@ public class AHelloworld {
 		Deployment deployment = processEngine.getRepositoryService()//与流程定义和部署对象相关的Service
 						.createDeployment()//创建一个部署对象
 						.name("helloworld入门程序")//添加部署的名称
-						.addClasspathResource("diagrams/helloworld.bpmn")//从classpath的资源中加载，一次只能加载一个文件
-						.addClasspathResource("diagrams/helloworld.png")//从classpath的资源中加载，一次只能加载一个文件
+						.addClasspathResource("helloworld.bpmn")//从classpath的资源中加载，一次只能加载一个文件
+						.addClasspathResource("helloworld.png")//从classpath的资源中加载，一次只能加载一个文件
 						.deploy();//完成部署
 		System.out.println("部署ID："+deployment.getId());//1
 		System.out.println("部署名称："+deployment.getName());//helloworld入门程序  

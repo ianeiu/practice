@@ -13,7 +13,7 @@
 * `com.wm.demo.patterns` 	设计模式DEMO及资料（u）
 * `com.wm.demo.gson`		gsonDemo
 * `com.wm.demo.logback`		logbackDemo
-* `com.wm.demo.jedis`		jedisDemo（u）
+* `com.wm.demo.jedis`		jedisDemo
 * `com.wm.demo.activiti`	activitiDemo
 * `com.wm.demo.use`			常用Java代码（u）
 * `com.wm.demo.trywork`		工作使用（u）

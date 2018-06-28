@@ -1,0 +1,106 @@
+https://blog.csdn.net/u010999240/article/details/49036017
+
+将java程序作为Windows服务
+我们可以将java程序作为Windows的服务来启动。
+
+首先下载 Java Service Wrapper包（http://wrapper.tanukisoftware.com/doc/english/download.jsp），
+在D:\MyServApp中创建bin\，conf，lib，lib\classes，logs文件夹：
+MyServApp\bin\
+MyServApp\conf\
+MyServApp\lang\（可不要）
+MyServApp\lib\
+MyServApp\lib\classes\
+MyServApp\logs\
+
+
+将wrapper-windows-x86-64-3.5.27-st中的相应文件复制到我们刚创建的文件，如下:
+
+%WRAPPER_HOME%\bin\wrapper.exe -> MyServApp\bin\wrapper.exe
+%WRAPPER_HOME%\lib\wrapper.jar -> MyServApp\lib\wrapper.jar
+%WRAPPER_HOME%\lib\wrapper.dll -> MyServApp\lib\wrapper.dll
+%WRAPPER_HOME%\src\conf\wrapper-license-time.conf -> MyServApp\conf\wrapper-license.conf
+%WRAPPER_HOME%\src\conf\wrapper.conf.in -> MyServApp\conf\wrapper.conf
+
+
+修改wrapper.config文件以下值：
+
+wrapper.java.command=java
+wrapper.java.command.loglevel=INFO
+
+wrapper.java.mainclass=org.tanukisoftware.wrapper.WrapperSimpleApp
+wrapper.app.parameter.1=timer.Task3
+
+wrapper.java.classpath.1=../lib/wrapper.jar
+wrapper.java.classpath.2=../lib/classes
+
+wrapper.java.library.path.1=../lib
+
+wrapper.logfile=../logs/wrapper.log
+
+wrapper.console.title=Task3
+wrapper.name=Task3
+wrapper.displayname=Task3
+wrapper.description=Task3
+
+其中timer.Task3为我们自己创建的class文件，timer为包名，Task文件如下：
+
+package timer;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * Created by siege on 2015-10-10.
+ */
+public class Task3 {
+    public static void main(String[] args) {
+        Runnable runnable = new Runnable() {
+            public void run() {
+                // task to run goes here
+                System.out.println("Hello !!");
+            }
+        };
+        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+        // 其中第二个参数为第一次启动的延时时间，第三个参数为每次执行的间隔时间，第四个参数为时间单位
+        service.scheduleAtFixedRate(runnable, 10, 1, TimeUnit.SECONDS);
+    }
+}
+
+执行：
+
+wrapper.exe -c ..\conf\wrapper.conf
+1
+直接运行该服务而不进行安装。
+
+若要安装，进入MyApp目录，执行：
+
+bin\wrapper.exe -i ..\conf\wrapper.conf
+
+进行service的安装，cmd控制台会提示
+
+wrapper | Task3 Server service installed.
+
+我们可以来启动该服务（需要以管理员身份），在cmd下：
+
+net start Task3
+
+启动完成，同样页面会有相应的提示。如果需要停止服务，执行下面命令：
+
+bin\wrapper.exe -p ..\conf\wrapper.conf
+
+如果需要卸载服务，执行下面命令：
+
+bin\wrapper.exe -r ..\conf\wrapper.conf
+
+
+
+/* wm add */
+建议使用开源版本，无需许可证；
+wrapper无64位开源版本；
+
+若出现语言相关错误日志可修改配置文件如下
+wrapper.lang=en_US
+wrapper.lang.folder=../lang
+
+..\lib\classes 放置java编译程序

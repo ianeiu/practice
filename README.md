@@ -1,25 +1,47 @@
-#项目仅供学习。
+# 仅供学习
 
-项目信息
-=======
+## 信息
 * maven:`3.0.4`
-* jdk：`1.8.0_31`
+* jdk：`1.8.0_31_x64`
 * tomcat：`8.0.9`
-* 数据库服务：`mysql5.7`
+* 数据库管理：`mysql5.7`
 
-ssm整合
-=======
-ssm最初的整合借鉴github上的一些项目。
-不过个人感觉把所有的模块扔在一个包里很乱，所以自己根据模块划分除了user、role等小模块，方便后期管理和扩展
+## 内容
+### demo
+* `com.wm.demo.learn`		java-api
+* `com.wm.demo.recursion`	递归DEMO
+* `com.wm.demo.patterns` 	设计模式DEMO及资料（u）
+* `com.wm.demo.gson`		gsonDemo
+* `com.wm.demo.logback`		logbackDemo
+* `com.wm.demo.jedis`		jedisDemo（u）
+* `com.wm.demo.activiti`	activitiDemo
+* `com.wm.demo.use`			常用Java代码（u）
+* `com.wm.demo.trywork`		工作使用（u）
 
-* `https://github.com/liyifeng1994/ssm`
-* `https://blog.csdn.net/qq598535550/article/details/51703190`
+### mybatisgenerator
+* `com.wm.mybatisgenerator`	Mybatis反向工程
 
-* `https://www.cnblogs.com/ainyi/p/8527984.html`
+### ssm
+* `com.wm.ssm`				SSM整合
 
-mabatis逆向工程 
-=======
-* `https://github.com/wcyong/mybatisGeneratorCustom`
+### utils
+* `com.wm.utils.array`		array
+* `com.wm.utils.code`		二维码、条形码
+* `com.wm.utils.cookie`		cookie
+* `com.wm.utils.date`		date
+* `com.wm.utils.file`		file
+* `com.wm.utils.ftp`		ftp
+* `com.wm.utils.http`		http
+* `com.wm.utils.id`			id生成
+* `com.wm.utils.image`		image
+* `com.wm.utils.json`		json
+* `com.wm.utils.list`		list
+* `com.wm.utils.pwd`		加密
+* `com.wm.utils.string`		string
+* `com.wm.utils.type`		type
+* `com.wm.utils.zip`		zip
+
+### wrapper
+* `com.wm.wrapper`			 Java Service Wrapper（将java程序作为Windows服务）
 
 
-<b>对他们表示感谢<b>

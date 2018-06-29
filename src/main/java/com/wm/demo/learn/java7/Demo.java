@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * 二进制字面量
  * 数字字面量可以出现下划线
  * switch 语句可以用字符串
- * 泛型简化
+ * 泛型简化 <>钻石操作符
  * 异常的多个catch合并
  * try-with-resources 语句
  * @author WM

@@ -1,0 +1,23 @@
+java.lang.IllegalStateException: Cannot call sendError() after the response has been committed
+
+做开发的时候，有时候报错：
+
+java.lang.IllegalStateException: Cannot call sendError() after the response has been committed
+
+字面上是参数异常， 在response已经提交之后 不能发送错误请求。
+
+下面看个例子就一目了然了：
+
+
+response.setContentType("text/html;charset=UTF-8");  
+PrintWriter out = response.getWriter();  
+out.print("上传成功！上传文件为:"+fileName+"<br/>保存的地址为"+filePath+ "！！");  
+out.close();  
+  
+response.sendRedirect("index.jsp");  
+
+首先，利用reponse.getWrite()获得输出流对象，close()之后，这里reponse其实已经提交了。注释下面的sendRedirect代码，执行之后发现response已经进行已经跳转了，只不过url没有发生改变，并且页面上已经有输出上面指定的字符串。
+
+所以当执行上面代码之后 ，reponse 会提交两次，服务器就不知道该怎么办了，所以抛出异常。
+
+解决方案： 去掉out.close()  这里不会因为PrintWriter 输出对象没有关闭而占用资源的。

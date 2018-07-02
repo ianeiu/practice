@@ -1,0 +1,82 @@
+jsp:
+<input type="file" name="file" id="newsFile" class="form190px"/>
+<input type="button"  value="上 传" onClick="uploadFile();" class="btn4"/>    
+
+script:
+<script type="text/javascript" src="${baseURL}/js/3rd-plug/jquery/ajaxfileupload.js"></script>
+function uploadFile(){
+		var s = $("#newsFile").val();
+		if ( s== '') return alert("请选择要上传的文件");
+        $.ajaxFileUpload({
+            url:'${baseURL}/activity/activityAction!uploadFile.action?type=2',//需要链接到服务器地址
+            data:{ 'fileName':s},
+            secureuri:false,
+            fileElementId:'newsFile',                        //文件选择框的id属性
+            dataType: 'json',                                              //服务器返回的格式，可以是json
+            success: function (data) {
+                if('0'==data.code){
+                	alert("上传文件成功！");
+                	//$("#filePath").val(data.data.reFilePath);
+
+                }else{
+                	alert(data.desc);
+                }
+            },
+            error: function () { alert("上传文件失败！"); }
+        })
+	}
+
+java:
+File file;
+	String fileName;
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public void uploadFile() throws Exception {
+		String ss = "\\upload\\fujian\\"+new SimpleDateFormat("yyyyMMdd").format(new Date());
+		fileName = fileName.substring(fileName.lastIndexOf("\\")+1,fileName.length());
+		
+		URI u = Thread.currentThread().getContextClassLoader().getResource("").toURI();
+		File f = new File(u);
+
+		File dir = new File(f.getParentFile().getParentFile().getPath() + ss);
+		
+		if(!dir.exists()){
+			dir.mkdir();
+		}
+		f = new File(dir.getPath()+"\\"+fileName);
+		f.createNewFile();
+		
+	    InputStream in = new FileInputStream(file);
+	    OutputStream out = new FileOutputStream(f);
+	    byte[] buf = new byte[1024];
+	    int len;
+	    while ((len = in.read(buf)) > 0) {
+	       out.write(buf, 0, len);
+	    }
+	    in.close();
+	    out.close();
+		
+		// URI u1 = this.getClass().getResource("/").toURI();
+		// System.out.println(u1);//file:/F:/apache/apache-tomcat-6.0.26-zhcmp/wtpwebapps/zhcmp/WEB-INF/classes/
+
+		// String s1 = ServletActionContext.getRequest().getSession().getServletContext().getRealPath("/");
+		// System.out.println(s1);//F:\apache\apache-tomcat-6.0.26-zhcmp\wtpwebapps\zhcmp\
+		// File f1 = new File(s1+ss);//F:\apache\apache-tomcat-6.0.26-zhcmp\wtpwebapps\zhcmp\ upload\fujian
+		setActionResult("0", "查询成功");
+		doJsonOut();
+	}

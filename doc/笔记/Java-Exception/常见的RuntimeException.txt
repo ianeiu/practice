@@ -1,0 +1,20 @@
+一般面试中java Exception（runtimeException ）是必会被问到的问题
+
+ 
+常见的几种如下：
+RuntimeException	运行时异常。是所有Java虚拟机正常操作期间可以被抛出的异常的父类。
+NullPointerException - 空指针引用异常
+ClassCastException - 类型强制转换异常。
+IllegalArgumentException - 传递非法参数异常。
+ArithmeticException - 算术运算异常
+ArrayStoreException - 向数组中存放与声明类型不兼容对象异常
+IndexOutOfBoundsException - 下标越界异常
+NegativeArraySizeException - 创建一个大小为负数的数组错误异常
+UnsupportedOperationException	不支持的方法异常。指明请求的方法不被支持情况的异常
+EnumConstantNotPresentException	枚举常量不存在异常。当应用试图通过名称和枚举类型访问一个枚举对象，但该枚举对象并不包含常量时，抛出该异常。
+IllegalMonitorStateException 违法的监控状态异常。当某个线程试图等待一个自己并不拥有的对象（O）的监控器或者通知其他线程等待该对象（O）的监控器时，抛出该异常。
+IllegalStateException 违法的状态异常。当在Java环境和应用尚未处于某个方法的合法调用状态，而调用了该方法时，抛出该异常。
+NegativeArraySizeException 数组大小为负值异常。当使用负数大小值创建数组时抛出该异常。
+SecurityException 安全异常。由安全管理器抛出，用于指示违反安全情况的异常。
+TypeNotPresentException 类型不存在异常。当应用试图以某个类型名称的字符串表达方式访问该类型，但是根据给定的名称又找不到该类型是抛出该异常。该异常与ClassNotFoundException的区别在于该异常是unchecked（不被检查）异常，而ClassNotFoundException是checked（被检查）异常。
+

@@ -39,7 +39,7 @@ import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.util.Date;
 import java.util.SortedMap;
 
-public class Demo09FileInfo {
+public class Demo10FileInfo {
 
     /**
      * @param args

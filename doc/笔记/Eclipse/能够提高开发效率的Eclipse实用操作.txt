@@ -1,52 +1,37 @@
-1、丢掉鼠标吧之Eclipse快捷键篇
+使用频率极高的快捷键：
+代码提示	 			alt+/
+自动生成object方法		alt + shift + s，然后根据提示继续
+复制当前行				ctrl +alt + ↓
+ 查找文本				ctrl + k ,ctrl + shfit + k
+ 如何跳转到文件中的特定行	ctrl + l
+调出搜索文本的视图		ctrl + f
+进行全局搜索和局部搜索		ctrl + h
 
-1.1	 文件切换的三种方式
-	1.1.1 Ctrl + E,在右边显示出当前打开的所有文件
-	1.1.2 Ctrl + Pg Up ,Ctrl + Pg Dn ,逐个文件跳跃
-	1.1.3 Ctrl + F6，在当前文件里显示当前打开的所有文件
 
-1.2	复制当前行或者当前选中的代码块	Ctrl +Alt + ↓
+类：
+1   查看接口实现类	ctrl + t
+2 查看下一个方法  ctrl + shift + ↓
+3   找出调用某个方法的所有类	ctrl + alt + h
 
-1.3  显示当前类的所有属性和方法	Ctrl + O
-	
-1.4	关闭当前文件	 Ctrl + W，关闭所有文件	Ctrl + Shift + W
+视图：
+1 文件切换的三种方式
+	1.1 显示出当前打开的所有文件	ctrl + e
+	1.2 文件切换		ctrl + pg、up ,ctrl + pg、dn
+2  视图切换				ctrl + f7	跳转到代码编辑器视图 f12
+3   经典的quick access	ctrl + 3  搜maven、server
+4 eclipse的面包屑功能	alt + shift + b
 
-1.5 快速定位当前文件在工程中的位置,即在package视图中的位置
-	一种方法是直接点击package视图中的”Link with Editor”。
-	第二种方式是使用Alt + Shift +W,显示视图，然后选择package视图，同样可以定位到当前文件在package视图中的位置。
+文件：
+1   创建各种类型的文件	ctrl + n
+2   关闭当前文件		ctrl + w
+3   关闭所有文件		ctrl + shift + w
+3   打开文件所在目录	alt + shift + w，选择system explorer
 
-1.6  选中Java文件中的内容	Alt + Shift + → ,Alt + Shift + ↑,Alt + Shift + ↓
-
-1.7	 查看接口实现类 	Ctrl + T
-
-1.8   进行全局搜索和局部搜索	Ctrl + H
-
-1.9	自动生成get/set方法、toString方法、hash方法 	Alt + Shift+S 
-
-2.0  视图切换	Ctrl + F7	跳转到代码编辑器视图 F12
-
-2.1  经典的Quick Access		Ctrl + 3  搜maven、server
-
-2.2  变量名和方法之间的跳跃 	当前方法的下一个方法  Ctrl + Shift + ↓
-
-2.3  重构
-	1、 修改名字 	Alt + Shift + R 统一修改方法的参数名字、或者类变量、方法变量
-	2、 抽取类方法	要选中某块代码，然后使用Alt + Shift + M,就会弹出抽取视图
-
-2.4	Eclipse的面包屑功能	Alt + Shift + B
-
-2.5  找出调用某个方法的所有类	Ctrl + Shift +G
-
-2.6 查找文本	 Ctrl + K ,Ctrl + Shfit + K
-
-2.7 调出搜索文本的视图	 Ctrl + F
-
-3.1  大小写转换	Ctrl + Shift + Y 变小写,Ctrl +Shift + X变大写。
-
-3.2 创建各种类型的文件	 Ctrl +N
-
-3.3  删除当前行 	使用Ctrl + D,很实用的快捷键。
-
-3.6 如何跳转到文件中的特定行		Ctrl + L
-
-3.8 显示html和xml元素的所有属性 	ctrl+shift+逗号
+文本：
+1  删除当前行				ctrl + d
+2  查看字符串出现的地方			ctrl + shift + u
+3 显示html和xml元素的所有属性	ctrl + shift + 逗号
+4  大小写转换				变小写ctrl + shift + y,变大写ctrl +shift + x。
+5 重构
+	5.1  修改名字 			alt + shift + r 统一修改方法的参数名字、或者类变量、方法变量
+	5.2  抽取类方法			选中代码，然后使用alt + shift + m,就会弹出抽取视图

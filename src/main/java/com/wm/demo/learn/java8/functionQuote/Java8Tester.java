@@ -8,7 +8,7 @@ import java.util.List;
  
 public class Java8Tester {
    public static void main(String args[]){
-      List names = new ArrayList();
+      List<String> names = new ArrayList<>();
         
       names.add("Google");
       names.add("Runoob");

@@ -63,8 +63,9 @@ public class UserAction {
 
 
 	// ajax json
-	@RequestMapping(value = "/updateUserStatus/{id}", method = RequestMethod.POST, produces = {
-			"application/json; charset=utf-8" })
+	@RequestMapping(value = "/updateUserStatus/{id}", 
+			/*method = RequestMethod.POST,*/
+			produces = { "application/json; charset=utf-8" })
 	@ResponseBody
 	private Result<TbSysUser> updateUserStatus(@PathVariable("id") String id, @RequestParam(value="userId",required = false) String userId) {
 		if (id == null || "".equals(id)) {

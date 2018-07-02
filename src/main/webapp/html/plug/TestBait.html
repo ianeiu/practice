@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../../js/plug/baiduTemplate.js"></script>
+</head>
+<body>
+	
+</body>
+
+<script type="text/javascript">
+  	  var id = '${param.id}';
+  	  var bat = baidu.template;
+	  
+	  $(document).ready(function(){
+		  doSearch();
+	  })
+		  
+	  function doSearch(){
+		  $.ajax({
+			url : '${baseURL}/remuneration/remunerationAction!searchBillView.action',
+			type : 'post',
+			dataType : 'json',
+			data : { 'id' : id },
+			success : function(result) {
+				if ("0" == result.code) {
+					var bill = result.data.data;
+					//酬金账单基础信息
+					$('.p_address').html(bill.fyCenterName);
+					$('#managerName').html(bill.managerName);
+					$('.p_grade').html(bill.starLevel);
+					$('.p_code').html(bill.pcCode);
+					$('#pcName').html(bill.pcName);
+					$('#month').html(bill.createMonth);
+					
+					//酬金项
+					var list = bill.itemList;
+					
+					if (list){
+				    		var html = bat('t:billitemlist', {list:list});
+				    		$(".viem_boxWrap").append(html); 
+	    				}
+				} else {
+					alert(result.desc);
+				}
+			}
+		  })
+	  }
+	  
+</script>
+
+
+<script id="t:billitemlist" type="text/html">
+	<# for(var i=0;i< list.length;i++){#>
+	<div class="viem_box">
+		<h3 class="viewTitles">
+<span class="fl viewName">
+<i><img src="${baseURL}/themes/3rd-plug/app/images/ico_money.png" class="viemImg"/></i>
+<em><#=list[i].itemName#></em>
+</span>
+<em class="fr viewText">排前<span class="c_0085D0"><#=list[i].rankPercent#></span></em>
+<em class="fr viewNums"><#=list[i].itemMoney#>元</em>
+<b class="icoDown"></b>
+</h3>
+		<ul class="viemVd">
+			<li>
+				<div class="viem_chrden">
+					<div class="fl viem_chrden_l F_des">
+						<i class="bPoint"></i>
+						<span>发生月</span>
+					</div>
+					<div class="fr viem_chrden_r c_333"><em><#=list[i].itemMonth#></em></div>	   								
+				</div>
+			</li>
+			<li>
+				<div class="viem_chrden">
+					<div class="fl viem_chrden_l F_des">
+						<i class="bPoint"></i>
+						<span>酬金金额</span>
+					</div>
+					<div class="fr viem_chrden_r c_333"><em><#=list[i].itemMoney#></em>元</div>	   								
+				</div>
+			</li>
+			<li>
+				<div class="viem_chrden">
+					<div class="fl viem_chrden_l F_des">
+						<i class="bPoint"></i>
+						<span>对应层级排名</span>
+					</div>
+					<div class="fr viem_chrden_r c_333">前<em><#=list[i].rankPercent#></em></div>	   								
+				</div>
+			</li>
+			<li>
+				<div class="viem_chrden">
+					<div class="fl viem_chrden_l F_des" style="width:98%;">
+						<i class="bPoint"></i>
+						<span><#=list[i].itemRemark#></span>
+					</div>
+					<div class="fr viem_chrden_r c_333"><em></em></div>	   								
+				</div>
+			</li>
+		</ul>
+	</div>
+	<#}#>				
+</script>
+
+</html>

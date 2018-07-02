@@ -30,3 +30,10 @@ HTML:
 	按钮value显示null
 	<!-- <input type="button" value="上传" class="sBtn" onclick="uploadDataFile(1,0);" /> -->
 	<a href="javascript:void(0);" class="sBtn"  onclick="uploadDataFile(1,0)">上传</a>
+	
+插件：
+	Webuploader IE浏览器兼容问题（点击无反应）
+		webuploader 加载后会默认先使用H5，在浏览器不支持H5,再采用flash,方式上传。
+		所以  初始化webuploader,一定要添加 swf:xxx/Uploader.swf ,保证路径正确
+		可能是 swf 路径不对，检查 dist 里面的 uploader.swf  文件。
+		

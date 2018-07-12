@@ -1,0 +1,19 @@
+/**
+ * 定时任务配置
+ * @author wm
+ *
+ */
+@Configuration
+@EnableScheduling
+public class SchedulerConfig implements SchedulingConfigurer{
+
+	@Override
+	public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
+		taskRegistrar.setScheduler(setTaskExecutors());
+	}
+	
+	@Bean(destroyMethod="shutdown")
+	public Executor setTaskExecutors(){
+	    return Executors.newScheduledThreadPool(10); // 10个线程来处理。
+	}
+}

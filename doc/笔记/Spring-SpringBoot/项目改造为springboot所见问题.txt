@@ -1,16 +1,88 @@
 项目改造为springboot所见问题
+1----------------------------------------------------------------------------------------------------
+现象：引入layer.js出现undefinedcss目录.txt
+原因：layer.js与layui.js冲突
+解决：将layui.js 第二个.link 中的n.dir改为(n.dir?n.dir:r)
+2----------------------------------------------------------------------------------------------------
+现象：配置CommonsMultipartResolver，上传文件返回异常HttpMediaTypeNotSupportedException
+原因：同下
+解决：FUN1、不配置CommonsMultipartResolver
+	FUN2、启动类@EnableAutoConfiguration(exclude = {MultipartAutoConfiguration.class}) （不建议）
+3----------------------------------------------------------------------------------------------------
+现象：上传文件返回异常java.lang.ClassCastException: org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile cannot be cast to org.springframework.web.multipart.commons.CommonsMultipartFile
+原因：FileUtil中multipartToFile的代码片段  CommonsMultipartFile cf = (CommonsMultipartFile)multfile
+	与springboot自带的org.springframework.web.multipart.MultipartFile冲突
+	import org.springframework.web.multipart.commons.CommonsMultipartResolver;//这是旧项目引入的
+	import org.springframework.web.multipart.MultipartFile;//这是springboot整合的
+解决：采用输入流方式获取File对象，具体代码自行百度
+4----------------------------------------------------------------------------------------------------
+现象：Shiro 自定义 filter 匹配异常，无限拦截重定向
+参考：http://www.hillfly.com/2017/179.html
+原因：自定义Filter注册为了 Bean交给 Spring托管,它会被自动注册到 FilterChain中。请求先经过自定义Filter，导致请求被其先消费掉了，而ShiroFilter成了摆设。
+解决：FUN1、利用 FilterRegistrationBean 注册自定义 Filter （建议使用）
+		ex：
+			@Bean
+			public CasFilter casFilter(){
+				CasFilter cf = new CasFilter();
+				cf.setSuccessUrl(successUrl);
+				cf.setFailureUrl(failureUrl);
+				return cf;
+			}
+			
+			/**
+			 * 注册casFilter
+			 * @param casFilter
+			 * @return
+			 */
+			@Bean
+			public FilterRegistrationBean registCasFilter(CasFilter casFilter) {
+				FilterRegistrationBean cas = new FilterRegistrationBean();
+				cas.setFilter(casFilter);
+				cas.setEnabled(false);	//该值缺省为false,表示生命周期由SpringApplicationContext管理,设置为true则表示由ServletContainer管理  x
+				return cas;
+			}
+			
+			/**
+			 * 注册shiroFilter
+			 * @param securityManager
+			 * @param casFilter
+			 * @param logoutFilter
+			 * @return
+			 */
+			@Bean
+			public ShiroFilterFactoryBean shiroFilter(DefaultWebSecurityManager securityManager,
+					CasFilter casFilter,LogoutFilter logoutFilter) {
+				ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+				...
+				Map<String,Filter> filters = new HashMap<>();
+				filters.put("casFilter",casFilter);
+				filters.put("logoutFilter", logoutFilter);
+				shiroFilterFactoryBean.setFilters(filters);		//添加casFilter到shiroFilter
+				...
+			}
+	FUN2、将 CasFilter注册为了 Bean交给 Spring托管,它会被自动注册到 FilterChain中，那我们如果不把它注册为 Bean就可以避免这个问题了。
+		ex:
+			/**
+			 * 注册shiroFilter
+			 * @param securityManager
+			 * @return
+			 */
+			@Bean
+			public ShiroFilterFactoryBean shiroFilter(DefaultWebSecurityManager securityManager) {
+				ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+				...
+				Map<String,Filter> filters = new HashMap<>();
+				filters.put("casFilter",new CasFilter());
+				filters.put("logoutFilter", new LogoutFilter());
+				shiroFilterFactoryBean.setFilters(filters);		//添加casFilter到shiroFilter
+				...
+			}
+5----------------------------------------------------------------------------------------------------
 
-	现象：引入layer.js出现undefinedcss目录.txt
-	原因：layer.js与layui.js冲突
-	解决：将layui.js 第二个.link 中的n.dir改为(n.dir?n.dir:r)
-	
-	现象：配置CommonsMultipartResolver，上传文件返回异常HttpMediaTypeNotSupportedException
-	
-	现象：上传文件返回异常java.lang.ClassCastException: org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile cannot be cast to org.springframework.web.multipart.commons.CommonsMultipartFile
-	原因：FileUtil中multipartToFile的代码片段  CommonsMultipartFile cf = (CommonsMultipartFile)multfile
-		与springboot自带的org.springframework.web.multipart.MultipartFile冲突
-		import org.springframework.web.multipart.commons.CommonsMultipartResolver;//这是旧项目引入的
-		import org.springframework.web.multipart.MultipartFile;//这是springboot整合的
-	解决：采用输入流方式获取File对象，具体代码自行百度
+
+6----------------------------------------------------------------------------------------------------
+
+
+7----------------------------------------------------------------------------------------------------
 		
 		

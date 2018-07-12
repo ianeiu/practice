@@ -1,0 +1,22 @@
+配置文件新增：
+#upload
+spring.http.multipart.enabled=true
+spring.http.multipart.file-size-threshold=0  #0-ALLFILE
+spring.http.multipart.location=D:/fsrzfw/temp
+spring.http.multipart.max-file-size=10Mb
+spring.http.multipart.max-request-size=10Mb
+
+新增配置
+/**
+ * 配置上传文件大小的配置
+ * @return
+ */
+@Bean
+public MultipartConfigElement multipartConfigElement() {
+   MultipartConfigFactory factory = new MultipartConfigFactory();
+   //  单个数据大小
+   factory.setMaxFileSize("102400KB");
+   /// 总上传数据大小
+   factory.setMaxRequestSize("102400KB");
+   return factory.createMultipartConfig();
+}

@@ -1,0 +1,16 @@
+项目改造为springboot所见问题
+
+	现象：引入layer.js出现undefinedcss目录.txt
+	原因：layer.js与layui.js冲突
+	解决：将layui.js 第二个.link 中的n.dir改为(n.dir?n.dir:r)
+	
+	现象：配置CommonsMultipartResolver，上传文件返回异常HttpMediaTypeNotSupportedException
+	
+	现象：上传文件返回异常java.lang.ClassCastException: org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile cannot be cast to org.springframework.web.multipart.commons.CommonsMultipartFile
+	原因：FileUtil中multipartToFile的代码片段  CommonsMultipartFile cf = (CommonsMultipartFile)multfile
+		与springboot自带的org.springframework.web.multipart.MultipartFile冲突
+		import org.springframework.web.multipart.commons.CommonsMultipartResolver;//这是旧项目引入的
+		import org.springframework.web.multipart.MultipartFile;//这是springboot整合的
+	解决：采用输入流方式获取File对象，具体代码自行百度
+		
+		

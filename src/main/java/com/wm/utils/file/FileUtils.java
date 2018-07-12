@@ -5,11 +5,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.wm.utils.id.IDUtils;
 
@@ -105,5 +107,66 @@ public class FileUtils {
 			}
 		}
 	}
+	
+
+    /**
+     * 输入流转化为文件
+     * @param ins
+     * @param file
+     * @throws Exception 
+     */
+	public static void inputstreamTofile(InputStream ins, File file) throws IOException {
+		OutputStream os = null;
+		try {
+			os = new FileOutputStream(file);
+			int bytesRead = 0;
+			byte[] buffer = new byte[8192];
+			while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
+				os.write(buffer, 0, bytesRead);
+			}
+		} catch (IOException e) {
+			throw new IOException(e);
+		} finally {
+			if(os != null){
+				try {
+					os.close();
+				} catch (IOException e) {
+					
+				}
+			}
+			if(ins != null){
+				try {
+					ins.close();
+				} catch (IOException e) {
+					
+				}
+			}
+		}
+	}
+	
+	/**
+     * MultipartFile 转换成File
+     * update by wm 2018.07.12
+     * @param multfile 原文件类型
+     * @return File
+     * @throws IOException
+     */
+    public static File multipartToFile(MultipartFile multfile) throws IOException {
+    	//Springboot自带上传不支持CommonsMultipartFile
+        //CommonsMultipartFile cf = (CommonsMultipartFile)multfile;
+        //这个myfile是MultipartFile的
+        //DiskFileItem fi = (DiskFileItem) cf.getFileItem();
+        //return fi.getStoreLocation();
+
+		File f = null;
+		if ("".equals(multfile) || multfile.getSize() <= 0) {
+			multfile = null;
+		} else {
+			InputStream ins = multfile.getInputStream();
+			f = new File(multfile.getOriginalFilename());
+			inputstreamTofile(ins, f);
+		}
+		return f;
+    }
 	
 }

@@ -1,12 +1,9 @@
 package com.wm.utils.ftp;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
@@ -119,40 +116,6 @@ public class FTPUtil extends HttpServlet{
         return in;  
     }  
     
-    /**
-     * 输入流转化为未见
-     * @param ins
-     * @param file
-     * @throws Exception 
-     */
-	public static void inputstreamTofile(InputStream ins, File file) throws IOException {
-		OutputStream os = null;
-		try {
-			os = new FileOutputStream(file);
-			int bytesRead = 0;
-			byte[] buffer = new byte[8192];
-			while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
-				os.write(buffer, 0, bytesRead);
-			}
-		} catch (IOException e) {
-			throw new IOException(e);
-		} finally {
-			if(os != null){
-				try {
-					os.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			if(ins != null){
-				try {
-					ins.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
 	
 	 /**  
      * Description: 向FTP服务器上传文件  

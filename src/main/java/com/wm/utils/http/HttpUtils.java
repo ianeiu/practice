@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
 import com.wm.utils.http.handler.AbstractHttpResultHandler;
+import com.wm.utils.http.handler.ContentToStringHandler;
 
 public class HttpUtils {
 
@@ -31,6 +32,28 @@ public class HttpUtils {
 		httpclient = HttpClientBuilder.create().setDefaultRequestConfig(config).build();
 	}
 
+	/**
+	 * getStringResult
+	 * @param url
+	 * @param paramMap
+	 * @return
+	 * @throws Exception
+	 */
+	public static String doGet(String url, Map<String, String> paramMap) throws Exception {
+		return doGet(url,paramMap,new ContentToStringHandler());
+	}
+	
+	/**
+	 * getStringResult
+	 * @param url
+	 * @param paramMap
+	 * @return
+	 * @throws Exception
+	 */
+	public static String doPost(String url, Map<String, String> paramMap) throws Exception {
+		return doPost(url,paramMap,new ContentToStringHandler());
+	}
+	
 	public static <T> T doGet(String url, Map<String, String> paramPairs, AbstractHttpResultHandler<T> httpResultHandler) throws Exception {
 		CloseableHttpResponse response = null;
 		try {

@@ -1,4 +1,4 @@
-package fix;
+package util.test;
 
 import org.junit.Test;
 

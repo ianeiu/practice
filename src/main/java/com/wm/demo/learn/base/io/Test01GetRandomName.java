@@ -17,7 +17,7 @@ import java.util.Random;
 public class Test01GetRandomName {
 	public static void main(String[] args) throws IOException {
 		// 把文本文件中的数据存储到集合中
-		BufferedReader br = new BufferedReader(new FileReader("name.txt"));
+		BufferedReader br = new BufferedReader(new FileReader("test_file/name.txt"));
 		ArrayList<String> array = new ArrayList<String>();
 		String line = null;
 		while ((line = br.readLine()) != null) {

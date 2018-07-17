@@ -1,4 +1,4 @@
-package fix;
+package util.test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import com.wm.utils.json.JSONUtil;
 
-import fix.vo.UserVO;
+import util.vo.UserVO;
 
 public class JSONTest {
 

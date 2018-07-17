@@ -1,4 +1,4 @@
-package fix.vo;
+package util.vo;
 
 public class UserVO {
 	private String id;

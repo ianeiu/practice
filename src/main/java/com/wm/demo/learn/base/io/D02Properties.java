@@ -76,7 +76,7 @@ public class D02Properties {
 		
 		//结合IO读
 		Properties prope = new Properties();
-		Reader r = new FileReader("prop.txt");
+		Reader r = new FileReader("test_file/prop.txt");
 		prope.load(r);
 		r.close();
 		System.out.println("prop:" + prop);

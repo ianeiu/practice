@@ -10,14 +10,24 @@ public class ContentToStringHandler extends AbstractHttpResultHandler<String> {
 
 	@Override
 	public String doHandle(HttpEntity entity) throws IOException {
-		InputStreamReader inputStreamReader = new InputStreamReader(entity.getContent(), "UTF-8");
-		BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-		StringBuilder sb = new StringBuilder();
-		String line = null;
-		while ((line = bufferedReader.readLine()) != null) {
-			sb.append(line);
+		BufferedReader bufferedReader = null;
+		try {
+			bufferedReader = new BufferedReader(new InputStreamReader(entity.getContent(), "UTF-8"));
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = bufferedReader.readLine()) != null) {
+				sb.append(line);
+			}
+			return sb.toString();
+		} finally {
+			if(bufferedReader!=null){
+				try {
+					bufferedReader.close();
+				} catch (IOException e) {
+					
+				}
+			}
 		}
-		return sb.toString();
 	}
 
 }

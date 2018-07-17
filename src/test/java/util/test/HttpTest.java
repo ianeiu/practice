@@ -1,4 +1,6 @@
-package fix;
+package util.test;
+
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -7,7 +9,7 @@ import com.wm.utils.http.HttpRequestSimple;
 
 public class HttpTest {
 	@Test
-	public void sendPost(){
+	public void sendPost() throws IOException{
 		String url = "http://baike.baidu.com/api/openapi/BaikeLemmaCardApi";
 		String param = "scope=103&format=json&appid=379020&bk_key=关键字&bk_length=600";
 		System.out.println(HttpRequestSimple.sendPost(url, param));

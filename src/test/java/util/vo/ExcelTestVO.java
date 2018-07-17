@@ -1,4 +1,4 @@
-package fix.vo;
+package util.vo;
 
 public class ExcelTestVO {
 	private String abc;

@@ -1,4 +1,4 @@
-package fix;
+package util.test;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import com.wm.utils.file.ExcelUtil;
 
-import fix.vo.ExcelTestVO;
+import util.vo.ExcelTestVO;
 
 public class ExcelTest {
 

@@ -82,7 +82,93 @@
 原因:springboot1.3.x和1.3.x以下版本才支持log4j的日志配置，1.3.x以上版本只支持log4j2和logback的日志配置
 解决：使用log4j2或logback
 6----------------------------------------------------------------------------------------------------
+现象：项目mvn install后jar包，启动报错，为获取到某个包下的class对象集合
+原因：springboot项目打包后获取包资源所在路径与启动main不一样
+	ex：//jarPaht:file:/E:/IDEABuilder/fs/tyrz-springboot/tyrz-front/target/fsrzfw.jar!/BOOT-INF/classes!/cn/com/do1/component/identitySource/service/impl
+解决：逐一分割路径获取类对象
+	/**
+	 * 获得包下面的所有的class
+	 * @author FengHuayuan
+	 * @date 2018年4月21日 下午12:25:20.
+	 * @param pack
+	 * @return
+	 */
+	public static List<Class<?>> getClassesFromPackage(String pack) {
+		List<Class<?>> clazzs = new ArrayList<Class<?>>();
+		// 是否循环搜索子包
+		boolean recursive = true;
+		// 包名字
+		String packageName = pack;
+		// 包名对应的路径名称
+		String packageDirName = packageName.replace('.', '/');
+		Enumeration<URL> dirs;
+		try {
+			dirs = Thread.currentThread().getContextClassLoader().getResources(packageDirName);
+			while (dirs.hasMoreElements()) {
+				URL url = dirs.nextElement();
+				String protocol = url.getProtocol();
+				if ("file".equals(protocol)) {
+					log.debug("*****【File类型】的扫描！");
+					String filePath = URLDecoder.decode(url.getFile(), "UTF-8");
+					findClassInPackageByFile(packageName, filePath, recursive, clazzs);
+				} else if ("jar".equals(protocol)) {
+					log.debug("*****【Jar类型】的扫描！");
+					String filePath = URLDecoder.decode(url.getFile(), "UTF-8");
+					getClasssFromJarFile(filePath, clazzs);//wm add
+				}
+			}
 
+		} catch (Exception e) {
+			log.error(e.getMessage(),e);
+		}
+		return clazzs;
+	}
+	
+	/** 
+	 * 从jar文件中读取指定目录下面的所有的class文件 
+	 * springboot打jar包专用
+	 * @author wm
+	 * @param jarPaht   jar文件存放的位置 
+	 * @param filePaht    指定的文件目录 
+	 * @param clazzs 所有的的class的对象 
+	 */  
+	public static void getClasssFromJarFile(String jarPath,List<Class<?>> clazzs) {  
+
+		log.info("getClasssFromJarFile - jarPath:"+jarPath);//wm
+		//jarPaht:file:/E:/IDEABuilder/fs/tyrz-springboot/tyrz-front/target/fsrzfw.jar!/BOOT-INF/classes!/cn/com/do1/component/identitySource/service/impl
+		String[] jarPaths = jarPath.split("!");
+		String jarPaht=jarPaths[0].substring(6);//去掉file:/
+		String startDir = (jarPaths[1]+jarPaths[2]).substring(1);//去掉/
+		
+	    JarFile jarFile = null;  
+	    try {  
+	        jarFile = new JarFile(jarPaht);  
+	    } catch (IOException e1) {  
+	        e1.printStackTrace();  
+	    }  
+	  
+	    List<JarEntry> jarEntryList = new ArrayList<JarEntry>();  
+	  
+	    Enumeration<JarEntry> ee = jarFile.entries();  
+	    while (ee.hasMoreElements()) {  
+	        JarEntry entry = (JarEntry) ee.nextElement();  
+	        if (entry.getName().startsWith(startDir) && entry.getName().endsWith(".class")) {  
+		        log.info("getClasssFromJarFile - entry:"+entry.getName());//wm
+	            jarEntryList.add(entry);  
+	        }  
+	    }  
+	    for (JarEntry entry : jarEntryList) {  
+	        String className = entry.getName().replace('/', '.');  
+			//   BOOT-INF/classes/cn/com/do1/component/identitySource/service/impl/XXX.class
+	        className = className.substring(17, className.length() - 6);//去掉  BOOT-INF/classes/     .class
+	        try {  
+	            clazzs.add(Thread.currentThread().getContextClassLoader().loadClass(className));  
+	        } catch (ClassNotFoundException e) {  
+	            e.printStackTrace();  
+	        }  
+	    }  
+	  
+	}
 
 7----------------------------------------------------------------------------------------------------
 		

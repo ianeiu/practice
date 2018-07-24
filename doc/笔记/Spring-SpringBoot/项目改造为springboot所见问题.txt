@@ -82,7 +82,7 @@
 原因:springboot1.3.x和1.3.x以下版本才支持log4j的日志配置，1.3.x以上版本只支持log4j2和logback的日志配置
 解决：使用log4j2或logback
 6----------------------------------------------------------------------------------------------------
-现象：项目mvn install后jar包，启动报错，为获取到某个包下的class对象集合
+现象：项目mvn install后jar包，启动报错，未获取到某个包下的class对象集合
 原因：springboot项目打包后获取包资源所在路径与启动main不一样
 	ex：//jarPaht:file:/E:/IDEABuilder/fs/tyrz-springboot/tyrz-front/target/fsrzfw.jar!/BOOT-INF/classes!/cn/com/do1/component/identitySource/service/impl
 解决：逐一分割路径获取类对象
@@ -171,5 +171,139 @@
 	}
 
 7----------------------------------------------------------------------------------------------------
+现象：启动jar包，访问登录，报NoClassDefFoundError RedisCacheManager		
+解决：注释pom配置
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+8----------------------------------------------------------------------------------------------------
+现象：jar包启动无法访问jsp的问题
+原因:https://www.jb51.net/article/141474.htm
+解决：亲测，需两步
+	步骤1、新增两个类
+		import java.io.File;
+		import java.net.MalformedURLException;
+		import java.net.URL;
 		
+		import org.apache.catalina.Context;
+		import org.apache.catalina.Lifecycle;
+		import org.apache.catalina.LifecycleEvent;
+		import org.apache.catalina.LifecycleListener;
+		import org.apache.catalina.WebResourceRoot.ResourceSetType;
+		import org.springframework.util.ResourceUtils;
+		
+		/**
+		 * Add main class fat jar/exploded directory into tomcat ResourceSet.
+		 *
+		 * @author hengyunabc 2017-07-29
+		 *
+		 */
+		public class StaticResourceConfigurer implements LifecycleListener {
+		
+			private final Context context;
+		
+			StaticResourceConfigurer(Context context) {
+				this.context = context;
+			}
+		
+			@Override
+			public void lifecycleEvent(LifecycleEvent event) {
+				if (event.getType().equals(Lifecycle.CONFIGURE_START_EVENT)) {
+					URL location = this.getClass().getProtectionDomain().getCodeSource().getLocation();
+		
+					if (ResourceUtils.isFileURL(location)) {
+						// when run as exploded directory
+						String rootFile = location.getFile();
+						if (rootFile.endsWith("/BOOT-INF/classes/")) {
+							rootFile = rootFile.substring(0, rootFile.length() - "/BOOT-INF/classes/".length() + 1);
+						}
+						if (!new File(rootFile, "META-INF" + File.separator + "resources").isDirectory()) {
+							return;
+						}
+		
+						try {
+							location = new File(rootFile).toURI().toURL();
+						} catch (MalformedURLException e) {
+							throw new IllegalStateException("Can not add tomcat resources", e);
+						}
+					}
+		
+					String locationStr = location.toString();
+					if (locationStr.endsWith("/BOOT-INF/classes!/")) {
+						// when run as fat jar
+						locationStr = locationStr.substring(0, locationStr.length() - "/BOOT-INF/classes!/".length() + 1);
+						try {
+							location = new URL(locationStr);
+						} catch (MalformedURLException e) {
+							throw new IllegalStateException("Can not add tomcat resources", e);
+						}
+					}
+					this.context.getResources().createWebResourceSet(ResourceSetType.RESOURCE_JAR, "/", location,
+							"/META-INF/resources");
+		
+				}
+			}
+		}
+		
+		import org.apache.catalina.Context;
+		import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+		import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+		import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+		import org.springframework.boot.context.embedded.tomcat.TomcatContextCustomizer;
+		import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
+		import org.springframework.context.annotation.Bean;
+		import org.springframework.context.annotation.Configuration;
+		
+		/**
+		 * 处理1.5版本jar包启动无法访问jsp的问题
+		 * <p>Title: TomcatConfig</p>  
+		 * <p>Description: </p>  
+		 * @author wm  
+		 * @date 2018年7月24日
+		 */
+		@Configuration
+		@ConditionalOnProperty(name = "tomcat.staticResourceCustomizer.enabled", matchIfMissing = true)
+		public class TomcatConfig {
+			@Bean
+			public EmbeddedServletContainerCustomizer staticResourceCustomizer() {
+				return new EmbeddedServletContainerCustomizer() {
+					@Override
+					public void customize(ConfigurableEmbeddedServletContainer container) {
+						if (container instanceof TomcatEmbeddedServletContainerFactory) {
+							((TomcatEmbeddedServletContainerFactory) container)
+									.addContextCustomizers(new TomcatContextCustomizer() {
+										@Override
+										public void customize(Context context) {
+											context.addLifecycleListener(new StaticResourceConfigurer(context));
+										}
+									});
+						}
+					}
+		
+				};
+			}
+		}
+		
+	步骤2，pom配置
+		<resources>
+			...
+			<resource>
+                <directory>src/main/webapp</directory>
+                <!-- 处理jar包启动无法访问jsp的问题 -->
+                <targetPath>META-INF/resources</targetPath>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+            </resource> 
+		</resources>
+		
+	
+
+
+9----------------------------------------------------------------------------------------------------
+
+10----------------------------------------------------------------------------------------------------
 		

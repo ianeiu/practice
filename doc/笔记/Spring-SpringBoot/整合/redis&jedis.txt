@@ -1,0 +1,71 @@
+package cn.com.do1.component.config;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import redis.clients.jedis.JedisPoolConfig;
+
+/**
+ * redis配置
+ * @author admin
+ *
+ */
+@Configuration
+@EnableCaching
+public class RedisConfig extends CachingConfigurerSupport{
+    
+    @Bean
+    public CacheManager cacheManager(RedisTemplate<?, ?> redisTemplate) {
+        RedisCacheManager rcm = new RedisCacheManager(redisTemplate);        
+        //设置缓存过期时间
+        //rcm.setDefaultExpiration(60);//秒
+        return rcm;
+    }
+    
+    @Bean
+    public RedisTemplate<String, Object> redisTemplate() {
+    	RedisTemplate<String, Object> template = new RedisTemplate<>();
+    	template.setConnectionFactory(jedisConnectionFactory());
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(new JdkSerializationRedisSerializer());
+        template.setHashKeySerializer(new StringRedisSerializer());
+        template.setHashValueSerializer(new JdkSerializationRedisSerializer());
+        return template;
+    }
+
+    
+    @Value("${redis.address}")
+    private String hostName;
+    @Value("${redis.port}")
+    private String port;
+    
+    @Bean
+    public JedisConnectionFactory jedisConnectionFactory(){
+    	JedisConnectionFactory jcf = new JedisConnectionFactory();
+    	jcf.setHostName(hostName);
+    	jcf.setPort(Integer.parseInt(port));
+    	//jcf.setPassword("");
+    	return jcf;
+    }
+    
+    @Bean
+    public JedisPoolConfig jedisPoolConfig(){
+    	JedisPoolConfig jpc = new JedisPoolConfig();
+    	jpc.setMaxIdle(1);
+    	jpc.setMaxTotal(5);
+    	jpc.setBlockWhenExhausted(true);
+    	jpc.setMaxWaitMillis(3000);
+    	jpc.setTestOnBorrow(true);
+		return jpc;
+    }
+
+}

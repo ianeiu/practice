@@ -1,3 +1,11 @@
+@Bean
+public ServletRegistrationBean CXFServlet() {
+	ServletRegistrationBean cxfBean = new ServletRegistrationBean(new CXFServlet(), "/webservice/*");
+	cxfBean.setName("CXFServlet");
+	cxfBean.setLoadOnStartup(1);
+	return cxfBean;
+}
+
 @Configuration
 public class CXFConfig {
     @Autowired

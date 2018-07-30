@@ -10,32 +10,28 @@
         <logback.version>1.1.1</logback.version>
         <spring.version>4.1.7.RELEASE</spring.version>
         <activiti.version>5.14</activiti.version>
+        <cxf.version>3.1.8</cxf.version>
     </properties>
-	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<testSourceDirectory>test</testSourceDirectory>
-		<testResources>
-			<testResource>
-				<directory>test</directory>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
-			</testResource>
-		</testResources>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<encoding>utf-8</encoding>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
 	<repositories>
+		<repository>
+			<id>DO1</id>
+			<name>DO1 Maven Repository</name>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<url>http://dqdp.do1.com.cn:8079/mvnrepository/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>central</id>
+			<name>Maven Repository Switchboard</name>
+			<url>http://repo2.maven.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
 		<repository>
 			<id>aliyun</id>
 			<name>aliyun</name>
@@ -49,14 +45,6 @@
 			<id>apache.nexus</id>
 			<name>ASF Nexus Staging</name>
 			<url>https://repository.apache.org/content/groups/staging/</url>
-		</repository>
-		<repository>
-			<id>central</id>
-			<name>Maven Repository Switchboard</name>
-			<url>http://repo2.maven.org/maven2</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
 		</repository>
 		<repository>
 			<id>Activiti</id>
@@ -171,33 +159,6 @@
 			<artifactId>xmlbeans</artifactId>
 			<version>2.3.0</version>
 		</dependency>
-
-		<!-- 由logback代替log4j -->
-		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
-		<!-- <dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency> -->
-		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
-		<!-- <dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.21</version>
-			<scope>test</scope>
-		</dependency> -->
-		<!-- https://mvnrepository.com/artifact/net.sf.ezmorph/ezmorph -->
-		<!-- <dependency>
-			<groupId>net.sf.ezmorph</groupId>
-			<artifactId>ezmorph</artifactId>
-			<version>1.0.6</version>
-		</dependency> -->
-		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-		<!-- <dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.21</version>
-		</dependency> -->
 
 		<!-- ant -->
 		<dependency>
@@ -397,6 +358,57 @@
             <artifactId>httpcore</artifactId>
             <version>4.4.9</version>
         </dependency>
+        
+        <!-- cxf依赖包 -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-ws-security</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http-jetty</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
 		
 	</dependencies>
+	
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<testSourceDirectory>test</testSourceDirectory>
+		<testResources>
+			<testResource>
+				<directory>test</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</testResource>
+		</testResources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<encoding>utf-8</encoding>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

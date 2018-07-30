@@ -304,8 +304,24 @@
 现象：启动项目报错ClassNotFoundException: javax.ws.rs.core.Response$StatusType
 解决：pom引入jsr311-api（g:javax.ws.rs）(a:jsr311-api)（v:1.1.1）
 10----------------------------------------------------------------------------------------------------
-
-
+现象：整合redis报 NOAUTH Authentication required
+原因：spring.redis.password=yourpassword 配置在JedisConnectionFactory中没有被加载进去
+解决：手动获取自定义或原配置密码进行配置
+	@Value("${redis.address}")
+    private String hostName;
+    @Value("${redis.port}")
+    private String port;
+    @Value("${redis.password}")
+    private String password;
+    
+    @Bean
+    public JedisConnectionFactory jedisConnectionFactory(){
+    	JedisConnectionFactory jcf = new JedisConnectionFactory();
+    	jcf.setHostName(hostName);
+    	jcf.setPort(Integer.parseInt(port));
+    	jcf.setPassword(password);
+    	return jcf;
+    }
 11----------------------------------------------------------------------------------------------------
 
 

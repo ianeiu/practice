@@ -1,0 +1,24 @@
+主题：
+Darkest Dark Theme with DevStyle
+
+Team:
+Subclipse
+
+反编译：
+Enhanced Class Decompiler
+
+创建项目：
+STS
+
+UML：
+[AmaterasUML_1.3.4.zip]解压放入plugins目录
+
+
+lombok：
+　　下载地址：https://projectlombok.org/download
+　　将下载的lombok.jar文件，放到eclipse安装路径，该jar包也就是lombok插件的jar文件了
+　　打开eclipse.ini文件，添加如下内容：
+　　　　-javaagent:lombok.jar
+　　　　-Xbootclasspath/a:lombok.jar
+ 　　　　重启eclipse
+

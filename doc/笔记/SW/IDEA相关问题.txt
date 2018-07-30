@@ -1,0 +1,11 @@
+------------------------------------------------------------
+IDEA-修复 弹窗License activation报this license BIG3CLIK6F has been cancelled
+对，没错，这个激活码本来可以使用到2018年的，但是，忽然间就不能用了。经查询吧。
+还得修改个系统配置。具体
+Linux在/etc/hosts中添加 0.0.0.0 account.jetbrains.com就好，
+windows的话没记错应该在C:\Windows\System32\drivers\etc\hosts
+
+要修改的是第一个hosts文件。
+使用时需要将“0.0.0.0 account.jetbrains.com”添加到hosts文件中
+------------------------------------------------------------
+http://idea.lanyus.com/

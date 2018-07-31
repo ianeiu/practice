@@ -11,6 +11,7 @@
 * `com.wm.demo.learn`		java-api
 * `com.wm.demo.recursion`	递归DEMO
 * `com.wm.demo.patterns` 	设计模式DEMO及资料（u）
+* `com.wm.demo.fastjson`	fastjsonDemo
 * `com.wm.demo.gson`		gsonDemo
 * `com.wm.demo.logback`		logbackDemo
 * `com.wm.demo.jedis`		jedisDemo
@@ -39,6 +40,7 @@
 * `com.wm.utils.pwd`		加密
 * `com.wm.utils.string`		string
 * `com.wm.utils.type`		type
+* `com.wm.utils.ws`			ws客户端
 * `com.wm.utils.zip`		zip
 
 ### wrapper

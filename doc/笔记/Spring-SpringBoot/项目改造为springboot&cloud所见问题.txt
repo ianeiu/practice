@@ -323,7 +323,27 @@
     	return jcf;
     }
 11----------------------------------------------------------------------------------------------------
-
-
+现象：整合swagger组件，HTTP接口统一处理异常失效
+原因：GlobalExceptionResolver implements HandlerExceptionResolver
+	private boolean isReturnReponseBody(Object handler) {
+		if(((HandlerMethod) handler).hasMethodAnnotation(ResponseBody.class)) {
+			return true;
+		}
+		HandlerMethod hm = (HandlerMethod) handler;
+		if(hm.getBean().getClass().isAnnotationPresent(RestController.class)) {
+			return true;
+		}
+		/*Method method = hm.getMethod();
+		Class<?> returnType = method.getReturnType();
+		if(returnType.isAnnotationPresent(ResponseBody.class)) {
+			return true;
+		}*/	
+		return false;
+	}
+	result ： false
+解决：新增判断
+	if(((HandlerMethod) handler).hasMethodAnnotation(ApiOperation.class)) {
+		return true;
+	}
 12----------------------------------------------------------------------------------------------------
 		

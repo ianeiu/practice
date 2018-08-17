@@ -72,6 +72,12 @@ public class MapRead {
 			if (StringUtils.equalsIgnoreCase("productLeibie", key)) {
 				sb.append(" and pi.product_leibie = '").append(value).append("'");
 			}
+			/*if (StringUtils.equalsIgnoreCase("startCreateDate", key)) {
+				sb.append(" and  create_time > str_to_date('").append(value).append(" 00:00:00','%Y-%m-%d %H:%i:%s')");
+			}
+			if (StringUtils.equalsIgnoreCase("endCreateDate", key)) {
+				sb.append(" and  create_time < str_to_date('").append(value).append(" 23:59:59','%Y-%m-%d %H:%i:%s')");
+			}*/
 		}
 		
 		return sb.toString();

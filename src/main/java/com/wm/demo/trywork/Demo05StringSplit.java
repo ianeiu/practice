@@ -20,4 +20,14 @@ public class Demo05StringSplit {
 			System.out.println(results[i]);
 		}
 	}
+	
+	@Test
+	public void testXG(){
+		String str = "标签1/标签2";
+		String[] results = str.split("/");
+		
+		for (int i=0;i<results.length;i++) {
+			System.out.println(results[i]);
+		}
+	}
 }

@@ -1,6 +1,5 @@
 package com.wm.utils.file;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,8 +9,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,14 +16,19 @@ import java.util.Scanner;
 public class TxtUtil {
 
 	/**
-	 * 创建文件
-	 * 
-	 * @param fileName
+	 * @Description:创建文件 
+	 * @author: wm
+	 * @date: 2018年8月20日 下午2:29:49
+	 * @version: 1.1
+	 * @param file
 	 * @return
+	 * @throws IOException
 	 */
-	public static boolean createFile(File file) throws Exception {
+	public static boolean createFile(File file) throws IOException   {
 		boolean flag = false;
-		if (!file.exists()) {
+		if (file.exists()) {
+			flag = true;
+		} else {
 			file.createNewFile();
 			flag = true;
 		}
@@ -34,42 +36,69 @@ public class TxtUtil {
 	}
 
 	/**
-	 * 读TXT文件内容
-	 * 
-	 * @param fileName
+	 * @Description:创建目录 
+	 * @author: wm
+	 * @date: 2018年8月20日 下午2:50:15
+	 * @version: 1.0
+	 * @param file
 	 * @return
 	 */
-	public static String readTxtFile(File file) throws Exception {
+	public static boolean createDir(File file) {
+		boolean flag = false;
+		if (file.exists()) {
+			flag = true;
+		} else {
+			file.mkdirs();
+			flag = true;
+		}
+		return flag;
+	}
+	public static String readTxtFile(String path) throws IOException{
+		return readTxtFile(new File(path));
+	}
+
+	/**
+	 * @Description: 读TXT文件内容
+	 * @author: wm
+	 * @date: 2018年8月20日 下午2:35:28
+	 * @version: 1.1 
+	 * @param file
+	 * @return
+	 * @throws IOException
+	 */
+	public static String readTxtFile(File file) throws IOException{
 		String result = null;
 		FileReader fileReader = null;
 		BufferedReader bufferedReader = null;
-		
-		fileReader = new FileReader(file);
-		bufferedReader = new BufferedReader(fileReader);
 		try {
+			fileReader = new FileReader(file);
+			bufferedReader = new BufferedReader(fileReader);
+		
 			String read = null;
 			while ((read = bufferedReader.readLine()) != null) {
 				result = result + read + "\r\n";
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	
-		if (bufferedReader != null) {
-			bufferedReader.close();
-		}
-		if (fileReader != null) {
-			fileReader.close();
+		} catch (FileNotFoundException e) {
+			//do nothing
+		}finally {
+			if (bufferedReader != null) {
+				bufferedReader.close();
+			}
+			if (fileReader != null) {
+				fileReader.close();
+			}
 		}
 		return result;
 	}
 	
 	/**
-	 * 读TXT文件内容
-	 * 
+	 * @Description: 读TXT文件内容
+	 * @author: wm
+	 * @date: 2018年8月20日 下午2:35:41
+	 * @version: 1.0
 	 * @param path
 	 * @return
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public static List<String> readTxtFile2(String path) throws IOException{
 		File file = new File(path);
@@ -77,11 +106,13 @@ public class TxtUtil {
 	}
 	
 	/**
-	 * 读TXT文件内容
-	 * 
+	 * @Description: 读TXT文件内容
+	 * @author: wm
+	 * @date: 2018年8月20日 下午2:35:48
+	 * @version: 1.0
 	 * @param file
 	 * @return
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public static List<String> readTxtFile2(File file) throws IOException  {
 		
@@ -113,9 +144,7 @@ public class TxtUtil {
 	 */
 	public static void writeToTxt(String filePath,List<String> list) throws IOException {
 		File file = new File(filePath);
-		if(!file.exists()){
-			file.createNewFile();
-		}
+		createFile(file);
 		
         FileWriter fw = null;
         BufferedWriter bw = null;
@@ -139,37 +168,56 @@ public class TxtUtil {
         }
 	}
 	
+	/**
+	 * @Description: 写入TXT
+	 * @author: wm
+	 * @date: 2018年8月20日 下午3:22:33
+	 * @version: 1.0
+	 * @param content
+	 * @param path
+	 * @return
+	 * @throws IOException
+	 */
+	public static boolean writeTxtFile(String content, String path) throws IOException  {
+		File file = new File(path);
+		return writeTxtFile(content,file);
+	}
+	
 	
 	/**
-	 * 写入Txt
-	 * 
+	 * @Description:写入TXT 
+	 * @author: wm
+	 * @date: 2018年8月20日 下午2:33:39
+	 * @version: 1.1
 	 * @param content
-	 * @param fileName
+	 * @param file
 	 * @return
-	 * @throws Exception
+	 * @throws IOException
 	 */
-	public static boolean writeTxtFile(String content, File file)
-			throws Exception {
-		// RandomAccessFile mm = null;
+	public static boolean writeTxtFile(String content, File file) throws IOException  {
 		boolean flag = false;
 		FileOutputStream o = null;
-
-		o = new FileOutputStream(file);
-		o.write(content.getBytes("GBK"));
-		o.close();
-		// mm=new RandomAccessFile(fileName,"rw");
-		// mm.writeBytes(content);
-		flag = true;
-
-		// if (mm != null) {
-		// mm.close();
-		// }
+		try {
+			createDir(file.getParentFile());
+			createFile(file);
+			o = new FileOutputStream(file);
+			o.write(content.getBytes("GBK"));
+			flag = true;
+		} finally {
+			try{
+	        	if(o!=null){
+	                o.close();
+	        	}
+        	}catch(IOException e){}
+		}
 		return flag;
 	}
 
 	/**
-	 * 追加内容至txt
-	 * 
+	 * @Description:追加内容至txt 
+	 * @author: wm
+	 * @date: 2018年8月20日 下午2:36:56
+	 * @version: 1.0
 	 * @param filePath
 	 * @param content
 	 * @throws IOException
@@ -218,7 +266,10 @@ public class TxtUtil {
 	}
 	
 	/**
-	 * 统计文件行数
+	 * @Description:统计文件行数 
+	 * @author: wm
+	 * @date: 2018年8月20日 下午2:37:07
+	 * @version: 1.0
 	 * @param filename
 	 * @return
 	 * @throws FileNotFoundException
@@ -247,7 +298,10 @@ public class TxtUtil {
 	
 	
 	/**
-	 * 
+	 * @Description: 清除TXT内容
+	 * @author: wm
+	 * @date: 2018年8月20日 下午2:37:13
+	 * @version: 1.0
 	 * @param filePath
 	 * @throws IOException
 	 */
@@ -258,6 +312,25 @@ public class TxtUtil {
 			out.close(); 
 		}
 	}
+	
+	/**
+	 * @Description:删除文件 
+	 * @author: wm
+	 * @date: 2018年8月20日 下午4:31:06
+	 * @version: 1.0
+	 * @param filePath
+	 * @return
+	 */
+    public static boolean delFile(String filePath){
+    	File file = new File(filePath);
+    	boolean flag = false;
+    	if(file.exists() && file.isFile()){
+    		flag =  file.delete();
+        }else{
+        	flag = true;
+        }
+    	return flag;
+    }
 
 	
 }

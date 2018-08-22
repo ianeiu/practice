@@ -1,6 +1,6 @@
 package com.wm.demo.trywork;
 
-public class Demo11IntegerParam {
+public class Demo02IntegerParam {
 	public static void main(String[] args) {
 		
 		//Integer i = 6;//6

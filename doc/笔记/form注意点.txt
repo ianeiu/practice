@@ -1,5 +1,0 @@
-回车提交
-查询页面，有绑定回车事件提交表单的，要在form中加上onsubmit="return false;"，不然会出现回车查询时页面直接显示JSON数据了
-
-防止中文乱码
-1、直接在form标签中加入属性accept-charset='UTF-8'；

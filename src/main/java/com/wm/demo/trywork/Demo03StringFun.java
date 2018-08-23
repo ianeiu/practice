@@ -25,4 +25,14 @@ public class Demo03StringFun {
 		System.out.println(str.contains("hello"));//true
 		System.out.println(str.contains("holl"));//false
 	}
+	
+	@Test
+	public void testDD(){
+		String str = "helo";
+		String str2 = "heloo";
+		String str3 = str2.substring(0, str2.length()-1);
+		
+		System.out.println(str3); //helo
+		System.out.println(str == str3); //false
+	}
 }

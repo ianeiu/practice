@@ -1,5 +1,8 @@
 package com.wm.demo.trywork;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Test;
 
 public class Demo03StringFun {
@@ -26,6 +29,12 @@ public class Demo03StringFun {
 		System.out.println(str.contains("holl"));//false
 	}
 	
+	/**
+	 * @Description:  ==
+	 * @author: wm
+	 * @date: 2018年8月24日 下午2:09:13
+	 * @version: 1.0
+	 */
 	@Test
 	public void testDD(){
 		String str = "helo";
@@ -34,5 +43,13 @@ public class Demo03StringFun {
 		
 		System.out.println(str3); //helo
 		System.out.println(str == str3); //false
+	}
+	
+	@Test
+	public void testJoin(){
+		List<String> list = Arrays.asList("1","2","3");
+		List<String> list2 = Arrays.asList();
+		System.out.println(String.join(";", list));
+		System.out.println(String.join(";", list2));
 	}
 }

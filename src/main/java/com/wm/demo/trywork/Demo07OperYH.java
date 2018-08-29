@@ -6,7 +6,7 @@ package com.wm.demo.trywork;
  * @date: 2018年8月23日 下午2:35:55
  * @version: 1.0
  */
-public class Demo15OperYH {
+public class Demo07OperYH {
 	
 	public static void main(String[] args) {
 		boolean tflag = true;

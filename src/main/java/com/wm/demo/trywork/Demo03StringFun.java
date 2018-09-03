@@ -3,6 +3,7 @@ package com.wm.demo.trywork;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
 public class Demo03StringFun {
@@ -82,5 +83,11 @@ Java底层会优先在常量池中查找是否存在"hello"，如果存在则让
 		for (String string : labelIdList) {
 			System.out.println(string);
 		}
+	}
+	
+	@Test
+	public void testUtilReplace(){
+		String str = "xixi**fff";
+		System.out.println(StringUtils.replace(str, "*", "%"));
 	}
 }

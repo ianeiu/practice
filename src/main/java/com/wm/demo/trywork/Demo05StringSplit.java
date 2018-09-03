@@ -1,5 +1,6 @@
 package com.wm.demo.trywork;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
 public class Demo05StringSplit {
@@ -28,6 +29,17 @@ public class Demo05StringSplit {
 		
 		for (int i=0;i<results.length;i++) {
 			System.out.println(results[i]);
+		}
+	}
+	
+	@Test
+	public void testUtilSplit(){
+		String str = "Z;asdfads;1212";
+		//String str = null;
+		//String str = "";
+		String[] strs = StringUtils.split(str, ";");
+		for (String string : strs) {
+			System.out.println(string);
 		}
 	}
 }

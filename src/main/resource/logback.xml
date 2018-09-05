@@ -186,8 +186,8 @@
 		<appender-ref ref="FILEERROR" />
         <appender-ref ref="FILEWARN" />
         <appender-ref ref="FILEINFO" />
-	  <appender-ref ref="STDOUT" />    
+	  	<appender-ref ref="STDOUT" />    
 	  <!-- <appender-ref ref="FILE" />--> 
-	  <appender-ref ref="DB" /> 
+	  <!-- <appender-ref ref="DB" />  -->
 	</root>   
 </configuration>  

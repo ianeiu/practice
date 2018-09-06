@@ -14,7 +14,7 @@ import com.wm.demo.mybatis.mapper.UserMapper;
 import com.wm.demo.mybatis.model.TbSysUser;
 
 /**
- *  * 1、接口式编程
+ * 1、接口式编程
  * 	原生：		Dao		====>  DaoImpl
  * 	mybatis：	Mapper	====>  xxMapper.xml
  * 
@@ -22,7 +22,7 @@ import com.wm.demo.mybatis.model.TbSysUser;
  * 3、SqlSession和connection一样她都是非线程安全。每次使用都应该去获取新的对象。
  * 4、mapper接口没有实现类，但是mybatis会为这个接口生成一个代理对象。
  * 		（将接口和xml进行绑定）
- * 		EmployeeMapper empMapper =	sqlSession.getMapper(EmployeeMapper.class);
+ * 		UserMapper user = sqlSession.getMapper(UserMapper.class);
  * 5、两个重要的配置文件：
  * 		mybatis的全局配置文件：包含数据库连接池信息，事务管理器信息等...系统运行环境信息
  * 		sql映射文件：保存了每一个sql语句的映射信息：
@@ -39,7 +39,7 @@ public class Demo01Base {
 	}
 	
 	/**
-	 * 查询方式1
+	 * 方式1
 	 * @throws IOException
 	 */
 	@Test
@@ -59,7 +59,7 @@ public class Demo01Base {
 	}
 	
 	/**
-	 * 查询方式2
+	 * 方式2
 	 * @throws IOException
 	 */
 	@Test
@@ -82,7 +82,7 @@ public class Demo01Base {
 	}
 	
 	/**
-	 * 查询方式3 注解
+	 * 方式3 注解
 	 * @throws IOException
 	 */
 	@Test

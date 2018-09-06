@@ -1,6 +1,8 @@
-package com.wm.demo.mybatis.abase;
+package com.wm.demo.mybatis.mapper;
 
 import org.apache.ibatis.annotations.Select;
+
+import com.wm.demo.mybatis.model.TbSysUser;
 
 public interface UserAnnotationMapper {
 	

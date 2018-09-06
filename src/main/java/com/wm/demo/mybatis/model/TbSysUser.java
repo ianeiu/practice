@@ -1,4 +1,4 @@
-package com.wm.demo.mybatis.abase;
+package com.wm.demo.mybatis.model;
 
 import java.util.Date;
 
@@ -12,7 +12,7 @@ public class TbSysUser {
 	private String userId;
 	private String userName;
 	private String passwork;
-	private String userSex;
+	private Integer userSex;
 	private Date createTime;
 	private boolean status;
 	private String depId;

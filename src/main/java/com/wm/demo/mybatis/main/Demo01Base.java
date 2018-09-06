@@ -1,4 +1,4 @@
-package com.wm.demo.mybatis.abase;
+package com.wm.demo.mybatis.main;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,6 +8,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
+
+import com.wm.demo.mybatis.mapper.UserAnnotationMapper;
+import com.wm.demo.mybatis.mapper.UserMapper;
+import com.wm.demo.mybatis.model.TbSysUser;
 
 /**
  *  * 1、接口式编程
@@ -26,14 +30,18 @@ import org.junit.Test;
  * @author WM
  *
  */
-public class MybatisTest {
+public class Demo01Base {
 	
 	private SqlSessionFactory getSqlSessionFactory() throws IOException {
-		String resource = "mybatis-demo/abase/mybatis-config.xml";
+		String resource = "mybatis-demo/mybatis-config.xml";
 		InputStream inputStream = Resources.getResourceAsStream(resource);
 		return new SqlSessionFactoryBuilder().build(inputStream);
 	}
 	
+	/**
+	 * 查询方式1
+	 * @throws IOException
+	 */
 	@Test
 	public void test() throws IOException {
 
@@ -42,7 +50,7 @@ public class MybatisTest {
 		SqlSession openSession = ssf.openSession();
 		try {
 			TbSysUser user = openSession.selectOne( 
-					"com.wm.demo.mybatis.abase.UserMapper.getUserById", "admin");
+					"com.wm.demo.mybatis.mapper.UserMapper.getUserById", "admin");
 			System.out.println(user);
 		} finally {
 			openSession.close();
@@ -50,6 +58,10 @@ public class MybatisTest {
 
 	}
 	
+	/**
+	 * 查询方式2
+	 * @throws IOException
+	 */
 	@Test
 	public void test01() throws IOException {
 		// 1、获取sqlSessionFactory对象
@@ -69,6 +81,10 @@ public class MybatisTest {
 
 	}
 	
+	/**
+	 * 查询方式3 注解
+	 * @throws IOException
+	 */
 	@Test
 	public void test02() throws IOException {
 		SqlSessionFactory ssf = this.getSqlSessionFactory();

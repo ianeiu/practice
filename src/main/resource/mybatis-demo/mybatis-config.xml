@@ -26,15 +26,15 @@
 	-->
 	<typeAliases>
 		<!-- 1、typeAlias:为某个java类型起别名
-				type:指定要起别名的类型全类名;默认别名就是类名小写；tbSysUser
+				type:指定要起别名的类型全类名;默认别名就是类名小写；tbsysuser
 				alias:指定新的别名
 		 -->
-		<!-- <typeAlias type="com.wm.demo.mybatis.abase.TbSysUser" alias="user"/> -->
+		<!-- <typeAlias type="com.wm.demo.mybatis.model.TbSysUser" alias="user"/> -->
 		
 		<!-- 2、package:为某个包下的所有类批量起别名 
 				name：指定包名（为当前包以及下面所有的后代包的每一个类都起一个默认别名（类名小写），）
 		-->
-		<package name="com.wm.demo.mybatis.abase"/>
+		<package name="com.wm.demo.mybatis.model"/>
 		
 		<!-- 3、批量起别名的情况下，使用@Alias注解为某个类型指定新的别名 -->
 	</typeAliases>
@@ -93,9 +93,9 @@
 			mapper:注册一个sql映射 
 				注册配置文件
 				resource：引用类路径下的sql映射文件
-					mybatis/mapper/EmployeeMapper.xml
+					mybatis/mapper/UserMapper.xml
 				url：引用网路路径或者磁盘路径下的sql映射文件
-					file:///var/mappers/AuthorMapper.xml
+					file:///var/mappers/UserMapper.xml
 					
 				注册接口
 				class：引用（注册）接口，
@@ -105,10 +105,10 @@
 						比较重要的，复杂的Dao接口我们来写sql映射文件
 						不重要，简单的Dao接口为了开发快速可以使用注解；
 		-->
-		<!-- <mapper resource="mybatis-demo/abase/UserMapper.xml" />
-		<mapper class="com.wm.demo.mybatis.abase.UserAnnotationMapper"/> -->
+		<mapper resource="mybatis-demo/mapper/UserMapper.xml" />
+		<mapper class="com.wm.demo.mybatis.mapper.UserAnnotationMapper"/>
 		
 		<!-- 批量注册： -->
-		<package name="com.wm.demo.mybatis.abase"/>
+		<!-- <package name="com.wm.demo.mybatis.mapper"/> -->
 	</mappers>
 </configuration>

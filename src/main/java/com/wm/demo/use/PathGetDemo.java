@@ -1,18 +1,29 @@
 package com.wm.demo.use;
 
+import java.io.File;
+
 public class PathGetDemo {
 	public static void main(String[] args) {
-		path1();//建议使用
-		path2();
-	}
-	
-	private static void path1(){
-		String path1 = PathGetDemo.class.getResource("").getPath()+"test.xml";
-		System.out.println(path1);
-	}
-	
-	private static void path2(){
-		String path2 = PathGetDemo.class.getResource("test.xml").getPath();
-		System.out.println(path2);
+
+		//	file:/E:/EclipseBuilder/j-util/target/classes/
+		System.out.println(Thread.currentThread().getContextClassLoader().getResource("")); 
+        System.out.println(PathGetDemo.class.getClassLoader().getResource("")); 
+        System.out.println(ClassLoader.getSystemResource("")); 
+        System.out.println(PathGetDemo.class.getResource("/"));
+        
+        //	file:/E:/EclipseBuilder/j-util/target/classes/com/wm/demo/use/
+        System.out.println(PathGetDemo.class.getResource(""));
+        //	file:/E:/EclipseBuilder/j-util/target/classes/com/wm/demo/use/test.xml
+        System.out.println(PathGetDemo.class.getResource("test.xml"));
+        
+        //	E:\
+        System.out.println(new File("/").getAbsolutePath()); 
+        
+        //	E:\EclipseBuilder\j-uti
+        System.out.println(System.getProperty("user.dir")); 
+        
+        //	/E:/EclipseBuilder/j-util/target/classes/com/wm/demo/use/test.xml
+		System.out.println(PathGetDemo.class.getResource("test.xml").getPath());
+		System.out.println(PathGetDemo.class.getResource("").getPath()+"test.xml");
 	}
 }

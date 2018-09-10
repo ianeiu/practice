@@ -13,6 +13,7 @@
 * `com.wm.demo.fastjson`	fastjsonDemo
 * `com.wm.demo.gson`		gsonDemo
 * `com.wm.demo.logback`		logbackDemo
+* `com.wm.demo.mybatis`		mybatisDemo
 * `com.wm.demo.jedis`		jedisDemo
 * `com.wm.demo.activiti`	activitiDemo
 * `com.wm.demo.use`			常用Java代码（u）

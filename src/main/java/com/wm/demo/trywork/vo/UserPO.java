@@ -7,4 +7,5 @@ public class UserPO {
 	private String userId;
 	private String userName;
 	private String sex;
+	private Long age;
 }

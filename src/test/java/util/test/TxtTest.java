@@ -29,7 +29,12 @@ public class TxtTest {
 	
 	@Test
 	public void testZ() throws Exception {
-		TxtUtil.contentToTxt("G:\\20171227.txt", "213214sd\r\n");
+		TxtUtil.contentToTxt("C:\\Users\\admin\\Desktop\\temp.txt", "213214sd\r\n");
+	}
+	
+	@Test
+	public void testZ2() throws Exception {
+		TxtUtil.contentToTxt2("C:\\Users\\admin\\Desktop\\temp.txt", "213214sd\r\n");
 	}
 
 	@Test

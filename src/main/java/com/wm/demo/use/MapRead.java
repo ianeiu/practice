@@ -65,9 +65,11 @@ public class MapRead {
 			}
 			if (StringUtils.equalsIgnoreCase("scode", key)) {
 				sb.append(" and psr.s_code ='").append(value).append("'");
+				continue;
 			}
 			if (StringUtils.equalsIgnoreCase("productName", key)) {
 				sb.append(" and pi.PRODUCT_NAME like '").append(value).append("'");
+				continue;
 			}
 			if (StringUtils.equalsIgnoreCase("productLeibie", key)) {
 				sb.append(" and pi.product_leibie = '").append(value).append("'");

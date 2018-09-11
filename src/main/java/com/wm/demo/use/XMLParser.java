@@ -61,6 +61,7 @@ public class XMLParser {
 	public static void main(String[] args) {
 
 		XMLParser parser = new XMLParser();
-		parser.getAllUserNames("e:\\test\\test.xml");
+		String path = XMLParser.class.getResource("test.xml").getPath();
+		parser.getAllUserNames(path);
 	}
 }

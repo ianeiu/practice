@@ -266,6 +266,48 @@ public class TxtUtil {
 	}
 	
 	/**
+	 * @Description: 追加内容至txt 
+	 * @author: wm
+	 * @date: 2018年9月11日 下午3:24:46
+	 * @version: 1.0
+	 * @param filePath
+	 * @param content
+	 * @throws IOException
+	 */
+	public static void contentToTxt2(String filePath, String content) throws IOException {
+		
+		File f = new File(filePath);
+		BufferedReader input = null;
+		BufferedWriter output = null;
+		try{
+			if (f.exists()) {
+				System.out.println("文件存在");
+			} else {
+				System.out.println("文件不存在");
+				f.createNewFile();// 不存在则创建
+			}
+			
+			output = new BufferedWriter(new FileWriter(f,true));
+			output.write(content);
+		} finally {
+			if(input !=null ){
+				try {
+					input.close();
+				} catch (IOException e) {
+					
+				}
+			}
+			if (output !=null ) {
+				try {
+					output.close();
+				} catch (IOException e) {
+					
+				}
+			}
+		}
+	}
+	
+	/**
 	 * @Description:统计文件行数 
 	 * @author: wm
 	 * @date: 2018年8月20日 下午2:37:07

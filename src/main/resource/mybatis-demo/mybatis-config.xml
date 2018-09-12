@@ -19,6 +19,12 @@
 	 -->
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		
+		<!--显示的指定每个我们需要更改的配置的值，即使他是默认的。防止版本更新带来的问题  -->
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
 	</settings>
 	
 	<!-- 3、typeAliases：别名处理器：可以为我们的java类型起别名 
@@ -105,10 +111,11 @@
 						比较重要的，复杂的Dao接口我们来写sql映射文件
 						不重要，简单的Dao接口为了开发快速可以使用注解；
 		-->
-		<mapper resource="mybatis-demo/mapper/UserMapper.xml" />
-		<mapper class="com.wm.demo.mybatis.mapper.UserAnnotationMapper"/>
+		<!-- <mapper resource="mybatis-demo/mapper/UserMapper.xml" />
+		<mapper resource="mybatis-demo/mapper/UserMapperUnion.xml" />
+		<mapper class="com.wm.demo.mybatis.mapper.UserAnnotationMapper"/> -->
 		
 		<!-- 批量注册： -->
-		<!-- <package name="com.wm.demo.mybatis.mapper"/> -->
+		<package name="com.wm.demo.mybatis.mapper"/>
 	</mappers>
 </configuration>

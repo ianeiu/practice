@@ -9,12 +9,12 @@ id：唯一标识
 resultType：返回值类型
 #{id}：从传递过来的参数中取出id值
  -->
+ 	<!-- TbSysUser getUserById(String id); -->
 	<select id="getUserById" resultType="com.wm.demo.mybatis.model.TbSysUser">
 		select * from tb_sys_user where user_id = #{id}
 	</select>
 	
-	
-	<!-- public void addEmp(Employee employee); -->
+	<!-- boolean addUser(TbSysUser user); -->
 	<!-- parameterType：参数类型，可以省略， 
 	获取自增主键的值：
 		mysql支持自增主键，自增主键值的获取，mybatis也是利用statement.getGenreatedKeys()；
@@ -65,13 +65,47 @@ resultType：返回值类型
 		 -->
 	</insert>
 	
+	<!-- boolean updateUser(TbSysUser user); -->
 	<update id="updateUser">
 		update tb_sys_user 
 		set passwork=#{passwork},status=#{status}
 		where user_id=#{userId}
 	</update>
 	
+	<!-- void deleteUserById(String id); -->
 	<delete id="deleteUserById">
 		delete from tb_sys_user where user_id=#{id}
 	</delete>
+	
+	<!-- Map<String, TbSysUser> getUserMapByUserName(String userName); -->
+	<select id="getUserMapByUserName" resultType="com.wm.demo.mybatis.model.TbSysUser">
+ 		select * from tb_sys_user where user_name like #{userName}
+ 	</select>
+ 	
+ 	<!--Map<String, Object> getUserMapByUserId(String id);  -->
+ 	<select id="getUserMapByUserId" resultType="map">
+ 		select * from tb_sys_user where user_id=#{id}
+ 	</select>
+ 	
+ 	<!-- List<TbSysUser> getUserListByUserName(String userName); -->
+	<!--resultType：如果返回的是一个集合，要写集合中元素的类型  -->
+	<select id="getUserListByUserName" resultType="com.wm.demo.mybatis.model.TbSysUser">
+		select * from tb_sys_user where user_name like #{userName}
+	</select>
+	
+	<!-- TbSysUser getUserByMap(Map<String, Object> map); -->
+	<select id="getUserByMap" resultType="com.wm.demo.mybatis.model.TbSysUser">
+		select * from tb_sys_user where user_id = #{userId} and user_name like #{userName}
+	</select>
+
+	<!-- TbSysUser getUserByIdAndName(String id, String userName); -->
+	<select id="getUserByIdAndName" resultType="com.wm.demo.mybatis.model.TbSysUser">
+		select * from tb_sys_user where user_id = #{0} and user_name like #{1}
+	</select>
+	
+	<!-- TbSysUser getUserAnnoationByIdAndName(@Param("id") String id, @Param("userName") String userName); -->
+ 	<select id="getUserAnnoationByIdAndName" resultType="com.wm.demo.mybatis.model.TbSysUser">
+		select * from tb_sys_user where user_id = #{id} and user_name like #{userName}
+	</select>
+	
 </mapper>

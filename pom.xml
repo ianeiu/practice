@@ -236,6 +236,12 @@
 			<version>3.2.8</version>
 			<!-- <version>3.3.0</version> -->
 		</dependency>
+		<!-- mybatis懒加载 -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>3.2.8</version>
+		</dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>

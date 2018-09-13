@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wm.demo.mybatis.mapper.UserDynamicMapper">
+<!-- 
+• if:判断
+• choose (when, otherwise):分支选择；带了break的swtich-case。如果带了id就用id查，如果带了userName就用userName查;只会进入其中一个
+• trim 字符串截取(where(封装查询条件), set(封装修改条件))
+• foreach 遍历集合
+-->
+	<!-- //携带了哪个字段查询条件就带上这个字段的值
+	List<TbSysUser> getUsersByConditionIf(TbSysUser user); -->
+	<select id="getUsersByConditionIf" resultType="com.wm.demo.mybatis.model.TbSysUser">
+		select * from tb_sys_user
+		<where>
+			<if test="userId!=null">
+		 		user_id=#{userId}
+		 	</if>
+		 	<if test="userName!=null &amp;&amp; userName.trim()!=&quot;&quot;">
+		 		and user_name like #{userName}
+		 	</if>
+		 	<!-- ognl会进行字符串与数字的转换判断  "0"==0 -->
+		 	<if test="userSex==0 or userSex==1">
+		 	 	and user_sex=#{userSex}
+		 	</if>
+		</where>
+	</select>
+	
+	<!-- List<TbSysUser> getUsersByConditionTrim(TbSysUser user); -->
+	<select id="getUsersByConditionTrim" resultType="com.wm.demo.mybatis.model.TbSysUser">
+	 	select * from tb_sys_user
+	 	<!-- 后面多出的and或者or where标签不能解决 
+		 	prefix="":prefix给拼串后的整个字符串加一个前缀 
+		 	prefixOverrides="": 去掉整个字符串前面多余的字符
+		 	suffix="":suffix给拼串后的整个字符串加一个后缀 
+		 	suffixOverrides="" 去掉整个字符串后面多余的字符
+	 	-->
+	 	<!-- 自定义字符串的截取规则 -->
+	 	<trim prefix="where" suffixOverrides="and">
+	 		<if test="userId!=null">
+		 		user_id=#{userId} and
+		 	</if>
+		 	<if test="userName!=null &amp;&amp; userName.trim()!=&quot;&quot;">
+		 		user_name like #{userName} and 
+		 	</if>
+		 	<!-- ognl会进行字符串与数字的转换判断  "0"==0 -->
+		 	<if test="userSex==0 or userSex==1">
+		 	 	user_sex=#{userSex} and 
+		 	</if>
+		 </trim>
+	 </select>
+	 
+	<!-- List<TbSysUser> getUsersByConditionChoose(TbSysUser user); -->
+	<select id="getUsersByConditionChoose" resultType="com.wm.demo.mybatis.model.TbSysUser">
+	 	select * from tb_sys_user 
+	 	<where>
+	 		<!-- 如果带了id就用id查，如果带了userName就用userName查;只会进入其中一个 -->
+	 		<choose>
+	 			<when test="userId!=null">
+	 				user_id=#{userId}
+	 			</when>
+	 			<when test="userName!=null &amp;&amp; userName.trim()!=&quot;&quot;">
+		 			user_name like #{userName} 
+	 			</when>
+	 			<otherwise>
+	 				user_sex = 1
+	 			</otherwise>
+	 		</choose>
+	 	</where>
+	 </select>
+	 
+	<!-- void updateUser(TbSysUser user); -->
+	<update id="updateUser">
+	 	<!-- Set标签的使用 -->
+	 	update tb_sys_user
+		<set>
+			<if test="userName!=null">
+				user_name=#{userName},
+			</if>
+			<if test="userSex!=null">
+				user_sex=#{userSex}
+			</if>
+		</set>
+		where user_id=#{userId} 
+		<!-- 		
+		Trim：更新拼串
+		update tb_sys_user 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="userName!=null">
+				last_name=#{lastName},
+			</if>
+			<if test="userSex!=null">
+				user_sex=#{userSex}
+			</if>
+		</trim>
+		where user_id=#{userId}   -->
+	 </update>
+	 
+	<!-- List<TbSysUser> getUsersByConditionForeach(@Param("ids")List<String> ids); -->
+	<select id="getUsersByConditionForeach" resultType="com.wm.demo.mybatis.model.TbSysUser">
+	 	select * from tb_sys_user
+	 	<!--
+	 		collection：指定要遍历的集合：
+	 			list类型的参数会特殊处理封装在map中，map的key就叫list
+	 		item：将当前遍历出的元素赋值给指定的变量
+	 		separator:每个元素之间的分隔符
+	 		open：遍历出所有结果拼接一个开始的字符
+	 		close:遍历出所有结果拼接一个结束的字符
+	 		index:索引。遍历list的时候是index就是索引，item就是当前值
+	 				      遍历map的时候index表示的就是map的key，item就是map的值
+	 		
+	 		#{变量名}就能取出变量的值也就是当前遍历出的元素
+	 	  -->
+	 	<foreach collection="ids" item="user_id" separator="," open="where user_id in(" close=")">
+	 		#{user_id}
+	 	</foreach>
+	</select>
+	
+
+	<!-- List<TbSysUser> getUsersDealParam(TbSysUser user); -->
+	<!-- 两个内置参数：
+	 	不只是方法传递过来的参数可以被用来判断，取值。。。
+	 	mybatis默认还有两个内置参数：
+	 	_parameter:代表整个参数
+	 		单个参数：_parameter就是这个参数
+	 		多个参数：参数会被封装为一个map；_parameter就是代表这个map
+	 	
+	 	_databaseId:如果配置了databaseIdProvider标签。
+	 		_databaseId就是代表当前数据库的别名oracle
+	  -->
+	<select id="getUsersDealParam" resultType="com.wm.demo.mybatis.model.TbSysUser">
+		select * from tb_sys_user
+		<!-- bind：可以将OGNL表达式的值绑定到一个变量中，方便后来引用这个变量的值 -->
+		<bind name="_userName" value="'%'+userName+'%'"/>
+		<if test="_databaseId=='mysql'">
+			<if test="_parameter!=null">
+				where user_name like #{_userName}
+			</if>
+		</if>
+		<if test="_databaseId=='oracle'">
+			<if test="_parameter!=null">
+				where user_name like #{_parameter.userName}
+			</if>
+		</if>
+	</select>
+	
+	
+	
+	<!-- void addUsers(@Param("users")List<TbSysUser> users); -->
+	 <!--MySQL下批量保存：可以foreach遍历   mysql支持values(),(),()语法-->
+	<insert id="addUsers">
+	 	insert into tb_sys_user(
+	 		<include refid="insertColumn"></include>
+	 	) 
+		values
+		<foreach collection="users" item="user" separator=",">
+			(#{user.userId},#{user.userName},#{user.userSex},#{user.createTime})
+		</foreach>
+	 </insert>
+	 
+	 <!-- 这种方式需要数据库连接属性allowMultiQueries=true；
+	 	这种分号分隔多个sql可以用于其他的批量操作（删除，修改） -->
+	 <!-- <insert id="addUsers">
+	 	<foreach collection="emps" item="emp" separator=";">
+	 		insert into tb_sys_user(user_id,user_name,user_sex,create_time)
+	 		values(#{user.userId},#{user.userName},#{user.userSex},#{user.createTime})
+	 	</foreach>
+	 </insert> -->
+	 
+	 <!-- Oracle数据库批量保存： 
+	 	Oracle不支持values(),(),()
+	 	Oracle支持的批量方式
+	 	1、多个insert放在begin - end里面
+	 		begin
+			    insert into tb_sys_user(user_id,user_name,user_sex,create_time) 
+			    values("1",'test_001','1',to_date('2005-01-01 13:14:20','yyyy-MM-dd HH24:mm:ss') );
+			    insert into tb_sys_user(user_id,user_name,user_sex,create_time) 
+			     values("2",'test_002','0',to_date('2005-01-01 13:14:20','yyyy-MM-dd HH24:mm:ss') );
+			end;
+		2、利用中间表：
+			insert into tb_sys_user(user_id,user_name,user_sex,create_time)
+		       select user_id,user_name,user_sex,create_time from(
+		              select "2" user_id,'test_002' user_name,'0' user_sex,to_date('2005-01-01 13:14:20','yyyy-MM-dd HH24:mm:ss') create_time from dual
+		              union
+		              select "2" user_id,'test_002' user_name,'0' user_sex,to_date('2005-01-01 13:14:20','yyyy-MM-dd HH24:mm:ss') create_time from dual
+		       )	
+	 -->
+	 <insert id="addUsers" databaseId="oracle">
+	 	<!-- oracle第一种批量方式 -->
+	 	<!-- <foreach collection="users" item="user" open="begin" close="end;">
+	 		insert into tb_sys_user(user_id,user_name,user_sex,create_time) 
+	 			values(#{user.userId},#{user.userName},#{user.userSex},#{user.createTime});
+	 	</foreach> -->
+	 	
+	 	<!-- oracle第二种批量方式  -->
+	 	insert into tb_sys_user(
+	 		<!-- 引用外部定义的sql -->
+		 		<!-- <include refid="insertColumn">
+		 			<property name="userSex" value="0"/> 
+		 		</include> -->
+		 		<include refid="insertColumn"></include>
+	 		)
+ 			<foreach collection="users" item="user" separator="union" open="select employees_seq.nextval,lastName,email from(" close=")">
+ 				select #{user.userId} user_id,#{user.userName} user_name,#{user.userSex} user_sex,#{user.createTime} create_time from dual	 
+ 			</foreach>
+	 </insert>
+	  
+	  
+	  <!-- 
+	  	抽取可重用的sql片段。方便后面引用 
+	  	1、sql抽取：经常将要查询的列名，或者插入用的列名抽取出来方便引用
+	  	2、include来引用已经抽取的sql：
+	  	3、include还可以自定义一些property，sql标签内部就能使用自定义的属性
+	  			include-property：取值的正确方式${prop},
+	  			#{不能使用这种方式}
+	  -->
+	  <sql id="insertColumn">
+	  		<if test="_databaseId=='oracle'">
+	  			user_id,user_name,user_sex,create_time
+	  		</if>
+	  		<if test="_databaseId=='mysql'">
+	  			user_id,user_name,user_sex,create_time
+	  		</if>
+	  </sql>
+</mapper>

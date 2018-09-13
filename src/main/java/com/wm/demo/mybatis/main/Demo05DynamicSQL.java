@@ -52,15 +52,15 @@ public class Demo05DynamicSQL {
 			sqlSession.commit();*/
 			
 			//condition foreach
-			/*List<String> ids = Arrays.asList("admin","test");
-			System.out.println(mapper.getUsersByConditionForeach(ids));*/
+			List<String> ids = Arrays.asList("admin","test");
+			System.out.println(mapper.getUsersByConditionForeach(ids));
 
 			//deal param
 			/*user.setUserName("测试");
 			System.out.println(mapper.getUsersDealParam(user));*/
 			
 			//addUsers
-			TbSysUser user1 = new TbSysUser()
+			/*TbSysUser user1 = new TbSysUser()
 					.setUserId("test3")
 					.setUserName("测试人员3")
 					.setUserSex(0)
@@ -74,7 +74,7 @@ public class Demo05DynamicSQL {
 			users.add(user1);
 			users.add(user2);
 			mapper.addUsers(users);
-			sqlSession.commit();
+			sqlSession.commit();*/
 			
 		}finally {
 			sqlSession.close();

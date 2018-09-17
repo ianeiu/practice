@@ -1,4 +1,4 @@
-package com.wm.utils.cookie;
+package com.wm.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

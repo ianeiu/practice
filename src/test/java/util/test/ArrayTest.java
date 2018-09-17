@@ -2,7 +2,7 @@ package util.test;
 
 import org.junit.Test;
 
-import com.wm.utils.array.ArrayUtil;
+import com.wm.utils.ArrayUtil;
 
 public class ArrayTest {
 	@Test

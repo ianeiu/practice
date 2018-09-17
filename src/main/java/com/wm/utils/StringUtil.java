@@ -1,4 +1,4 @@
-package com.wm.utils.string;
+package com.wm.utils;
 
 import org.apache.commons.lang.StringUtils;
 

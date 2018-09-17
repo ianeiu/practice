@@ -1,4 +1,4 @@
-package com.wm.utils.zip;
+package com.wm.utils;
 
 import java.io.BufferedInputStream;
 import java.io.File;

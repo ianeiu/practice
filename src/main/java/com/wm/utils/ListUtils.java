@@ -1,4 +1,4 @@
-package com.wm.utils.list;
+package com.wm.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

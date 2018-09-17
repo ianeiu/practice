@@ -2,8 +2,8 @@ package com.wm.demo.use;
 
 import java.util.List;
 
+import com.wm.utils.RegexUtils;
 import com.wm.utils.http.HttpRequestSimple;
-import com.wm.utils.regex.RegexUtils;
 
 /**
  * @Description: HTML解析

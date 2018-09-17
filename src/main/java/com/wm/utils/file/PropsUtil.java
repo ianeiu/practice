@@ -8,7 +8,7 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.wm.utils.type.CastUtil;
+import com.wm.utils.CastUtil;
 
 /**
  * 属性文件工具类

@@ -1,4 +1,4 @@
-package com.wm.utils.git;
+package com.wm.utils;
 
 import java.io.File;
 import java.io.IOException;

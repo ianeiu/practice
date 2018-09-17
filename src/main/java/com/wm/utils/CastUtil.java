@@ -1,6 +1,4 @@
-package com.wm.utils.type;
-
-import com.wm.utils.string.StringUtil;
+package com.wm.utils;
 
 /**
  * 转型操作工具类

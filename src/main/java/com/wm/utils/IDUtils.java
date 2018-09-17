@@ -1,4 +1,4 @@
-package com.wm.utils.id;
+package com.wm.utils;
 
 import java.util.Random;
 import java.util.UUID;

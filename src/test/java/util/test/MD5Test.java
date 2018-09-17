@@ -2,7 +2,7 @@ package util.test;
 
 import org.junit.Test;
 
-import com.wm.utils.pwd.MD5Utils;
+import com.wm.utils.MD5Utils;
 
 public class MD5Test {
 

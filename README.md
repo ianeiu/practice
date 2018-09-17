@@ -7,17 +7,18 @@
 
 ## 内容
 ### demo
-* `com.wm.demo.learn`		java-api
-* `com.wm.demo.recursion`	递归DEMO
-* `com.wm.demo.patterns` 	设计模式DEMO及资料（u）
+* `com.wm.demo.activiti`	activitiDEMO
+* `com.wm.demo.annotation`	注解DEMO
 * `com.wm.demo.fastjson`	fastjsonDemo
 * `com.wm.demo.gson`		gsonDemo
+* `com.wm.demo.learn`		java-base/learn/jdk5/jdk7/jdk8/反射/socket
+* `com.wm.demo.jedis`		jedisDemo
 * `com.wm.demo.logback`		logbackDemo
 * `com.wm.demo.mybatis`		mybatisDemo
-* `com.wm.demo.jedis`		jedisDemo
-* `com.wm.demo.activiti`	activitiDemo
-* `com.wm.demo.use`			常用Java代码（u）
+* `com.wm.demo.patterns` 	设计模式DEMO及资料（u）
+* `com.wm.demo.recursion`	递归DEMO
 * `com.wm.demo.trywork`		工作使用（u）
+* `com.wm.demo.use`			常用Java代码（u）
 
 ### mybatisgenerator
 * `com.wm.mybatisgenerator`	Mybatis反向工程
@@ -26,22 +27,25 @@
 * `com.wm.ssm`				SSM整合
 
 ### utils
-* `com.wm.utils.array`		array
+* `com.wm.utils.ArrayUtil`	array
 * `com.wm.utils.code`		二维码、条形码
-* `com.wm.utils.cookie`		cookie
+* `com.wm.utils.CastUtil`	类型转化
+* `com.wm.utils.ClassUtil`	类操作
+* `com.wm.utils.CookieUtils`cookie
 * `com.wm.utils.date`		date
 * `com.wm.utils.file`		file
 * `com.wm.utils.ftp`		ftp
 * `com.wm.utils.http`		http
-* `com.wm.utils.id`			id生成
+* `com.wm.utils.IDUtils`	id生成
 * `com.wm.utils.image`		image
 * `com.wm.utils.json`		json
-* `com.wm.utils.list`		list
-* `com.wm.utils.pwd`		加密
-* `com.wm.utils.string`		string
-* `com.wm.utils.type`		type
+* `com.wm.utils.ListUtils`	list
+* `com.wm.utils.MD5Utils`	加密
+* `com.wm.utils.RegexUtils`	正则工具类
+* `com.wm.utils.StringUtil`	string
 * `com.wm.utils.ws`			ws客户端
-* `com.wm.utils.zip`		zip
+* `com.wm.utils.ZipUtil`	ZIP压缩
+* `com.wm.utils.Zip4jUtil`	ZIP加密压缩解压
 
 ### wrapper
 * `com.wm.wrapper`			 Java Service Wrapper（将java程序作为Windows服务）

@@ -1,4 +1,4 @@
-package com.wm.utils.type;
+package com.wm.utils;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;

@@ -6,7 +6,7 @@ import org.dom4j.DocumentException;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wm.utils.json.XmlTool;
+import com.wm.utils.XmlTool;
 
 public class XmlToolTest {
 

@@ -4,7 +4,7 @@ import java.io.File;
 
 import org.junit.Test;
 
-import com.wm.utils.zip.ZipUtil;
+import com.wm.utils.ZipUtil;
 
 public class zipTest {
 	@Test

@@ -1,4 +1,4 @@
-package com.wm.utils.array;
+package com.wm.utils;
 
 public class ArrayUtil {
 	

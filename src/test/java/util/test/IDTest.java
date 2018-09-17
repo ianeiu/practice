@@ -2,7 +2,7 @@ package util.test;
 
 import org.junit.Test;
 
-import com.wm.utils.id.IDUtils;
+import com.wm.utils.IDUtils;
 
 public class IDTest {
 	

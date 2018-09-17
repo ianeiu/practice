@@ -1,4 +1,4 @@
-package com.wm.utils.pwd;
+package com.wm.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

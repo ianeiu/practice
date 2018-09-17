@@ -1,4 +1,4 @@
-package com.wm.utils.json;
+package com.wm.utils;
 
 import java.util.List;
 

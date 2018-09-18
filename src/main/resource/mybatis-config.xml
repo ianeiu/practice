@@ -14,11 +14,4 @@
 		<!-- 开启驼峰命名转换:Table{create_time} -> Entity{createTime} -->
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
-	
-  	<typeAliases>
-		<!--自定义user对象的别名 -->
-		<!-- <typeAlias type="com.wm.ssm.sys.user.model.TbSysUser" alias="TbSysUser" /> -->
-		<!-- 批量定义别名 -->
-		<!-- <package name="com.wm.ssm.sys.user" /> -->
-	</typeAliases>
 </configuration>

@@ -1,5 +1,6 @@
 package com.wm.demo.mybatis.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
@@ -10,7 +11,10 @@ import lombok.experimental.Accessors;
 @Alias("user")
 @Data
 @Accessors(chain=true)
-public class TbSysUser {
+public class TbSysUser implements Serializable {
+	
+	private static final long serialVersionUID = 2738094983146195753L;
+	
 	private String userId;
 	private String userName;
 	private String passwork;

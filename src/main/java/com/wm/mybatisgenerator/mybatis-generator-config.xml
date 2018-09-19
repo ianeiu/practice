@@ -44,9 +44,9 @@
 		</javaClientGenerator>
 		
 		<!-- 指定数据库表 -->
-		<table tableName="tb_sys_role" schema="" enableCountByExample="false"
+		<table tableName="tb_sys_role" domainObjectName="TbSysRolePO" schema="" enableCountByExample="false"
 				enableDeleteByExample="false" enableUpdateByExample="false"
-				enableSelectByExample="false" selectByExampleQueryId="false"></table>
+				enableSelectByExample="true" selectByExampleQueryId="false"></table>
 		
 		<!-- 有些表的字段需要指定java类型
 		 <table schema="" tableName="">

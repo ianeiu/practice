@@ -8,16 +8,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.wm.utils.IDUtils;
+import com.wm.utils.CheckUtil;
+import com.wm.utils.RandomUtil;
 
-public class FileUtils {
+public class FileUtil {
 
-    private final static transient Logger logger = LoggerFactory.getLogger(FileUtils.class);
+    private final static transient Logger logger = LoggerFactory.getLogger(FileUtil.class);
     
     /**
      * 上传文件
@@ -39,7 +42,7 @@ public class FileUtils {
 
 	    String filePath = "";//文件保存地址
 	    if(ifBefore){
-	    	filePath = tmpFile.getPath() +"/"+ IDUtils.genImageName()+"_"+fileName; 
+	    	filePath = tmpFile.getPath() +"/"+ RandomUtil.imageName()+"_"+fileName; 
 	    }else{
 	    	filePath = tmpFile.getPath() +"/"+fileName; 
 	    }
@@ -169,4 +172,56 @@ public class FileUtils {
 		return f;
     }
 	
+    /**
+     * 罗列指定路径下的全部文件
+     * @param path 需要处理的文件
+     * @param child 是否罗列子文件
+     * @return 包含所有文件的的list
+     */
+    public final static List<File> listFile(String path,boolean child){
+        return listFile(new File(path),child);
+    }
+    
+    /**
+     * 罗列指定路径下的全部文件
+     * @param path 指定的路径
+     * @param child 是否罗列子目录
+     * @return
+     */
+    public final static List<File> listFile(File path,boolean child){
+        List<File> list = new ArrayList<>();
+        File[] files = path.listFiles();
+        if (CheckUtil.valid(files)) {
+            for (File file : files) {
+                if (child && file.isDirectory()) {
+                    list.addAll(listFile(file));
+                } else {
+                    list.add(file);
+                }
+            }
+        }
+        return list;
+    }
+    
+    /**
+     * 罗列指定路径下的全部文件
+    *
+    * @param path 需要处理的文件
+    * @return 返回文件列表
+    */
+   public final static List<File> listFile(File path) {
+       List<File> list = new ArrayList<>();
+       File[] files = path.listFiles();
+       if (CheckUtil.valid(files)) {
+           for (File file : files) {
+               if (file.isDirectory()) {
+                   list.addAll(listFile(file));
+               } else {
+                   list.add(file);
+               }
+           }
+       }
+       return list;
+   }
+   
 }

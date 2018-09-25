@@ -29,21 +29,31 @@
 ### utils
 * `com.wm.utils.ArrayUtil`	array
 * `com.wm.utils.code`		二维码、条形码
-* `com.wm.utils.CastUtil`	类型转化
+* `com.wm.utils.CharsetUtil`编码相关
+* `com.wm.utils.CharUtil`	Char
+* `com.wm.utils.CheckUtil`	对象检查
+* `com.wm.utils.ChinesUtil`	中文
 * `com.wm.utils.ClassUtil`	类操作
-* `com.wm.utils.ClobUtil`	Clob
+* `com.wm.utils.ConvertUtil`类型转换
 * `com.wm.utils.CookieUtils`cookie
+* `com.wm.utils.ExceptionUtil`异常
+* `com.wm.utils.FilePathUtil`文件路径
 * `com.wm.utils.date`		date
 * `com.wm.utils.file`		file
 * `com.wm.utils.ftp`		ftp
 * `com.wm.utils.http`		http
-* `com.wm.utils.IDUtils`	id生成
 * `com.wm.utils.image`		image
 * `com.wm.utils.json`		json
 * `com.wm.utils.ListUtils`	list
 * `com.wm.utils.MD5Utils`	加密
+* `com.wm.utils.NumberUtil`	数字操作
+* `com.wm.utils.PropertiesUtil`	Prop
+* `com.wm.utils.RandomUtil`	随机字符串
 * `com.wm.utils.RegexUtils`	正则工具类
 * `com.wm.utils.StringUtil`	string
+* `com.wm.utils.SysUtil`	系统
+* `com.wm.utils.UrlUtil`	Url
+* `com.wm.utils.WebUtil`	WebHtml
 * `com.wm.utils.ws`			ws客户端
 * `com.wm.utils.ZipUtil`	ZIP压缩
 * `com.wm.utils.Zip4jUtil`	ZIP加密压缩解压

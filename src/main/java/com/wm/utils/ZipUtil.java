@@ -4,85 +4,84 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.zip.CRC32;
 import java.util.zip.CheckedOutputStream;
-
-import org.apache.tools.zip.ZipEntry;
-import org.apache.tools.zip.ZipOutputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 /**
- * ZIP压缩工具
- * 
- * @author  TerryLi 
- * @since 1.0
+ * @Description: ZIP工具类
+ * @author: wm
+ * @date: 2018年9月25日 下午4:00:19
+ * @version: 1.0
  */
 public class ZipUtil {
 
+	/**
+	 * 压缩格式
+	 */
 	public static final String EXT = ".zip";
+	
+	/**
+	 * 上级目录,""表示不添加
+	 */
 	private static final String BASE_DIR = "";
 
-	// 符号"/"用来作为目录标识判断符
+	/**
+	 * 符号"/"
+	 */
 	private static final String PATH = "/";
+	
 	private static final int BUFFER = 1024;
 	
 	
-	
-	
-	
-
 	/**
-	 * 压缩
-	 * 
+	 * 压缩 
 	 * @param srcFile
-	 * @throws Exception
+	 * @throws IOException
 	 */
-	public static void compress(File srcFile) throws Exception {
+	public static void compress(File srcFile) throws IOException {
 		String name = srcFile.getName();
+		if(srcFile.isFile()){
+			int extPlace = name.lastIndexOf(".");
+			if(extPlace!=-1){
+				name = name.substring(0,name.lastIndexOf("."));
+			}
+		}
+		
 		String basePath = srcFile.getParent();
-		String destPath = basePath + name + EXT;
+		String destPath = basePath + PATH + name + EXT;
 		compress(srcFile, destPath);
 	}
-
 	
 	/**
-	 * 压缩
-	 * 
-	 * @param srcFile
-	 *            源路径
-	 * @param destPath
-	 *            目标路径
-	 * @throws Exception
+	 * 压缩 
+	 * @param srcPath
+	 * @throws IOException
 	 */
-	public static void compress(File srcFile, OutputStream os) throws Exception {
-
-		// 对输出文件做CRC32校验
-		CheckedOutputStream cos = new CheckedOutputStream(os, new CRC32());
-
-		ZipOutputStream zos = new ZipOutputStream(cos);
-		// 
-		zos.setEncoding("UTF-8");
-		compress(srcFile, zos, BASE_DIR);
-
-		zos.flush();
-		zos.close();
+	public static void compress(String srcPath) throws IOException {
+		File srcFile = new File(srcPath); 
+		compress(srcFile);
 	}
+
 	
 	/**
-	 * 压缩
-	 * 
-	 * @param srcFile
-	 *            源路径
-	 * @param destPath
-	 *            目标路径
-	 * @throws Exception
+	 * 压缩 
+	 * @param srcFile 源路径
+	 * @param destFile 生成的压缩文件
+	 * @throws IOException
 	 */
-	public static void compress(File srcFile, File destFile) throws Exception {
-
+	public static void compress(File srcFile, File destFile) throws IOException {
+		/*if(!destFile.exists()){
+			destFile.createNewFile();
+		}*/
 		// 对输出文件做CRC32校验
-		CheckedOutputStream cos = new CheckedOutputStream(new FileOutputStream(
-				destFile), new CRC32());
-
+		CheckedOutputStream cos = new CheckedOutputStream(new FileOutputStream(destFile), new CRC32());
 		ZipOutputStream zos = new ZipOutputStream(cos);
 
 		compress(srcFile, zos, BASE_DIR);
@@ -90,23 +89,40 @@ public class ZipUtil {
 		zos.flush();
 		zos.close();
 	}
+
+	/**
+	 * 压缩文件 
+	 * @param srcFile 源路径
+	 * @param destPath 文件路径
+	 * @throws IOException
+	 */
+	public static void compress(File srcFile, String destPath) throws IOException {
+		compress(srcFile, new File(destPath));
+	}
+
+	/**
+	 * 压缩 文件
+	 * @param srcPath  源文件路径
+	 * @param destPath  目标文件路径
+	 * 
+	 */
+	public static void compress(String srcPath, String destPath)
+			throws IOException {
+		File srcFile = new File(srcPath);
+		compress(srcFile, destPath);
+	}
 	
 	/**
-	 * 压缩
-	 * 
-	 * @param srcFile
-	 *            源路径
-	 * @param destPath
-	 *            目标路径
-	 * @throws Exception
+	 * 压缩 
+	 * @param srcFile 压缩文件集合
+	 * @param destFile  生成的压缩文件
+	 * @throws IOException
 	 */
-	public static void compress(File srcFile[], File destFile) throws Exception {
-
+	public static void compress(File srcFile[], File destFile) throws IOException {
 		// 对输出文件做CRC32校验
-		CheckedOutputStream cos = new CheckedOutputStream(new FileOutputStream(
-				destFile), new CRC32());
-
+		CheckedOutputStream cos = new CheckedOutputStream(new FileOutputStream(destFile), new CRC32());
 		ZipOutputStream zos = new ZipOutputStream(cos);
+		
 		for(File file : srcFile)
 			compress(file, zos, BASE_DIR);
 
@@ -115,29 +131,13 @@ public class ZipUtil {
 	}
 
 	/**
-	 * 压缩文件
-	 * 
-	 * @param srcFile
-	 * @param destPath
-	 * @throws Exception
+	 * 压缩 
+	 * @param srcFile  源路径
+	 * @param zos  ZipOutputStream
+	 * @param basePath 压缩包内相对路径
+	 * @throws IOException
 	 */
-	public static void compress(File srcFile, String destPath) throws Exception {
-		compress(srcFile, new File(destPath));
-	}
-
-	/**
-	 * 压缩
-	 * 
-	 * @param srcFile
-	 *            源路径
-	 * @param zos
-	 *            ZipOutputStream
-	 * @param basePath
-	 *            压缩包内相对路径
-	 * @throws Exception
-	 */
-	private static void compress(File srcFile, ZipOutputStream zos,
-			String basePath) throws Exception {
+	private static void compress(File srcFile, ZipOutputStream zos, String basePath) throws IOException {
 		if (srcFile.isDirectory()) {
 			compressDir(srcFile, zos, basePath);
 		} else {
@@ -146,90 +146,46 @@ public class ZipUtil {
 	}
 
 	/**
-	 * 压缩
-	 * 
-	 * @param srcPath
-	 * @throws Exception
-	 */
-	public static void compress(String srcPath) throws Exception {
-		File srcFile = new File(srcPath);
-
-		compress(srcFile);
-	}
-
-	/**
-	 * 文件压缩
-	 * 
-	 * @param srcPath
-	 *            源文件路径
-	 * @param destPath
-	 *            目标文件路径
-	 * 
-	 */
-	public static void compress(String srcPath, String destPath)
-			throws Exception {
-		File srcFile = new File(srcPath);
-
-		compress(srcFile, destPath);
-	}
-
-	/**
 	 * 压缩目录
 	 * 
 	 * @param dir
 	 * @param zos
 	 * @param basePath
-	 * @throws Exception
+	 * @throws IOException
 	 */
-	private static void compressDir(File dir, ZipOutputStream zos,
-			String basePath) throws Exception {
+	private static void compressDir(File dir, ZipOutputStream zos,String basePath) throws IOException {
 
 		File[] files = dir.listFiles();
 
 		// 构建空目录
 		if (files.length < 1) {
 			ZipEntry entry = new ZipEntry(basePath + dir.getName() + PATH);
-			entry.setUnixMode(755);
+			//org.apache.tools.zip.ZipEntry entry.setUnixMode(755);
 			zos.putNextEntry(entry);
 			zos.closeEntry();
 		}
 
-		for (File file : files) {
-
+		for (File file : files) { 
 			// 递归压缩
-			compress(file, zos, basePath + dir.getName() + PATH);
+			compress(file, zos, basePath + PATH + dir.getName() + PATH);
 
 		}
 	}
 
 	/**
-	 * 文件压缩
-	 * 
-	 * @param file
-	 *            待压缩文件
-	 * @param zos
-	 *            ZipOutputStream
-	 * @param dir
-	 *            压缩文件中的当前路径
-	 * @throws Exception
+	 * 文件压缩 
+	 * @param file  待压缩文件
+	 * @param zos ZipOutputStream
+	 * @param dir  压缩文件中的当前路径
+	 * @throws IOException
 	 */
-	private static void compressFile(File file, ZipOutputStream zos, String dir)
-			throws Exception {
+	private static void compressFile(File file, ZipOutputStream zos, String dir) throws IOException {
 
-		/**
-		 * 压缩包内文件名定义
-		 * 
-		 * <pre>
-		 * 如果有多级目录，那么这里就需要给出包含目录的文件名
-		 * 如果用WinRAR打开压缩包，中文名将显示为乱码
-		 * </pre>
-		 */
-		ZipEntry entry = new ZipEntry(dir + file.getName());
-		entry.setUnixMode(644);
+		ZipEntry entry = new ZipEntry(dir +PATH+ file.getName());
+		//org.apache.tools.zip.ZipEntry entry.setUnixMode(644);
 		zos.putNextEntry(entry);
 
-		BufferedInputStream bis = new BufferedInputStream(new FileInputStream(
-				file));
+		BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
 
 		int count;
 		byte data[] = new byte[BUFFER];
@@ -240,4 +196,65 @@ public class ZipUtil {
 
 		zos.closeEntry();
 	}
+	
+	
+	/**
+     * 文档解压 from opslabJutil
+     * @param source 需要解压缩的文档名称
+     * @param path   需要解压缩的路径
+     */
+    public final static void unCompress(File source, String path) throws IOException {
+        ZipEntry zipEntry = null;
+        File dir = new File(path);
+        if(!dir.exists()){
+        	dir.mkdirs();	
+        }
+        //实例化ZipFile，每一个zip压缩文件都可以表示为一个ZipFile
+        //实例化一个Zip压缩文件的ZipInputStream对象，可以利用该类的getNextEntry()方法依次拿到每一个ZipEntry对象
+        try (
+                ZipFile zipFile = new ZipFile(source);
+                ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(source))
+        ) {
+            while ((zipEntry = zipInputStream.getNextEntry()) != null) {
+                String fileName = zipEntry.getName();
+                File temp = new File(path + "/" + fileName);
+                if (!temp.getParentFile().exists()) {
+                    temp.getParentFile().mkdirs();
+                }
+                try (OutputStream os = new FileOutputStream(temp);
+                     //通过ZipFile的getInputStream方法拿到具体的ZipEntry的输入流
+                     InputStream is = zipFile.getInputStream(zipEntry)) {
+                    int len = 0;
+                    while ((len = is.read()) != -1) {
+                        os.write(len);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
+    public static void main(String[] args) {
+    	File srcFile = new File("D:/DqdpUtil.java");
+    	//File srcFile = new File("D:/logs/analyse");
+		//File srcFile = new File("D:/中文测试");
+		try {
+			ZipUtil.compress(srcFile);
+			System.out.println("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+	}
+    
+    public static void main1(String[] args) {
+    	String destPath = "D:/logs/GG";
+    	File file = new File("D:/logs/analyse.zip");
+    	try {
+    		ZipUtil.unCompress(file, destPath);
+    		System.out.println("success");
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	} 
+    }
 }

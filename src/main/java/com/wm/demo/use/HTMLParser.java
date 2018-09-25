@@ -2,7 +2,7 @@ package com.wm.demo.use;
 
 import java.util.List;
 
-import com.wm.utils.RegexUtils;
+import com.wm.utils.RegexUtil;
 import com.wm.utils.http.HttpRequestSimple;
 
 /**
@@ -18,7 +18,7 @@ public class HTMLParser {
 		try {
 			String content = HttpRequestSimple.sendGet("http://127.0.0.1:8080/test/89b9c0b6-ed23-43d1-9803-401f484bcb2c/", "");
 			String regex = "<a[^>]*href=(\"([^\"]*)\"|\'([^\']*)\'|([^\\s>]*))[^>]*><tt>(.*?)/</tt></a>";
-			List<String> links = RegexUtils.getContentByRegex(content, regex); 
+			List<String> links = RegexUtil.getContentByRegex(content, regex); 
 					
 			for (String link : links) {
 				String s = link.replaceAll("<.*?>", "");

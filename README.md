@@ -31,6 +31,7 @@
 * `com.wm.utils.code`		二维码、条形码
 * `com.wm.utils.CastUtil`	类型转化
 * `com.wm.utils.ClassUtil`	类操作
+* `com.wm.utils.ClobUtil`	Clob
 * `com.wm.utils.CookieUtils`cookie
 * `com.wm.utils.date`		date
 * `com.wm.utils.file`		file

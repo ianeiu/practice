@@ -205,34 +205,53 @@ public class DayUtils {
         if(weekDays.indexOf("|")!=-1){//多个星期数  
             String []strWeeks = weekDays.split("\\|");  
             for(int i=0;i<strWeeks.length;i++){  
-                weekNumber = weekNumber + "" + getWeekNum(strWeeks[i]).toString();  
+                weekNumber = weekNumber + "" + getWeekCode(strWeeks[i]).toString();  
             }  
         }else{//一个星期数  
-            weekNumber = getWeekNum(weekDays).toString();  
+            weekNumber = getWeekCode(weekDays).toString();  
         }  
           
         return weekNumber;  
           
     }  
       
-    //将星期转换为对应的系数  星期日：1，星期一：2，星期二：3，星期三：4，星期四：5，星期五：6，星期六：7  
-    public static Integer getWeekNum(String strWeek){  
-        Integer number = 1;//默认为星期日  
-        if("星期日".equals(strWeek)){  
-            number = 1;  
-        }else if("星期一".equals(strWeek)){  
-            number = 2;  
-        }else if("星期二".equals(strWeek)){  
-            number = 3;  
-        }else if("星期三".equals(strWeek)){  
-            number = 4;  
-        }else if("星期四".equals(strWeek)){  
-            number = 5;  
-        }else if("星期五".equals(strWeek)){  
-            number = 6;  
-        }else if("星期六".equals(strWeek)){  
-            number = 7;  
-        }  
-        return number;  
+    /**
+     * @Description: 将星期转换为对应的系数  星期日：1，星期一：2，星期二：3，星期三：4，星期四：5，星期五：6，星期六：7  
+     * @author: wm
+     * @date: 2018年9月25日 下午7:50:07
+     * @version: 1.1
+     * @param strWeek
+     * @return
+     */
+    public static Integer getWeekCode(String strWeek){  
+        Integer code = 1;
+        
+        switch (strWeek) {
+		case "星期日":
+			code = 1;
+			break;
+		case "星期一":
+			code = 2;
+			break;
+		case "星期二":
+			code = 3;
+			break;
+		case "星期三":
+			code = 4;
+			break;
+		case "星期四":
+			code = 5;
+			break;
+		case "星期五":
+			code = 6;
+			break;
+		case "星期六":
+			code = 7;
+			break;
+		default:
+			break;
+		}
+       
+        return code;  
     }  
 }

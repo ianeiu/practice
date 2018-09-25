@@ -11,7 +11,7 @@ import java.util.Date;
  * @author wm
  *
  */
-public class DateUtils {
+public class DateUtil2 {
 	
 	private static final String ymd = "yyyy-MM-dd";
 	private static final String Hms = "HH:mm:ss";
@@ -217,5 +217,42 @@ public class DateUtils {
 		return new java.sql.Date(date.getTime());
 	}
 	
+	/**
+	 * @Description: 判断时间是否在时间段内
+	 * @author: wm
+	 * @date: 2018年9月25日 下午7:52:24
+	 * @version: 1.1
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static boolean isBelongHour(String start,String end) {
+
+		SimpleDateFormat df = new SimpleDateFormat("HH:mm");// 设置日期格式
+		Date now = null;
+		Date beginTime = null;
+		Date endTime = null;
+		try {
+			now = df.parse(df.format(new Date()));
+			beginTime = df.parse(start);
+			endTime = df.parse(end);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Boolean flag = belongCalendar(now, beginTime, endTime);
+		return flag;
+	}
+
+	/**
+	 * 判断时间是否在时间段内
+	 * @param nowTime
+	 * @param beginTime
+	 * @param endTime
+	 * @return
+	 */
+	public static boolean belongCalendar(Date nowTime, Date beginTime, Date endTime) {
+		return nowTime.getTime() >= beginTime.getTime() && nowTime.getTime() <= endTime.getTime(); 
+	}
 	
 }

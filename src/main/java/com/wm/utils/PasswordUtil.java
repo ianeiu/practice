@@ -4,8 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class MD5Utils {
-
+public class PasswordUtil {
 	public static byte[] getMD5(byte[] src) {
 		MessageDigest messageDigest = null;
 		try {
@@ -43,4 +42,24 @@ public class MD5Utils {
 		return md5StrBuff.toString();
 	}
 	
+
+	/**
+	 * 必选包含数字、字母、特殊字符，长度在8到15位
+	 * 必选包含数字、大写字母、小写字母、特殊字符，长度在8到15位
+	 */
+    private static final String SEC_PASSWORD =
+            "^(?=.*?[0-9])(?=.*?[a-zA-Z])(?=.*?[@!#$%^&*()_+\\.\\-\\?<>'\"|=]+).{8,15}$";
+    		//"^(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[@!#$%^&*()_+\\.\\-\\?<>'\"|=]+).{8,15}$";
+   
+
+    /**
+     * 判断一个密码是否健壮
+     * 必选包含数字、大写字母、小写字母、特殊字符，长度在8到15位
+     * @param password
+     * @return
+     */
+    public final static  boolean isSec(String password){
+        return RegexUtil.isMatche(password,SEC_PASSWORD);
+    }
+    
 }

@@ -1,4 +1,4 @@
-package util.test;
+package com.wm.demo.use;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
-public class CommonTest {
+public class CommonUtilTest {
 
 	@Test
 	public void TestString() {
@@ -29,8 +29,10 @@ public class CommonTest {
 	
 	@Test
 	public void TestStringEsca() {
-		String isB = StringEscapeUtils.escapeHtml("<span>123sdf</span>");
-		System.out.println(isB);
+		String html = StringEscapeUtils.escapeHtml("<span>123sdf</span>");
+		System.out.println(html);
+		
+		System.out.println(StringEscapeUtils.unescapeHtml(html));
 	}
 	
 	@Test

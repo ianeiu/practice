@@ -1,4 +1,4 @@
-package com.wm.utils.file;
+package com.wm.utils;
 
 import java.io.IOException;
 import java.io.InputStream;

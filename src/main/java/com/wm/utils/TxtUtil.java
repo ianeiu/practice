@@ -1,4 +1,4 @@
-package com.wm.utils.file;
+package com.wm.utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,44 +15,6 @@ import java.util.Scanner;
 
 public class TxtUtil {
 
-	/**
-	 * @Description:创建文件 
-	 * @author: wm
-	 * @date: 2018年8月20日 下午2:29:49
-	 * @version: 1.1
-	 * @param file
-	 * @return
-	 * @throws IOException
-	 */
-	public static boolean createFile(File file) throws IOException   {
-		boolean flag = false;
-		if (file.exists()) {
-			flag = true;
-		} else {
-			file.createNewFile();
-			flag = true;
-		}
-		return flag;
-	}
-
-	/**
-	 * @Description:创建目录 
-	 * @author: wm
-	 * @date: 2018年8月20日 下午2:50:15
-	 * @version: 1.0
-	 * @param file
-	 * @return
-	 */
-	public static boolean createDir(File file) {
-		boolean flag = false;
-		if (file.exists()) {
-			flag = true;
-		} else {
-			file.mkdirs();
-			flag = true;
-		}
-		return flag;
-	}
 	public static String readTxtFile(String path) throws IOException{
 		return readTxtFile(new File(path));
 	}
@@ -144,7 +106,6 @@ public class TxtUtil {
 	 */
 	public static void writeToTxt(String filePath,List<String> list) throws IOException {
 		File file = new File(filePath);
-		createFile(file);
 		
         FileWriter fw = null;
         BufferedWriter bw = null;
@@ -198,8 +159,6 @@ public class TxtUtil {
 		boolean flag = false;
 		FileOutputStream o = null;
 		try {
-			createDir(file.getParentFile());
-			createFile(file);
 			o = new FileOutputStream(file);
 			o.write(content.getBytes("GBK"));
 			flag = true;
@@ -308,33 +267,34 @@ public class TxtUtil {
 	}
 	
 	/**
-	 * @Description:统计文件行数 
+	 * @Description: 统计文件行数 
 	 * @author: wm
-	 * @date: 2018年8月20日 下午2:37:07
-	 * @version: 1.0
-	 * @param filename
+	 * @date: 2018年9月27日 下午3:24:20
+	 * @version: 1.1
+	 * @param filePath 文件路径
+	 * @param ignoreBlank 空行是否不计算在内
 	 * @return
 	 * @throws FileNotFoundException
 	 */
-	public static long countLines(String filename) throws FileNotFoundException{
-		Scanner scanner = null;
-		try{
-			File file = new File(filename);
-			if(!file.exists()){
-				return 0L;
+	public static long countLines(String filePath,boolean ignoreBlank) throws FileNotFoundException{
+		File file = new File(filePath);
+		if(!file.exists()){
+			return 0L;
+		}
+		try(Scanner scanner = new Scanner(new FileInputStream(file))){
+			long count = 0;
+			
+			if(ignoreBlank){
+				while (scanner.hasNextLine()) {
+					if(!"".equals(scanner.nextLine().trim())) count++;
+				}
+			}else{
+				while (scanner.hasNextLine()) {
+						count++;
+				}
 			}
 			
-			long count = 0;
-			scanner= new Scanner(new FileInputStream(file));
-			while (scanner.hasNextLine()) {
-				if(!"".equals(scanner.nextLine().trim()))
-					count++;
-			}
 			return count;
-		}finally {
-			if(scanner != null){
-				scanner.close();
-			}
 		}
 	}
 	

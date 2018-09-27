@@ -252,7 +252,7 @@ public final class ConvertUtil {
         double doubleValue = defaultValue;
         if (obj != null) {
             String strValue = castString(obj);
-            if (StringUtils.isNotEmpty(strValue)) {
+            if (StringUtil.isNotEmpty(strValue)) {
                 try {
                     doubleValue = Double.parseDouble(strValue);
                 } catch (NumberFormatException e) {
@@ -277,7 +277,7 @@ public final class ConvertUtil {
         long longValue = defaultValue;
         if (obj != null) {
             String strValue = castString(obj);
-            if (StringUtils.isNotEmpty(strValue)) {
+            if (StringUtil.isNotEmpty(strValue)) {
                 try {
                     longValue = Long.parseLong(strValue);
                 } catch (NumberFormatException e) {
@@ -302,7 +302,7 @@ public final class ConvertUtil {
         int intValue = defaultValue;
         if (obj != null) {
             String strValue = castString(obj);
-            if (StringUtils.isNotEmpty(strValue)) {
+            if (StringUtil.isNotEmpty(strValue)) {
                 try {
                     intValue = Integer.parseInt(strValue);
                 } catch (NumberFormatException e) {

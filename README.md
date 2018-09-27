@@ -37,15 +37,19 @@
 * `com.wm.utils.ConvertUtil`类型转换
 * `com.wm.utils.CookieUtils`cookie
 * `com.wm.utils.EmailUtil`	email
+* `com.wm.utils.ExcelUtil`	excel
 * `com.wm.utils.ExceptionUtil`异常
+* `com.wm.utils.FileEncodingUtil`文件编码
 * `com.wm.utils.FilePathUtil`文件路径
+* `com.wm.utils.FileUtil`	文件
 * `com.wm.utils.date`		date
-* `com.wm.utils.file`		file
 * `com.wm.utils.ftp`		ftp
 * `com.wm.utils.http`		http
 * `com.wm.utils.image`		image
+* `com.wm.utils.image2`		image
 * `com.wm.utils.json`		json
 * `com.wm.utils.ListUtils`	list
+* `com.wm.utils.MapCoordinateUtil`	经纬度
 * `com.wm.utils.NumberUtil`	数字操作
 * `com.wm.utils.PasswordUtil`	加密
 * `com.wm.utils.PropertiesUtil`	Prop
@@ -54,6 +58,7 @@
 * `com.wm.utils.StreamUtil`	流操作
 * `com.wm.utils.StringUtil`	string
 * `com.wm.utils.SysUtil`	系统
+* `com.wm.utils.TxtUtil`	TXT
 * `com.wm.utils.UrlUtil`	Url
 * `com.wm.utils.WebUtil`	WebHtml
 * `com.wm.utils.ws`			ws客户端

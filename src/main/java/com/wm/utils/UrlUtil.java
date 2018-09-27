@@ -660,7 +660,7 @@ public final class UrlUtil {
      * @return map
      */
     public static Map<String,String> parseQuery(String query, char split1, char split2, String dupLink) {
-        if (!StringUtils.isEmpty(query) && query.indexOf(split2) > 0) {
+        if (!StringUtil.isEmpty(query) && query.indexOf(split2) > 0) {
             Map<String,String> result = new HashMap<>();
 
             String name = null;
@@ -672,7 +672,7 @@ public final class UrlUtil {
                 if (c == split2) {
                     value = "";
                 } else if (c == split1) {
-                    if (!StringUtils.isEmpty(name) && value != null) {
+                    if (!StringUtil.isEmpty(name) && value != null) {
                         if (dupLink != null) {
                             tempValue = result.get(name);
                             if (tempValue != null) {
@@ -690,7 +690,7 @@ public final class UrlUtil {
                 }
             }
 
-            if (!StringUtils.isEmpty(name) && value != null) {
+            if (!StringUtil.isEmpty(name) && value != null) {
                 if (dupLink != null) {
                     tempValue = result.get(name);
                     if (tempValue != null) {
@@ -711,7 +711,7 @@ public final class UrlUtil {
      */
     public static Map<String,String> httpParseQuery(String queryUri){
         Map<String,String> result = new HashMap<>();
-        if(!StringUtils.isEmpty(queryUri)){
+        if(!StringUtil.isEmpty(queryUri)){
             result = parseQuery(queryUri,'&','=',",");
         }
         return result;

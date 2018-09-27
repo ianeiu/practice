@@ -22,11 +22,8 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.wm.utils.file.FileUtil;
 
 /**
  * 类操作工具类
@@ -87,7 +84,7 @@ public final class ClassUtil {
 	 */
 	public static Object readFieldValue(String propertyKey, Object obj) {
 		try {
-			if (StringUtils.isBlank(propertyKey))
+			if (StringUtil.isBlank(propertyKey))
 				return null;
 			else if (obj == null)
 				return null;

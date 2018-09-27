@@ -19,7 +19,7 @@ public final class WebUtil {
      * @return 编码后的字符串
      */
     public static String escape(String str, String encoding) throws UnsupportedEncodingException {
-        if (StringUtils.isEmpty(str)) {
+        if (StringUtil.isEmpty(str)) {
             return "";
         }
         char[] chars =ConvertUtil.bytesToChars(ConvertUtil.encodeBytes(str.getBytes(encoding), '%'));
@@ -34,7 +34,7 @@ public final class WebUtil {
      * @return 解码后的字符串
      */
     public static String unescape(String str,String encoding){
-        if(StringUtils.isEmpty(str)){
+        if(StringUtil.isEmpty(str)){
             return "";
         }
         return UrlUtil.decodeQuery(str, encoding);
@@ -63,7 +63,7 @@ public final class WebUtil {
             ÷	除号	&divide;
      */
     public static String unhtml(String content) {
-        if (StringUtils.isEmpty(content)) {
+        if (StringUtil.isEmpty(content)) {
             return "";
         }
         String html = content;
@@ -75,7 +75,7 @@ public final class WebUtil {
         return html;
     }
     public static String html(String content) {
-        if (StringUtils.isEmpty(content)) {
+        if (StringUtil.isEmpty(content)) {
             return "";
         }
         String html = content;

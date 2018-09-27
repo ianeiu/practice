@@ -2,6 +2,8 @@ package com.wm.utils;
 
 import java.io.UnsupportedEncodingException;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * 提供Web相关的个工具类
  */
@@ -17,7 +19,7 @@ public final class WebUtil {
      * @return 编码后的字符串
      */
     public static String escape(String str, String encoding) throws UnsupportedEncodingException {
-        if (StringUtil.isEmpty(str)) {
+        if (StringUtils.isEmpty(str)) {
             return "";
         }
         char[] chars =ConvertUtil.bytesToChars(ConvertUtil.encodeBytes(str.getBytes(encoding), '%'));
@@ -32,7 +34,7 @@ public final class WebUtil {
      * @return 解码后的字符串
      */
     public static String unescape(String str,String encoding){
-        if(StringUtil.isEmpty(str)){
+        if(StringUtils.isEmpty(str)){
             return "";
         }
         return UrlUtil.decodeQuery(str, encoding);
@@ -61,7 +63,7 @@ public final class WebUtil {
             ÷	除号	&divide;
      */
     public static String unhtml(String content) {
-        if (StringUtil.isEmpty(content)) {
+        if (StringUtils.isEmpty(content)) {
             return "";
         }
         String html = content;
@@ -73,7 +75,7 @@ public final class WebUtil {
         return html;
     }
     public static String html(String content) {
-        if (StringUtil.isEmpty(content)) {
+        if (StringUtils.isEmpty(content)) {
             return "";
         }
         String html = content;

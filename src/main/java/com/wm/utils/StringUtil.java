@@ -7,20 +7,39 @@ import org.apache.commons.lang.StringUtils;
  */
 public final class StringUtil {
 
-    /**
-     * 判断字符串是否为空
+	public static void main(String[] args) {
+		
+		System.out.println(StringUtils.isBlank(" " ));
+		System.out.println(StringUtils.isEmpty(" "));
+	}
+	
+    
+	/**
+	 * 隐藏邮件地址前缀
+	 * @param email - EMail邮箱地址 例如: ssss@koubei.com 等等...
+	 * @return 返回已隐藏前缀邮件地址, 如 *********@koubei.com.
+	 */
+	public static String getHideEmailPrefix(String email) {
+		if (null != email) {
+			int index = email.lastIndexOf('@');
+			if (index > 0) {
+				email = repeat("*", index).concat(email.substring(index));
+			}
+		}
+		return email;
+	}
+	
+	/**
+     * repeat - 通过源字符串重复生成N次组成新的字符串。
+     *
+     * @param src - 源字符串 例如: 空格(" "), 星号("*"), "g" 等等...
+     * @param num - 重复生成次数
+     * @return 返回已生成的重复字符串
      */
-    public static boolean isEmpty(String str) {
-        if (str != null) {
-            str = str.trim();
-        }
-        return StringUtils.isEmpty(str);
-    }
-
-    /**
-     * 判断字符串是否非空
-     */
-    public static boolean isNotEmpty(String str) {
-        return !isEmpty(str);
+    public  static String repeat(String src, int num) {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < num; i++)
+            s.append(src);
+        return s.toString();
     }
 }

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context.xsd">
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<!-- 配置整合mybatis过程 -->
 	<!-- 1.配置数据库相关参数properties的属性：${url} -->
 	<context:property-placeholder location="classpath:jdbc.properties" />
@@ -40,17 +43,21 @@
 		<property name="mapperLocations" value="classpath:com/wm/ssm/**/**/dao/*.xml" />
 	</bean>
 
-	<!-- 4.配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中 --> <!-- 改由spring-x.xml统一配置 -->
-	<!-- <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		注入sqlSessionFactory
+	<!-- 4.配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-		给出需要扫描Dao接口包
-		<property name="basePackage" value="com.wm.ssm.sys.user.dao" />
-	</bean> -->
+		<property name="basePackage" value="com.wm.ssm.**.dao" />
+	</bean>
+	
+    <!-- 5. 扫描全部包下所有使用注解的类型  -->
+	<context:component-scan base-package="com.wm.ssm" />
 	
 	 <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
+    
+	<!-- 6.配置基于注解的声明式事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
 </beans>

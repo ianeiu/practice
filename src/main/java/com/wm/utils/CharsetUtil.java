@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * Description:
  * 编码相关的封装类
@@ -144,7 +146,7 @@ public final class CharsetUtil {
      * @return 转换完成字符串
      */
     public final static String toGBKWithUTF8(String input) throws UnsupportedEncodingException {
-        if (StringUtil.isEmpty(input)) {
+        if (StringUtils.isEmpty(input)) {
             return "";
         } else {
             String s1;
@@ -160,7 +162,7 @@ public final class CharsetUtil {
      * @return 转换完成字符串
      */
     public final static String toUnicodeWithGBK(String input) throws UnsupportedEncodingException {
-        if (StringUtil.isEmpty(input)) {
+        if (StringUtils.isEmpty(input)) {
             return "";
         } else {
             String s1;

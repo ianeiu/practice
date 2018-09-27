@@ -12,6 +12,8 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * URL相关的工具类
  * 以下工具类来自开源项目jodd
@@ -658,7 +660,7 @@ public final class UrlUtil {
      * @return map
      */
     public static Map<String,String> parseQuery(String query, char split1, char split2, String dupLink) {
-        if (!StringUtil.isEmpty(query) && query.indexOf(split2) > 0) {
+        if (!StringUtils.isEmpty(query) && query.indexOf(split2) > 0) {
             Map<String,String> result = new HashMap<>();
 
             String name = null;
@@ -670,7 +672,7 @@ public final class UrlUtil {
                 if (c == split2) {
                     value = "";
                 } else if (c == split1) {
-                    if (!StringUtil.isEmpty(name) && value != null) {
+                    if (!StringUtils.isEmpty(name) && value != null) {
                         if (dupLink != null) {
                             tempValue = result.get(name);
                             if (tempValue != null) {
@@ -688,7 +690,7 @@ public final class UrlUtil {
                 }
             }
 
-            if (!StringUtil.isEmpty(name) && value != null) {
+            if (!StringUtils.isEmpty(name) && value != null) {
                 if (dupLink != null) {
                     tempValue = result.get(name);
                     if (tempValue != null) {
@@ -709,7 +711,7 @@ public final class UrlUtil {
      */
     public static Map<String,String> httpParseQuery(String queryUri){
         Map<String,String> result = new HashMap<>();
-        if(!StringUtil.isEmpty(queryUri)){
+        if(!StringUtils.isEmpty(queryUri)){
             result = parseQuery(queryUri,'&','=',",");
         }
         return result;

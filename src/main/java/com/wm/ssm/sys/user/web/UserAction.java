@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wm.ssm.common.vo.Result;
+import com.wm.ssm.common.exception.BusinessException;
+import com.wm.ssm.common.vo.ResultVO;
 import com.wm.ssm.sys.user.model.TbSysUser;
 import com.wm.ssm.sys.user.service.IUserService;
 import com.wm.ssm.sys.user.vo.UserVO;
@@ -36,7 +37,7 @@ public class UserAction {
 		}
 		logger.info("searchUserInfoById:"+user.getUserName()+"---"+user.getRole().getRoleName());
 		model.addAttribute("user", user);
-		return "userVO";
+		return "userVO";// WEB-INF/jsp/"userVO".jsp
 	}
 	
 	@RequestMapping(value = "/searchUserInfoById/{userId}", method = RequestMethod.GET)
@@ -50,29 +51,22 @@ public class UserAction {
 		}
 		logger.info("searchUserInfoById:"+user.getUserName());
 		model.addAttribute("user", user);
-		return "userDetail";
+		return "userDetail";// WEB-INF/jsp/"userDetail".jsp
 	}
 	
-	@RequestMapping(value = "/searchUserList", method = RequestMethod.GET)
-	private String searchUserList(Model model) {
+	@ResponseBody
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	private ResultVO<List<TbSysUser>> searchUserList() {
 		List<TbSysUser> list = userService.getList();
-		model.addAttribute("list", list);
-		// list.jsp + model = ModelAndView
-		return "userList";// WEB-INF/jsp/"list".jsp
+		return ResultVO.createBySuccess(list);
 	}
 
 
-	// ajax json
-	@RequestMapping(value = "/updateUserStatus/{id}", 
-			/*method = RequestMethod.POST,*/
-			produces = { "application/json; charset=utf-8" })
 	@ResponseBody
-	private Result<TbSysUser> updateUserStatus(@PathVariable("id") String id, @RequestParam(value="userId",required = false) String userId) {
-		if (id == null || "".equals(id)) {
-			return new Result<>("1001", "用户名不得为空");
-		}
+	@RequestMapping(value = "/updateUserStatus/{id}")
+	private ResultVO<TbSysUser> updateUserStatus(@PathVariable("id") String id) {
 		userService.updateUserStatus(id);
 		TbSysUser user = userService.getById(id);
-		return new Result<TbSysUser>("0", "查询成功",user);
+		return ResultVO.createBySuccess(user);
 	}
 }

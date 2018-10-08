@@ -1,6 +1,13 @@
 package com.wm.demo.patterns.strut.adapter;
 
 import java.util.*;
+
+/**
+ * 目的是复用已有的功能
+ * 
+ * 优点:复用、扩展
+ * 缺点:过多的使用适配器，系统会非常凌乱，不容易入手
+ */
 public class Client {
 	public static void main(String[] args) {
 		//准备日志内容，也就是测试的数据

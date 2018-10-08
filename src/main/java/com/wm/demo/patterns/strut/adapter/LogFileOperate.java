@@ -24,7 +24,7 @@ public class LogFileOperate implements LogFileOperateApi{
 		}
 	}
 	public  List<LogModel> readLogFile() {
-		List<LogModel> list = null;
+		/*List<LogModel> list = null;
 		ObjectInputStream oin = null;
 		try {
 			File f = new File(logFilePathName);
@@ -45,7 +45,17 @@ public class LogFileOperate implements LogFileOperateApi{
 				e.printStackTrace();
 			}
 		}
-		return list;
+		return list;*/
+		
+		LogModel log =new LogModel();
+		LogModel log2 =new LogModel();
+		
+		log.setLogId("1213");
+		log2.setLogId("1213");
+		log.setLogContent("hello");
+		log.setLogContent("world");
+		
+		return Arrays.asList(log,log2);
 	}
 
 	public void writeLogFile(List<LogModel> list){

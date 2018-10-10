@@ -1,9 +1,9 @@
-package com.wm.demo.learn.base.d1tod4;
+package com.wm.demo.writeexam;
 /*
 面试题：
 	请自己实现两个整数变量的交换
 */
-class Important02BaseOper {
+class ExchangeNumValue {
 	public static void main(String[] args) {
 		int a = 10;
 		int b = 20;

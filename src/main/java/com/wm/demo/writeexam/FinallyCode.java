@@ -1,4 +1,4 @@
-package com.wm.demo.learn.base.exception;
+package com.wm.demo.writeexam;
 
 /*
  * 面试题：
@@ -25,7 +25,7 @@ package com.wm.demo.learn.base.exception;
  * 		E:try...finally
  * 			这种做法的目前是为了释放资源。
  */
-public class Important15Finally {
+public class FinallyCode {
 	public static void main(String[] args) {
 		System.out.println(getInt());//30
 	}

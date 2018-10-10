@@ -19,6 +19,7 @@
 * `com.wm.demo.recursion`	递归DEMO
 * `com.wm.demo.trywork`		工作使用（u）
 * `com.wm.demo.use`			常用Java代码（u）
+* `com.wm.demo.writeexam`	笔试代码（u）
 
 ### mybatisgenerator
 * `com.wm.mybatisgenerator`	Mybatis反向工程

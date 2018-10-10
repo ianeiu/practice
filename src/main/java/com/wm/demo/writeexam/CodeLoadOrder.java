@@ -1,7 +1,8 @@
-package com.wm.demo.learn.base.d1tod4;
+package com.wm.demo.writeexam;
 
-public class Important06Code {
-	static { System.out.println("Importtant06Code静态代码块");}
+public class CodeLoadOrder {
+	
+	static { System.out.println("CodeLoadOrder静态代码块");}
 	
 	public static void main(String[] args) {
 		System.out.println("main");

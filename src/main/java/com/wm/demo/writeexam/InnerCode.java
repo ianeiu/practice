@@ -1,4 +1,4 @@
-package com.wm.demo.learn.base.d1tod4;
+package com.wm.demo.writeexam;
 
 /**
  * 按照要求，补齐代码
@@ -9,7 +9,7 @@ package com.wm.demo.learn.base.d1tod4;
 		      Outer.method().show();
 		  }
 	}
-要求在控制台输出”HelloWorld”
+要求在控制台输出”Hello World”
  * @author WM
  *
  */
@@ -24,10 +24,15 @@ class Outer {
 	}
 
 }
+class OuterDemo {
+    public static void main(String[] args) {
+	      Outer.method().show();
+	  }
+}
 
 
 
-public class Important05Inner {
+public class InnerCode {
 	public static void main(String[] args) {
 	      Outer.method().show();
 	  }

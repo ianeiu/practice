@@ -3,7 +3,7 @@ package com.wm.demo.trywork;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
-public class Demo05StringSplit {
+public class Demo04StringSplit {
 	
 	@Test
 	public void testS2(){

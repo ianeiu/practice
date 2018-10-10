@@ -13,6 +13,7 @@ public class UserVO {
 	private List<String> list;
 	
 	
+	
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		UserVO vo = new UserVO();
@@ -22,6 +23,21 @@ public class UserVO {
 		vo.sexDesc = this.sexDesc;
 		vo.list = this.list;
 		return vo;
+	}
+
+
+
+	public UserVO(String userId, String userName, String sex) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.sex = sex;
+	}
+
+
+
+	public UserVO() {
+		super();
 	}
 	
 	

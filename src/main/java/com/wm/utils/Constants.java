@@ -1,6 +1,24 @@
 package com.wm.utils;
 
 public interface Constants {
+	
+	/**
+	 * @Description: 状态码
+	 * @author: wm
+	 * @date: 2018年10月11日 上午10:57:20
+	 * @version: 1.0
+	 */
+	interface StatusCode {
+		
+		String CODE_200 = "200";
+		
+		String CODE_404 = "404";
+		
+		String CODE_500 = "500";
+		
+	}
+	
+	
 	/**
 	 * 页面请求结果返回代码
 	 * 1：成功  0：失败
@@ -58,5 +76,39 @@ public interface Constants {
 		 * 半角空格的值，在ASCII中为32(Decimal)
 		 */
 		char DBC_SPACE = ' '; // 半角空格
+	}
+	
+	/**
+	 * @Description: 文件类型
+	 * @author: wm
+	 * @date: 2018年10月11日 上午11:00:27
+	 * @version: 1.0
+	 */
+	interface FileType{
+		
+		String TXT = "txt";
+		
+		String IMG_JPG = "jpg";
+		
+		String IMG_PNG = "png";
+		
+		String EXCEL_XLS = "xls";
+		
+		String EXCEL_XLSX = "xlsx";
+		
+	}
+	
+	/**
+	 * @Description: 符号字符串
+	 * @author: wm
+	 * @date: 2018年10月11日 上午11:03:28
+	 * @version: 1.0
+	 */
+	interface SymbolString {
+		String F = ";";
+		String X = "*";
+		String XZ = "/";
+		String XY = "\\";
+		String XHX = "_";
 	}
 }

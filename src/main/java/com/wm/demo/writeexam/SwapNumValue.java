@@ -3,7 +3,7 @@ package com.wm.demo.writeexam;
 面试题：
 	请自己实现两个整数变量的交换
 */
-class ExchangeNumValue {
+class SwapNumValue {
 	public static void main(String[] args) {
 		int a = 10;
 		int b = 20;

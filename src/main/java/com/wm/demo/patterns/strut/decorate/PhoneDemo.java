@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Scanner;
 
+/**
+ * 基本思想是俄罗斯套娃一样层层包裹，层层装饰，每套一层就会多出一些功能出来，我们更可以自由搭配，实现不同的组合功能。
+ */
 public class PhoneDemo {
 	public static void main(String[] args) {
 		Phone p = new IPhone();

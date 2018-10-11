@@ -1,5 +1,8 @@
 package com.wm.demo.patterns.build.singleton;
 
+/**
+ * 在系统内存中只存在一个对象，因此可以节约系统资源，对于一些需要频繁创建和销毁的对象单例模式无疑可以提高系统的性能。
+ */
 public class SingletonTest {
 	class MyThreadEnum extends Thread {  
         @Override  

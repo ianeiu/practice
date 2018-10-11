@@ -38,6 +38,7 @@ class Driver{
 }  
   
 //老板  
+//不需要在负责对象的创建，从而明确了各个类的职责
 public class BossSimplyFactory {  
   
     public static void main(String[] args){  

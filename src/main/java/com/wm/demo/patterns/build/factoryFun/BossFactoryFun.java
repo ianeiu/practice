@@ -43,6 +43,7 @@ class BmwDriver extends Driver{
 }  
   
 //老板  
+//不需要在负责对象的创建，从而明确了各个类的职责.如果有新的对象增加，只需要增加一个具体的类和具体的工厂类即可，不影响已有的代码，后期维护容易，增强了系统的扩展性
 public class BossFactoryFun{  
   
     public static void main(String[] args) throws Exception {  

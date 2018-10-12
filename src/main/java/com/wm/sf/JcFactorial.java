@@ -1,4 +1,4 @@
-package com.wm.demo.recursion;
+package com.wm.sf;
 
 /*
  * 需求：请用代码实现求5的阶乘。
@@ -13,7 +13,7 @@ package com.wm.demo.recursion;
  * 			b:出口条件
  * 			c:规律
  */
-public class Demo01JC {
+public class JcFactorial {
 	public static void main(String[] args) {
 		int jc = 1;
 		for (int x = 2; x <= 5; x++) {

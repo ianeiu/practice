@@ -1,4 +1,4 @@
-package com.wm.demo.recursion;
+package com.wm.sf;
 
 /*
  * 斐波那契数列
@@ -31,7 +31,7 @@ package com.wm.demo.recursion;
  * 第四个相邻的数据：a=3,b=5
  * 看到了：下一次的a是以前的b，下一次是以前的a+b	
  */
-public class Demo02Rabbit {
+public class RabbitFibonacci {
 	public static void main(String[] args) {
 		// 定义一个数组
 		int[] arr = new int[20];

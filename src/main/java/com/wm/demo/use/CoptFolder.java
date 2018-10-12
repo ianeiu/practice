@@ -1,4 +1,4 @@
-package com.wm.demo.learn.base.io;
+package com.wm.demo.use;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -24,7 +24,7 @@ import java.io.IOException;
  * 		D:把该File进行复制
  * 		E:在目的地目录下改名
  */
-public class Test03CoptFolder {
+public class CoptFolder {
 	public static void main(String[] args) throws IOException {
 		// 封装目录
 		File srcFolder = new File("e:\\java");

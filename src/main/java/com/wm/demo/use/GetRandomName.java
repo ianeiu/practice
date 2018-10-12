@@ -1,4 +1,4 @@
-package com.wm.demo.learn.base.io;
+package com.wm.demo.use;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,7 +14,7 @@ import java.util.Random;
  * 		B:随机产生一个索引
  * 		C:根据该索引获取一个值
  */
-public class Test01GetRandomName {
+public class GetRandomName {
 	public static void main(String[] args) throws IOException {
 		// 把文本文件中的数据存储到集合中
 		BufferedReader br = new BufferedReader(new FileReader("test_file/name.txt"));

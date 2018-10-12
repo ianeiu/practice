@@ -1,4 +1,4 @@
-package com.wm.demo.learn.base.io;
+package com.wm.demo.use;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -25,7 +25,7 @@ import java.io.IOException;
  * 			b:是文件
  * 				就复制(字节流)
  */
-public class Test04CopyFolders {
+public class CopyFolders {
 	public static void main(String[] args) throws IOException {
 		// 封装数据源File
 		File srcFile = new File("E:\\JavaSE\\day21\\code\\demos");

@@ -8,10 +8,9 @@
 ## 内容
 ### demo
 * `com.wm.demo.activiti`	activitiDEMO
-* `com.wm.demo.annotation`	注解DEMO
 * `com.wm.demo.fastjson`	fastjsonDemo
 * `com.wm.demo.gson`		gsonDemo
-* `com.wm.demo.learn`		java-base/learn/jdk5/jdk7/jdk8/反射/socket
+* `com.wm.demo.javabase`	JavaDemo
 * `com.wm.demo.jedis`		jedisDemo
 * `com.wm.demo.logback`		logbackDemo
 * `com.wm.demo.mybatis`		mybatisDemo

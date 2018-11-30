@@ -22,8 +22,10 @@ Java底层会优先在常量池中查找是否存在"hello"，如果存在则让
 		 * 会重新在常量池创建常量（String不可变属性）
 		 */
 		String s5 = s1+"o";
-		//都存储在常量池中,指向不同常量
+		//字符串拼接有变量参与，底层调用StringBuffer处理，相当于在堆内存中开辟了新空间
 		System.out.println(s4 == s5); // false
+		//常量相加，先在常量池找，找到即用
+		System.out.println(s4 == "hello"+"o");//true
 
 		//hello
 		String s6 = s4.substring(0, s4.length() - 1);

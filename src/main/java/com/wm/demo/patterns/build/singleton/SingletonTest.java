@@ -39,7 +39,7 @@ public class SingletonTest {
     public static void main(String[] args) {  
     	
 
-    	System.out.println("");
+    	/*System.out.println("");
     	System.out.println("MyThread1");
     	SingletonTest.MyThread1 t1 = new SingletonTest().new MyThread1();  
     	SingletonTest.MyThread1 t2 = new SingletonTest().new MyThread1();  
@@ -47,9 +47,9 @@ public class SingletonTest {
     	
     	t1.start();  
     	t2.start();  
-    	t3.start(); 
+    	t3.start();*/ 
     	
-    	/*System.out.println("");
+    	System.out.println("");
     	System.out.println("MyThreadEnum");
     	SingletonTest.MyThreadEnum e1 = new SingletonTest().new MyThreadEnum();  
     	SingletonTest.MyThreadEnum e2 = new SingletonTest().new MyThreadEnum();  
@@ -57,7 +57,7 @@ public class SingletonTest {
   
         e1.start();  
         e2.start();  
-        e3.start();  */
+        e3.start();
   
     } 
 }

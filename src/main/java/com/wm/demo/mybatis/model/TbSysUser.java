@@ -20,6 +20,22 @@ public class TbSysUser implements Serializable {
 	private String passwork;
 	private Integer userSex;
 	private Date createTime;
-	private boolean status;
+	//private boolean status;
 	private String depId;
+	//状态 Demo08
+	private UserStatus status=UserStatus.LOGOUT;
+
+
+	public TbSysUser() {
+		super();
+	}
+	
+	public TbSysUser(String userId, String userName) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+	}
+
+	
+	
 }

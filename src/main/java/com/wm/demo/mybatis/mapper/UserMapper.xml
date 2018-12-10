@@ -131,4 +131,21 @@ resultType：返回值类型
 		select * from tb_sys_user where user_id = #{id} and user_name like #{userName}
 	</select>
 	
+	<!-- void getUserPageByProcedure(OraclePage<TbSysUser> page);
+	1、使用select标签定义调用存储过程
+	2、statementType="CALLABLE":表示要调用存储过程
+	3、{call procedure_name(params)}
+	-->
+	<select id="getPageByProcedure" statementType="CALLABLE" databaseId="oracle">
+		{call hello_test(
+			#{start,mode=IN,jdbcType=INTEGER},
+			#{end,mode=IN,jdbcType=INTEGER},
+			#{count,mode=OUT,jdbcType=INTEGER},
+			#{users,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=PageUser}
+		)}
+	</select>
+	<resultMap type="com.wm.ssm.sys.user.model.TbSysUser" id="PageUser">
+		<id column="user_id" property="userId"/>
+		<result column="user_name" property="userName"/>
+	</resultMap>
 </mapper>

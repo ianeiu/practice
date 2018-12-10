@@ -36,7 +36,7 @@ public class Demo02CUD {
 			TbSysUser user = new TbSysUser();
 			user.setUserId("test1");
 			user.setPasswork("123");
-			user.setStatus(true);
+			//user.setStatus(true);
 			user.setUserName("测试");
 			user.setUserSex(1);
 			System.out.println(mapper.addUser(user));

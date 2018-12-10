@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
+import com.wm.demo.mybatis.model.OraclePage;
 import com.wm.demo.mybatis.model.TbSysUser;
 
 public interface UserMapper {
@@ -40,4 +41,6 @@ public interface UserMapper {
 	TbSysUser getUserByIdAndName(String id, String userName);
 
 	TbSysUser getUserAnnoationByIdAndName(@Param("id") String id, @Param("userName") String userName);
+
+	void getUserPageByProcedure(OraclePage<TbSysUser> page);
 }

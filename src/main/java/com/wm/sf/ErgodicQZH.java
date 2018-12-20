@@ -1,5 +1,11 @@
 package com.wm.sf;
 
+/**
+ * @Description: 前中后序遍历
+ * @author: wm
+ * @date: 2018年12月19日 上午10:10:16
+ * @version: 1.0
+ */
 public class ErgodicQZH {
 
 	public static void main(String[] args) {

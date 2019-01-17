@@ -19,11 +19,11 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-
 /**
- * Excel读取工具类（封装poi）
+ * @Description: Excel读取工具类（封装poi）
  * @author wm
- *
+ * @date 2018/12/27 17:20
+ * @version: 1.0
  */
 public class ExcelUtil {
 
@@ -37,36 +37,46 @@ public class ExcelUtil {
 	public static List<Map<String, String>> getDataFromExecl2003(InputStream is) throws Exception{
 		HSSFWorkbook wb;
 		try {
-			wb = new HSSFWorkbook(is);// 把一张xls的数据表读到wb里
+			// 把一张xls的数据表读到wb里
+			wb = new HSSFWorkbook(is);
 		} catch (IOException e) {
-			throw new Exception("获取文件的数据(把一张xls的数据表读到wb里)出现IOException!"+e);
+			throw new Exception("获取文件的数据(把一张xls的数据表读到wb里)出现IOException!" + e);
 		}
-		HSSFSheet sheet = wb.getSheetAt(0);// 读取第一页,一般一个excel文件会有三个工作表，这里获取第一个工作表来进行操作
-		List<Map<String, String>> targetList = new ArrayList<Map<String, String>>();// 表数据 转换成的 对象
-		int col = 0;// 需要读取的列数
-		
-		List<String> paramList = new ArrayList<String>();
-		HSSFRow row = sheet.getRow(0);//从第一行开始读
+		// 读取第一页,一般一个excel文件会有三个工作表，这里获取第一个工作表来进行操作
+		HSSFSheet sheet = wb.getSheetAt(0);
+		// 表数据 转换成的 对象
+		List<Map<String, String>> targetList = new ArrayList<>();
+		// 需要读取的列数
+		int col = 0;
+
+		List<String> paramList = new ArrayList<>();
+		//从第一行开始读
+		HSSFRow row = sheet.getRow(0);
 		if (row != null) {
 			col = row.getPhysicalNumberOfCells();
-			for (short j = 0; j < col; j++) {   // 遍历第1行的所有列
+			// 遍历第1行的所有列
+			for (short j = 0; j < col; j++) {
 				HSSFCell cell = row.getCell(j);
 				if (cell != null) {
-					String value = cell.getStringCellValue().trim();// 读取cell内容转换为字符串value
+					// 读取cell内容转换为字符串value
+					String value = cell.getStringCellValue().trim();
 					paramList.add(value);
 				}
 			}
 		}
-		
-		// 遍历所有行
-		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {// i等于1从第二行开始读
-			row = sheet.getRow(i); // 取第i行数据
+
+		// 遍历:i等于1从第二行开始读
+		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+			// 取第i+1行数据
+			row = sheet.getRow(i);
 			if (row != null) {
-				Map<String,String> map = new HashMap<>();
-				for (short j = 0; j < col; j++) {  // 遍历第i行的列 
+				Map<String, String> map = new HashMap<>(1000);
+				// 遍历第i+1行的列
+				for (short j = 0; j < col; j++) {
 					HSSFCell cell = row.getCell(j);
 					if (cell != null) {
-						String value = cell.getStringCellValue().trim();	// 读取cell内容转换为字符串value
+						// 读取cell内容转换为字符串value
+						String value = cell.getStringCellValue().trim();
 						map.put(paramList.get(j), value);
 					}
 				}
@@ -87,36 +97,46 @@ public class ExcelUtil {
 	public static List<Map<String, String>> getDataFromExecl2007(InputStream is) throws Exception{
 		XSSFWorkbook wb;
 		try {
-			wb = new XSSFWorkbook(is);// 把一张xlsx的数据表读到wb里
+			// 把一张xlsx的数据表读到wb里
+			wb = new XSSFWorkbook(is);
 		} catch (IOException e) {
-			throw new Exception("获取文件的数据(把一张xlsx的数据表读到wb里)出现IOException!"+e);
+			throw new Exception("获取文件的数据(把一张xlsx的数据表读到wb里)出现IOException!" + e);
 		}
-		XSSFSheet sheet = wb.getSheetAt(0);// 读取第一页,一般一个excel文件会有三个工作表，这里获取第一个工作表来进行操作
-		List<Map<String, String>> targetList = new ArrayList<Map<String, String>>();// 表数据 转换成的 对象
-		int col = 0;// 需要读取的列数
+		// 读取第一页,一般一个excel文件会有三个工作表，这里获取第一个工作表来进行操作
+		XSSFSheet sheet = wb.getSheetAt(0);
+		// 表数据 转换成的 对象
+		List<Map<String, String>> targetList = new ArrayList<>();
+		// 需要读取的列数
+		int col = 0;
 		
-		List<String> paramList = new ArrayList<String>();
-		XSSFRow row = sheet.getRow(0);//从第一行开始读
+		List<String> paramList = new ArrayList<>();
+		//从第一行开始读
+		XSSFRow row = sheet.getRow(0);
 		if (row != null) {
 			col = row.getPhysicalNumberOfCells();
-			for (short j = 0; j < col; j++) {   // 遍历第1行的所有列
+			// 遍历第1行的所有列
+			for (short j = 0; j < col; j++) {
 				XSSFCell cell = row.getCell(j);
 				if (cell != null) {
-					String value = cell.getStringCellValue().trim();// 读取cell内容转换为字符串value
+					// 读取cell内容转换为字符串value
+					String value = cell.getStringCellValue().trim();
 					paramList.add(value);
 				}
 			}
 		}
-		
-		// 遍历所有行
-		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {// i等于1从第二行开始读
-			row = sheet.getRow(i);// 取第i行数据
+
+		// 遍历: i等于1从第二行开始读
+		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+			// 取第i+1行数据
+			row = sheet.getRow(i);
 			if (row != null) {
-				Map<String,String> map = new HashMap<>();
-				for (short j = 0; j < col; j++) {  // 遍历第i行的列 
+				Map<String, String> map = new HashMap<>(1000);
+				// 遍历第i+1行的列
+				for (short j = 0; j < col; j++) {
 					XSSFCell cell = row.getCell(j);
 					if (cell != null) {
-						String value = cell.getStringCellValue().trim();	// 读取cell内容转换为字符串value
+						// 读取cell内容转换为字符串value
+						String value = cell.getStringCellValue().trim();
 						map.put(paramList.get(j), value);
 					}
 				}
@@ -131,9 +151,6 @@ public class ExcelUtil {
 	/**
      * 
      * excel数据 读取
-     *
-     * @author 博客园-唯所欲为 update by wm
-     * 
      * @param customClass  实体类
      * @param is  excel 
      * @param indexSheet    sheet 下标
@@ -151,7 +168,8 @@ public class ExcelUtil {
     	
     	HSSFWorkbook workbook;
 		try {
-			workbook = new HSSFWorkbook(is);// 把一张xls的数据表读到wb里
+			// 把一张xls的数据表读到wb里
+			workbook = new HSSFWorkbook(is);
 		} catch (IOException e) {
 			throw new Exception("获取文件的数据(把一张xls的数据表读到wb里)出现IOException!"+e);
 		}
@@ -166,7 +184,8 @@ public class ExcelUtil {
         // 开始循环读取数据 ,从数据其实行开始
         for (int i = startingLine; i < lastRowNum + 1; i++) {
             createRow = sheetAt.getRow(i);
-            T ob = customClass.newInstance();// 创建实例化对象，创建新的存储数据的对象
+			// 创建实例化对象，创建新的存储数据的对象
+            T ob = customClass.newInstance();
             // 遍历所有属性值
             for (int j = 0; j < attr.length; j++) {
                 commandField = customClass.getDeclaredField(attr[j]);
@@ -174,16 +193,15 @@ public class ExcelUtil {
                 commandField.setAccessible(true);
                 // 获取数据
                 String data = createRow.getCell(j).toString();
-                // 判断属性的类型
+                // 判断属性的类型， 将读入的数据（在con中）封装到对象（ob）的属性（fi[i]）中
                 if (commandField.getType().toString().equals("class java.lang.String")) {
-                    // 将读入的数据（在con中）封装到对象（ob）的属性（fi[i]）中
                     commandField.set(ob, data);
                 } else if (commandField.getType().toString().equals("class java.math.BigDecimal")) {
-                    commandField.set(ob, new BigDecimal(data));//
+                    commandField.set(ob, new BigDecimal(data));
                 } else if (commandField.getType().toString().equals("class java.math.BigInteger")) {
-                    commandField.set(ob, new BigInteger(data));// 将信息封装到对象中
+                    commandField.set(ob, new BigInteger(data));
                 } else if (commandField.getType().toString().equals("class java.lang.Integer")) {
-                    commandField.set(ob, Integer.valueOf(data));// 将信息封装到对象中
+                    commandField.set(ob, Integer.valueOf(data));
                 }
 
             }
@@ -216,7 +234,8 @@ public class ExcelUtil {
     	
     	XSSFWorkbook workbook;
 		try {
-			workbook = new XSSFWorkbook(is);// 把一张xls的数据表读到wb里
+			// 把一张xls的数据表读到wb里
+			workbook = new XSSFWorkbook(is);
 		} catch (IOException e) {
 			throw new Exception("获取文件的数据(把一张xls的数据表读到wb里)出现IOException!"+e);
 		}
@@ -231,7 +250,8 @@ public class ExcelUtil {
         // 开始循环读取数据 ,从数据其实行开始
         for (int i = startingLine; i < lastRowNum + 1; i++) {
             createRow = sheetAt.getRow(i);
-            T ob = customClass.newInstance();// 创建实例化对象，创建新的存储数据的对象
+			// 创建实例化对象，创建新的存储数据的对象
+            T ob = customClass.newInstance();
             // 遍历所有属性值
             for (int j = 0; j < attr.length; j++) {
                 commandField = customClass.getDeclaredField(attr[j]);
@@ -239,16 +259,15 @@ public class ExcelUtil {
                 commandField.setAccessible(true);
                 // 获取数据
                 String data = createRow.getCell(j).toString();
-                // 判断属性的类型
+                // 判断属性的类型，将读入的数据（在con中）封装到对象（ob）的属性（fi[i]）中
                 if (commandField.getType().toString().equals("class java.lang.String")) {
-                    // 将读入的数据（在con中）封装到对象（ob）的属性（fi[i]）中
                     commandField.set(ob, data);
                 } else if (commandField.getType().toString().equals("class java.math.BigDecimal")) {
-                    commandField.set(ob, new BigDecimal(data));//
+                    commandField.set(ob, new BigDecimal(data));
                 } else if (commandField.getType().toString().equals("class java.math.BigInteger")) {
-                    commandField.set(ob, new BigInteger(data));// 将信息封装到对象中
+                    commandField.set(ob, new BigInteger(data));
                 } else if (commandField.getType().toString().equals("class java.lang.Integer")) {
-                    commandField.set(ob, Integer.valueOf(data));// 将信息封装到对象中
+                    commandField.set(ob, Integer.valueOf(data));
                 }
 
             }

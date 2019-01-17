@@ -57,10 +57,10 @@ public class Demo07Plugin {
 			// 3、获取接口的实现类对象
 			//会为接口自动的创建一个代理对象，代理对象去执行增删改查方法
 			UserMapper mapper = openSession.getMapper(UserMapper.class);
-			Page<Object> page = PageHelper.startPage(1,1);
+			Page<Object> page = PageHelper.startPage(1,3);
 		
 			List<TbSysUser> users = mapper.getUserListByUserName("%测试%"); 
-			PageInfo<TbSysUser> userPage = new PageInfo<>(users, 2);
+			PageInfo<TbSysUser> userPage = new PageInfo<>(users, 10);
 			
 			for(TbSysUser user:users){
 				System.out.println(user);
@@ -76,6 +76,10 @@ public class Demo07Plugin {
 			System.out.println("每页的记录数："+userPage.getPageSize());
 			System.out.println("总页码："+userPage.getPages());
 			System.out.println("是否第一页："+userPage.isIsFirstPage());
+			System.out.println("获取结果集："+userPage.getList());
+			for (TbSysUser tbSysUser : userPage.getList()) {
+				System.out.println(tbSysUser);
+			}
 			System.out.println("连续显示的页码：");
 			int[] nums = userPage.getNavigatepageNums();
 			for (int i = 0; i < nums.length; i++) {

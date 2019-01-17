@@ -3,7 +3,7 @@ package com.wm.sf.query;
 public class QueryDemo {
 
 	public static void main(String[] args) {
-		int[] sz = {2,6,33,40,50};
+		int[] sz = {2,6,33,35,40,50};
 		System.out.println(sequenceSearch(sz, 50));
 		System.out.println(binarySearch(sz, 50));
 	}

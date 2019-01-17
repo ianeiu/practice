@@ -7,18 +7,40 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.CollectionUtils;
-
 /**
- * 提供一些对象有效性校验的方法
+ * @Description: 提供一些对象有效性校验的方法
+ * @author wm
+ * @date 2018/12/27 17:36
+ * @version: 1.0
  */
-@SuppressWarnings("rawtypes")
 public final class CheckUtil {
 	
 	public static void main(String[] args) {
 		List<String> list = new ArrayList<String>();
-		System.out.println(CollectionUtils.isEmpty(list));//true
+		//System.out.println(org.apache.commons.collections.CollectionUtils.isEmpty(list));//true
 
+        String dateStr = "2018-12-27";
+        String format = "yyyy-MM-dd";
+        String format2 = "yyyy-MM HH:mm:ss";
+        System.out.println(isDate(dateStr,format));
+        System.out.println(isDate(dateStr,format2));
+
+        String testStr = "ada";
+        String testStr2 = "  ";
+        System.out.println(valid(testStr));
+        System.out.println(valid(testStr2));
+
+        StringBuffer sb = new StringBuffer();
+        StringBuffer sb2 = null;
+        System.out.println(valid(sb));
+        System.out.println(valid(sb2));
+
+        /*true
+        false
+        true
+        false
+        true
+        false*/
 	}
 
     /**
@@ -33,7 +55,7 @@ public final class CheckUtil {
             sdf.parse(date);
             return true;
         } catch (ParseException e) {
-            e.printStackTrace();
+
         }
         return false;
     }

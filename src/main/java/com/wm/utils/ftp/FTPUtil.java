@@ -108,7 +108,7 @@ public class FTPUtil extends HttpServlet{
 			ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
 	        ftpClient.enterLocalPassiveMode();  
 	        ftpClient.changeWorkingDirectory(ftpPath);  
-	        in = ftpClient.retrieveFileStream(fileName);
+	        in = ftpClient.retrieveFileStream(new String(fileName.getBytes("GBK"),"iso-8859-1"));
         } catch (IOException e) {
 			throw new Exception(e);
 		}  
@@ -165,7 +165,7 @@ public class FTPUtil extends HttpServlet{
 	    	ftp.enterLocalActiveMode();
 	    	ftp.setFileType(FTPClient.BINARY_FILE_TYPE);  
 	    	
-	    	boolean b = ftp.storeFile(filename, input); 
+	    	boolean b = ftp.storeFile(new String(filename.getBytes("GBK"),"iso-8859-1"), input); 
 	    	logger.info("ftp://"+host+":"+port+"  上传文件状态："+b);
     	 
 	    	ftp.logout(); 
@@ -221,7 +221,7 @@ public class FTPUtil extends HttpServlet{
 	    	ftp.setControlEncoding(charset);
 	    	ftp.enterLocalActiveMode();
 	    	ftp.setFileType(FTPClient.BINARY_FILE_TYPE);
-	    	success = ftp.storeFile(filename, input); 
+	    	success = ftp.storeFile(new String(filename.getBytes("GBK"),"iso-8859-1"), input); 
     	 
 	    	ftp.logout(); 
     	} finally { 

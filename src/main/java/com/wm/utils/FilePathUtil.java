@@ -11,8 +11,8 @@ public final class FilePathUtil {
      * @param path 需要处理的文件路径
      */
     public final static boolean legalFile(String path) {
-        //下面的正则表达式有问题
         String regex = "[a-zA-Z]:(?:[/][^/:*?\"<>|.][^/:*?\"<>|]{0,254})+";
+        //下面的正则表达式有问题
         //String regex ="^([a-zA-z]:)|(^\\.{0,2}/)|(^\\w*)\\w([^:?*\"><|]){0,250}";
         return RegexUtil.isMatche(commandPath(path), regex);
     }

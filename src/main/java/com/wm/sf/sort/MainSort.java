@@ -10,13 +10,16 @@ public class MainSort {
 		int[] array = initData(300);
 		int[] array2 = array.clone();
 		int[] array3 = array.clone();
-		int[] array4 = array.clone();
+		//int[] array4 = array.clone();
 		
 		TemplateSort mpsort = new SortMP();
 		mpsort.sortPrintln(array);
 		
 		mpsort = new SortXZ();
 		mpsort.sortPrintln(array2);
+		
+		mpsort = new SortKS();
+		mpsort.sortPrintln(array3);
 	}
 	
 	

@@ -11,8 +11,6 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.FileNameMap;
-import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
@@ -249,13 +247,14 @@ public class FileUtil {
     public static void copyFileWithBuffer(File in, File out) throws FileNotFoundException, IOException {
         try (
                 InputStream fis = new BufferedInputStream(new FileInputStream(in));
-                OutputStream fos = new BufferedOutputStream(new FileOutputStream(out))
+                OutputStream fos = new BufferedOutputStream(new FileOutputStream(out));
+        		BufferedInputStream bufferedInputStream = new BufferedInputStream(fis);
+            	BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fos)
         ) {
-            byte[] buf = new byte[4096];
-            int i;
-            while ((i = fis.read(buf)) != -1) {
-                fos.write(buf, 0, i);
-            }
+        	int content = 0;
+        	while((content = bufferedInputStream.read())!=-1){
+        		bufferedOutputStream.write(content);
+        	}
         }
     }
 

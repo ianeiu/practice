@@ -46,6 +46,7 @@
 * `com.wm.utils.FileUtil`	文件
 * `com.wm.utils.date`		date
 * `com.wm.utils.ftp`		ftp
+* `com.wm.utils.enumutil`	Enum
 * `com.wm.utils.http`		http
 * `com.wm.utils.image`		image
 * `com.wm.utils.image2`		image
@@ -54,6 +55,7 @@
 * `com.wm.utils.MapCoordinateUtil`	经纬度
 * `com.wm.utils.NumberUtil`	数字操作
 * `com.wm.utils.PasswordUtil`	加密
+* `com.wm.utils.PackageUtil`	包工具类
 * `com.wm.utils.PropertiesUtil`	Prop
 * `com.wm.utils.RandomUtil`	随机字符串
 * `com.wm.utils.RegexUtils`	正则工具类

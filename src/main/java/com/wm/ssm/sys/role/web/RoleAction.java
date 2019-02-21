@@ -2,7 +2,6 @@ package com.wm.ssm.sys.role.web;
 
 import javax.annotation.Resource;
 
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wm.ssm.common.vo.ResultVO;
 import com.wm.ssm.sys.role.model.TbSysRole;
 import com.wm.ssm.sys.role.service.IRoleService;
-import com.wm.utils.RandomUtil;
 
 @RestController
 @RequestMapping("/role")
@@ -23,7 +21,7 @@ public class RoleAction {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	private ResultVO<String> searchUserInfoById(@RequestParam String roleName,@RequestParam(value="roleDesc",required = false) String roleDesc){
 		TbSysRole rs = new TbSysRole();
-		rs.setId(RandomUtil.uuid());
+		rs.setId("123132");
 		rs.setRoleName(roleName);
 		rs.setRoleDesc(roleDesc);
 		roleService.addRole(rs);

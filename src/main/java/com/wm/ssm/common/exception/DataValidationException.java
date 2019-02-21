@@ -1,6 +1,6 @@
 package com.wm.ssm.common.exception;
 
-import com.wm.utils.Constants;
+import com.wm.ssm.common.constant.Constants;
 
 public class DataValidationException extends BusinessException {
 

@@ -1,4 +1,4 @@
-package com.wm.utils;
+package com.wm.ssm.common.constant;
 
 public interface Constants {
 	

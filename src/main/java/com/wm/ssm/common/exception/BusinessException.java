@@ -1,12 +1,11 @@
 package com.wm.ssm.common.exception;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.wm.utils.Constants;
-import com.wm.utils.date.DateUtil;
 	
 
 /**
@@ -20,7 +19,7 @@ public class BusinessException extends RuntimeException {
 	
 	private static final long serialVersionUID = 2624148658376402001L;
 
-	private String code = Constants.HttpRequestResultCode.CODE_SYSTEM_ERROR_FAIL;
+	private String code = "100500";
 	private Date date;
 	
 	public BusinessException() {
@@ -53,15 +52,31 @@ public class BusinessException extends RuntimeException {
 	}
 
 	public String handle() {
-		this.date = DateUtil.now();
+		this.date = now();
 		if(log.isDebugEnabled()) {
 			log.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-			log.debug("系统处理了业务异常[" + this.getMessage() + "],当前时间为:" + DateUtil.formatDate(date, DateUtil.DATETIME_FORMAT));
+			log.debug("系统处理了业务异常[" + this.getMessage() + "],当前时间为:" + formatDate(date, DATETIME_FORMAT));
 		}
 		if(log.isErrorEnabled()) {
-			log.error("系统处理了业务异常[" + this.getMessage() + "],当前时间为:" + DateUtil.formatDate(date, DateUtil.DATETIME_FORMAT), this);
+			log.error("系统处理了业务异常[" + this.getMessage() + "],当前时间为:" + formatDate(date, DATETIME_FORMAT), this);
 		}
 		return code();
 	}
 	
+
+	public static String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+	public static Date now() {
+		Calendar now = Calendar.getInstance();
+		return now.getTime();
+	}
+	public static String formatDate(Date date, String format) {
+		if (date == null) {
+			return "";
+		}
+		if (format.indexOf("h") > 0) {
+			format = format.replace('h', 'H');
+		}
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+		return simpleDateFormat.format(date);
+	}
 }

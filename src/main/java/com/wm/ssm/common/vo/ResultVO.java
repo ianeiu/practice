@@ -1,6 +1,7 @@
 package com.wm.ssm.common.vo;
 
-import com.wm.utils.Constants;
+
+import com.wm.ssm.common.constant.Constants;
 
 import lombok.Data;
 

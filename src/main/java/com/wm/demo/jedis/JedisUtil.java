@@ -6,14 +6,12 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.wm.demo.logback.LogBackDemo;
-
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 public class JedisUtil {
-	private static final Logger logger = LoggerFactory.getLogger(LogBackDemo.class);
+	private static final Logger logger = LoggerFactory.getLogger(JedisUtil.class);
 
 	private JedisUtil() {
 	}

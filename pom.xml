@@ -10,7 +10,6 @@
         <logback.version>1.1.1</logback.version>
         <spring.version>4.3.18.RELEASE</spring.version>
         <activiti.version>5.14</activiti.version>
-        <cxf.version>3.1.8</cxf.version>
     </properties>
 	<repositories>
 		<repository>
@@ -117,20 +116,7 @@
 			<artifactId>xom</artifactId>
 			<version>1.2.5</version>
 		</dependency>
-		
-		<!-- fastjson -->
-		<dependency>
-		    <groupId>com.alibaba</groupId>
-		    <artifactId>fastjson</artifactId>
-		    <version>1.2.47</version>
-		</dependency>
 
-		<!-- gson -->
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.6</version>
-		</dependency>
 		<!-- guava -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -244,7 +230,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.9.8</version>
+			<version>2.9.9</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -405,7 +391,7 @@
 	
 	<build>
 		<sourceDirectory>src</sourceDirectory>
-		<testSourceDirectory>test</testSourceDirectory>
+		<!--<testSourceDirectory>test</testSourceDirectory>-->
 		<testResources>
 			<testResource>
 				<directory>test</directory>

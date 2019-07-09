@@ -8,9 +8,6 @@
 ## 内容
 ### demo
 * `com.wm.demo.activiti`	activitiDEMO
-* `com.wm.demo.fastjson`	fastjsonDemo
-* `com.wm.demo.gson`		gsonDemo
-* `com.wm.demo.javabase`	JavaDemo
 * `com.wm.demo.jedis`		jedisDemo
 * `com.wm.demo.logback`		logbackDemo
 * `com.wm.demo.mybatis`		mybatisDemo

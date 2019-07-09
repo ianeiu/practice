@@ -103,19 +103,7 @@
 			<artifactId>commons-net</artifactId>
 			<version>3.3</version>
 		</dependency>
-		
-		<!-- json -->
-		<dependency>
-			<groupId>net.sf.json-lib</groupId>
-			<artifactId>json-lib</artifactId>
-			<version>2.4</version>
-			<classifier>jdk15</classifier>
-		</dependency>
-		<dependency>
-			<groupId>xom</groupId>
-			<artifactId>xom</artifactId>
-			<version>1.2.5</version>
-		</dependency>
+
 
 		<!-- guava -->
 		<dependency>
@@ -123,15 +111,6 @@
 			<artifactId>guava</artifactId>
 			<version>18.0</version>
 		</dependency>
-
-		<!-- ant -->
-		<dependency>
-			<groupId>org.apache.ant</groupId>
-			<artifactId>ant</artifactId>
-			<version>1.8.4</version>
-		</dependency>
-
-
 
 		<!-- junit -->
 		<dependency>
@@ -283,23 +262,6 @@
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
-		<!-- redis客户端:Jedis -->
-		<dependency>
-			<groupId>redis.clients</groupId>
-			<artifactId>jedis</artifactId>
-			<version>2.9.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.dyuproject.protostuff</groupId>
-			<artifactId>protostuff-core</artifactId>
-			<version>1.0.8</version>
-		</dependency>
-		<dependency>
-			<groupId>com.dyuproject.protostuff</groupId>
-			<artifactId>protostuff-runtime</artifactId>
-			<version>1.0.8</version>
-		</dependency>
 		
         <!-- MyBatis逆向工程 -->
 		<dependency>
@@ -320,73 +282,18 @@
 			<version>${activiti.version}</version>
 		</dependency>
 		
-        <!-- http -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-            <version>4.4.9</version>
-        </dependency>
-        
-        <!-- cxf依赖包 -->
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-frontend-jaxws</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-ws-security</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http-jetty</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-		
-		
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.16.20</version>
 		</dependency>
-		
-		<!-- jgit -->
+
+		<!-- fastjson -->
 		<dependency>
-		    <groupId>org.eclipse.jgit</groupId>
-		    <artifactId>org.eclipse.jgit</artifactId>
-		    <version>5.0.2.201807311906-r</version>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.47</version>
 		</dependency>
-		
-		<!--pinyin4j-->
-        <dependency>
-            <groupId>com.belerweb</groupId>
-            <artifactId>pinyin4j</artifactId>
-            <version>2.5.0</version>
-        </dependency>
-        
-        <!-- 字符集编码识别 -->
-		<dependency>
-            <groupId>net.sourceforge.jchardet</groupId>
-            <artifactId>jchardet</artifactId>
-            <version>1.0</version>
-        </dependency>
-		
 	</dependencies>
 	
 	<build>

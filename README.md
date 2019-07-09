@@ -9,7 +9,6 @@
 ### demo
 * `com.wm.demo.activiti`	activitiDEMO
 * `com.wm.demo.mybatis`		mybatisDemo
-* `com.wm.demo.patterns` 	设计模式DEMO及资料（u）
 * `com.wm.demo.trywork`		工作使用（u）
 * `com.wm.demo.use`			常用Java代码（u）
 * `com.wm.demo.writeexam`	笔试代码（u）

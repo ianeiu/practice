@@ -8,8 +8,6 @@
 ## 内容
 ### demo
 * `com.wm.demo.activiti`	activitiDEMO
-* `com.wm.demo.jedis`		jedisDemo
-* `com.wm.demo.logback`		logbackDemo
 * `com.wm.demo.mybatis`		mybatisDemo
 * `com.wm.demo.patterns` 	设计模式DEMO及资料（u）
 * `com.wm.demo.trywork`		工作使用（u）

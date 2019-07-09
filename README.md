@@ -17,9 +17,6 @@
 ### mybatisgenerator
 * `com.wm.mybatisgenerator`	Mybatis反向工程
 
-### sf
-* `com.wm.sf`				算法
-
 ### ssm
 * `com.wm.ssm`				SSM整合
 

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wm.mybatis.mapper.UserUnionDepMapper">
+
+	<!--自定义某个javaBean的封装规则：type：自定义规则的Java类型；id:唯一id方便引用 -->
+	<resultMap type="com.wm.mybatis.model.TbSysUserVO" id="SimpleUser">
+		<!--指定主键列的封装规则 ：id定义主键会底层有优化； column：指定哪一列 property：指定对应的javaBean属性 -->
+		<id column="user_id" property="userId" />
+		<!-- 定义普通列封装规则 -->
+		<result column="user_name" property="userName" />
+		<result column="passwork" property="password" />
+		<!-- 其他不指定的列会自动封装：一般只要写resultMap就把全部的映射规则都写上，此次不写。 -->
+	</resultMap>
+	
+	<!--联合查询：级联属性封装结果集 -->
+	<resultMap type="com.wm.mybatis.model.TbSysUserVO" id="DifUser">
+		<id column="user_id" property="userId"/>
+		<result column="user_name" property="userName" />
+		<result column="passwork" property="password"/>
+		<result column="dep_name" property="dep.depName"/>
+	</resultMap>
+
+
+	<!-- 使用association定义关联的单个对象的封装规则； -->
+	<resultMap type="com.wm.mybatis.model.TbSysUserVO" id="DifUser2">
+		<id column="user_id" property="userId"/>
+		<result column="user_name" property="userName" />
+		<result column="passwork" property="password"/>
+
+		<!-- association可以指定联合的javaBean对象 .property="dept"：指定哪个属性是联合的对象;javaType:指定这个属性对象的类型[不能省略] -->
+		<association property="dep" javaType="com.wm.mybatis.model.TbSysDep">
+			<id column="dep_id" property="id"/>
+			<result column="dep_name" property="depName"/>
+		</association>
+	</resultMap>
+	
+	<!-- =======================鉴别器============================ -->
+	<!-- <discriminator javaType=""></discriminator>
+		鉴别器：mybatis可以使用discriminator判断某列的值，然后根据某列的值改变封装行为
+	 -->
+	 <resultMap type="com.wm.mybatis.model.TbSysUserVO" id="UserDis">
+	 	<id column="user_id" property="userId"/>
+		<result column="user_name" property="userName" />
+		<result column="passwork" property="password"/>
+	 	<!-- column：指定判定的列名  ;javaType：列值对应的java类型  -->
+	 	<discriminator javaType="string" column="user_sex">
+	 		<!--如果是女生，把user_id这一列的值赋值给passwork; -->
+	 		<case value="0" resultType="com.wm.mybatis.model.TbSysUserVO">
+	 			<result column="user_id" property="password"/>
+	 		</case>
+	 		<!--如果是男生，把user_name这一列的值赋值给passwork; -->
+	 		<case value="1" resultType="com.wm.mybatis.model.TbSysUserVO">
+			 	<result column="user_name" property="password"/>
+	 		</case>
+	 	</discriminator>
+	 </resultMap>
+
+	<!-- TbSysUserVO getUserByUserId(String id); -->
+	<!-- <select id="getUserByUserId" resultMap = "SimpleUser"> -->
+	<!-- <select id="getUserByUserId" resultMap = "DifUser"> -->
+	<select id="getUserByUserId" resultMap = "DifUser2">
+	<!-- <select id="getUserByUserId" resultMap = "UserDis"> -->
+		select u.*,d.dep_name from tb_sys_user u left join tb_sys_department d on u.dep_id = d.id where user_id = #{id}
+	</select>
+	
+	<!-- 分段查询：可懒加载 -->
+	<resultMap type="com.wm.mybatis.model.TbSysUserVO" id="UserByStep">
+	 	<id column="user_id" property="userId"/>
+		<result column="user_name" property="userName" />
+		<result column="passwork" property="password"/>
+		<!-- association定义关联对象的封装规则 :select:表明当前属性是调用select指定的方法查出的结果 ;column:指定将哪一列的值传给这个方法 
+		流程：使用select指定的方法（传入column指定的这列参数的值）查出对象，并封装给property指定的属性 -->
+ 		<association property="dep" select="com.wm.mybatis.mapper.DepartmentMapper.getDepById" column="dep_id"/>
+	</resultMap>
+	
+	<!-- TbSysUserVO getUserByUserIdStep(String id); -->
+	<select id="getUserByUserIdStep" resultMap = "UserByStep">
+		select * from tb_sys_user where user_id = #{id}
+	</select>
+	
+
+	<!-- List<TbSysUserVO> getUserListByDepId(String depId); -->
+	<select id="getUserListByDepId" resultType = "com.wm.mybatis.model.TbSysUserVO">
+		select * from tb_sys_user where dep_id=#{depId}
+	</select>
+</mapper>

@@ -1,6 +1,0 @@
-我们可以使用 -version 参数来查看当前 Java 的运行版本，命令如下：
-java -version
-以上代码实例输出结果为：
-java version "1.6.0_13"
-Java(TM) SE Runtime Environment (build 1.6.0_13-b03)
-Java HotSpot(TM) Client VM (build 11.3-b02, mixed mode, sharing)
